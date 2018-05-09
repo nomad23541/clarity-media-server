@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <title><%=doc.title%> - Clarity</title>
+        <link rel="stylesheet" href="/css/style.css">
+        <script src="/scripts_server/jquery/dist/jquery.min.js"></script>
+    </head>
+    <body>
+        <% include partials/navbar.ejs %>
+        <div class="details-container">
+            <div class="details-poster poster-wrapper">
+                <img class="details-poster" src="<%=doc.images.posterWeb%>">
+            </div>
+            <div class="details-info">
+                <h1><%=doc.title%></h1>
+                <div class="details-wrapper row row-add-spacing">
+                    <p><%=doc.year%></p>
+                    <p><%=doc.runtime%> min</p>
+                    <p class="details-rated"><%=doc.rated%></p>
+                </div>
+                <div class="details-wrapper row row-add-spacing">
+                    <p>Directed by: <%=doc.director.name%></p>
+                </div>
+                <br>
+                <div class="row row-add-spacing">
+                    <button onclick="window.location.href='/watch?id=<%=doc._id%>'" class="btn btn-primary"><i class="fas fa-play"></i> Play</button>
+                    <button onclick="window.location.href='/edit?id=<%=doc._id%>'" class="btn"><i class="fas fa-edit"></i> Edit</button>
+                </div>
+                <br>
+                <p class="details-tagline"><%=doc.tagline%></p>
+                <br>
+                <p><%=doc.plot%></p>
+                
+                <div class="file-details">
+                    <p>File Details:</p>
+                    <p><%=doc.videoInfo.videoCodec%>, <%=doc.videoInfo.audioCodec%></p>
+                    <p><%=doc.videoInfo.width%> x <%=doc.videoInfo.height%></p>
+                    <p><%=doc.location%></p>
+                </div>
+            </div>
+            <div class="details-actors">
+                <h2>Cast:</h2>
+                <div class="card-scrollpane">
+                    <% for(var member in doc.cast) { %>
+                        <div class="card profile-box">
+                            <a href="#">
+                                <img src="<%=doc.cast[member].profileWeb%>">
+                                <p class="profile-name"><%=doc.cast[member].name%></p>
+                                <p class="profile-role">as <%=doc.cast[member].character%></p>
+                            </a>
+                        </div>
+                    <%}%>
+                </div>
+            </div>
+        </div>
+
+        <div class="details-background">
+            <img src="<%=doc.images.backdropWeb%>">
+        </div>
+    </body>
+</html>

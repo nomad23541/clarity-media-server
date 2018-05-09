@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>Edit <%=doc.title%> - Clarity</title>
+        <link rel="stylesheet" href="/css/style.css">
+        <script src="/scripts_server/jquery/dist/jquery.min.js"></script>
+        <script src="/scripts/edit.js"></script>
+    </head>
+    <body>
+        <% include partials/navbar.ejs %>
+        <div class="vertical-align center-align">
+            <h2>Edit: <%=doc.title%></h2>
+            <div class="panel center">
+                <button id="deleteBtn" class="button-danger"><i class="fas fa-trash-alt"></i>Delete Media</button>
+            </div>
+        </div>
+    </body>
+</html>

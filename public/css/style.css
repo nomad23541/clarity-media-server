@@ -1,0 +1,8 @@
+/* Include all css files into one */
+@import 'reset.css';
+@import 'font.css';
+@import 'fontawesome-all.css';
+@import 'layout.css';
+@import 'base.css';
+@import 'color.css';
+

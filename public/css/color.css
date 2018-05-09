@@ -1,0 +1,11 @@
+/* Define Colors */
+:root {
+    --background: #1e272e;
+    --background-alt: #485460;
+    --primary: #2ecc71;
+    --primary-dark: #27ae60;
+    --danger: #e74c3c;
+    --danger-dark: #c0392b;
+    --button: #3a4753;
+    --button-hover: #2f3a44;
+}

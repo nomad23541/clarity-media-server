@@ -1,0 +1,376 @@
+/** All components, navbar, buttons, etc */
+
+body {
+    background: var(--background);
+    color: white;
+    font-family: 'Roboto';
+}
+
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+a {
+    color: var(--primary);
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+    .navbar a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .navbar-links ul {
+        list-style: none;
+    }
+
+    .navbar-links ul li {
+        display: inline;
+    }
+
+    .navbar-links a {
+        margin: 5px;
+        font-size: 1.5em;
+        transition: 0.2s ease;
+    }
+
+    .navbar-links a:hover {
+        color: var(--primary);
+    }
+
+    .navbar-header h1 {
+        font-weight: 300;
+    }
+    
+.media-box {
+    width: 30%;
+    min-width: 100px;
+    max-width: 200px;
+    margin: 5px;
+
+    text-align: center;
+}
+
+    .media-box a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .media-box p {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    .media-box img {
+        width: 100%;
+        height: auto;
+    }
+
+    .poster-wrapper {
+        position: relative;
+    }
+
+    .poster-overlay {
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        border: 2px solid transparent;
+        box-sizing: border-box;
+        transition: 0.15s ease-out;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        pointer-events: none;
+        opacity: 0;
+    }
+
+    .media-box:hover .poster-overlay {
+        opacity: 1;
+        border-color: var(--primary)
+    }
+
+    .media-edit, .media-player, .media-info {
+        pointer-events: auto;
+    }
+
+    .media-edit {
+        position: absolute;
+        left: 5px;
+        top: 5px;
+    }
+
+    .media-info {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+    }
+
+    .media-edit:hover, .media-info:hover {
+        color: var(--primary);
+    }
+
+    .media-play {
+        font-size: 5vh;
+    }
+
+    .media-year {
+        font-weight: 300;
+        opacity: 0.7;
+    }
+
+#player {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+    .player-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 100;
+        pointer-events: none;
+
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+        
+        width: 100%;
+
+        opacity: 0;
+
+        transition: 0.3s ease-out;
+    }
+
+    .player-title, .player-year, #backArrow {
+        padding: 10px;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .player-title {
+        font-size: 2.5em;
+    }
+
+    .player-year {
+        font-weight: 100;
+        font-size: 2.5em;
+    }
+
+        .player-year:before {
+            content: '- ';
+        }
+
+    .player-overlay img {
+        position: absolute;
+        right: 0;
+        width: 200px;
+        margin: 5px;
+        box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+    }
+
+    #backArrow {
+        pointer-events: auto;
+        color: white;
+        font-size: 2em;
+    }
+
+.btn {
+    text-transform: uppercase;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    background: var(--button);
+    color: white;
+
+    padding: 8px 15px;
+
+    cursor: pointer;
+    transition: 0.2s ease-out;
+}
+
+    .btn:hover {
+        background: var(--button-hover);
+    }
+
+    .btn-primary {
+        background: var(--primary);
+    }
+
+    .btn-primary:hover {
+        background: var(--primary-dark);
+    }
+
+    .btn-danger {
+        background: var(--danger);
+    }
+
+    .btn-danger:hover {
+        background: var(--danger-dark);
+    }
+
+.poster-wrapper {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.details-poster {
+    width: 250px;
+}
+
+.details-wrapper {
+    font-size: 13px;
+    opacity: 0.6;
+}
+
+.details-rated {
+    border: 1px solid white;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.details-tagline {
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.2em;
+}
+
+.details-background {
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    z-index: -100;
+    opacity: 0.1;
+}
+
+    .details-background img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        min-width: 50%;
+        min-height: 50%;
+    }
+
+.file-details {
+    margin-top: 5px;
+    font-weight: 300;
+    opacity: 0.5;
+}
+
+.profile-box {
+    width: 30%;
+    min-width: 100px;
+    max-width: 200px;
+    margin: 5px;
+
+    text-align: center;
+}
+
+    .profile-box img {
+        width: 100%;
+        min-height: 100%;
+        height: 30vh;
+        object-fit: cover;
+        margin-bottom: 5px;
+    }
+
+    .profile-box a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .profile-box p {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    .profile-role {
+        font-weight: 300;
+        opacity: 0.7;
+    }
+
+/* A popup box */
+.dialog-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.8);
+
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+
+    display: none;
+}
+
+    .dialog {
+        background: var(--background);
+        border-radius: 5px;
+        padding: 15px;
+        text-align: center;
+    }
+
+    /* Spinner animation, taken from: https://loading.io/css/ */
+    .lds-dual-ring {
+        display: inline-block;
+        width: 64px;
+        height: 64px;
+        padding: 5px;
+    }
+
+    .lds-dual-ring:after {
+        content: " ";
+        display: block;
+        width: 46px;
+        height: 46px;
+        margin: 1px;
+        border-radius: 50%;
+        border: 5px solid #fff;
+        border-color: #fff transparent #fff transparent;
+        animation: lds-dual-ring 1.2s linear infinite;
+    }
+
+    @keyframes lds-dual-ring {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+      

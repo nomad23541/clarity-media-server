@@ -1,0 +1,147 @@
+/** Anything related to laying things out in the page */
+
+/** Uses grid layout */
+.details-container {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+        "poster"
+        "info"
+        "actors";
+    margin: 30px;
+}
+    
+    .details-poster {
+        grid-area: poster;
+    }
+
+    .details-info {
+        grid-area: info;
+    }
+
+    .details-actors {
+        grid-area: actors;
+        overflow: hidden;
+    }
+
+/* Resizing */
+@media (min-width: 700px) {
+    .details-container {
+        grid-template-areas: 
+            "poster info"
+            "actors actors"
+    }
+}
+
+/* A horizontal scrollpane (think netflix) */
+.scrollpane-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.card-scrollpane {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: flex-start;
+    align-items: flex-start;
+    overflow-x: scroll;
+    width: 100%;
+}
+    .card {
+        flex: 0 0 auto;
+    }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+    .container-fullscreen {
+        width: 100%;
+        height: 100%;
+    }
+
+    .align-left {
+        align-items: flex-start;
+    }
+
+    .text-container {
+        width: 60%;
+    }
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    align-content: center;
+
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+    .row-center {
+        justify-content: center;
+    }
+
+    .row-add-spacing * {
+        margin-left: 2px;
+        margin-right: 2px;
+    }
+
+    .row-align-top {
+        align-items: flex-start;
+    }
+
+    .row-no-wrap {
+        flex-wrap: nowrap;
+    }
+
+    .row-align-left {
+        justify-content: flex-start;
+    }
+
+    .row-container {
+        width: 100%;
+    }
+
+@media screen and (max-width: 990px) {
+    .row-no-wrap {
+        flex-wrap: wrap;
+    }
+
+    .text-container {
+        width: 100%;
+    }
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.header {
+    margin: 10px;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.left-text {
+    text-align: left;
+}
+
+.font-light {
+    font-weight: 300;
+}

@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>Search - Clarity</title>
+        <link rel="stylesheet" href="/css/style.css">
+        <script src="/scripts_server/jquery/dist/jquery.min.js"></script>
+        <script src="/scripts/search.js"></script>
+    </head>
+    <body>
+        <% include partials/navbar.ejs %>
+        <div class="container">
+            <div class="header">
+                <h1>Search</h1>
+            </div>
+            <div class="row row-add-spacing">
+                <input id="searchField" type="text" placeholder="Search Away...">
+                <button id="searchBtn" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+        <div id="results" class="row"></div>
+    </body>
+</html>

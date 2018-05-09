@@ -1,0 +1,32 @@
+{
+  "name": "clarity-project",
+  "version": "0.0.1",
+  "description": "Simple Media Server",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "nomad23541",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.17.3"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "camo": "^0.12.3",
+    "ejs": "^2.5.8",
+    "express": "^4.16.3",
+    "get-video-info": "^1.0.0",
+    "imdb-api": "^3.1.2",
+    "is-video": "^1.0.1",
+    "jquery": "^3.3.1",
+    "moviedb": "^0.2.10",
+    "nedb": "^1.8.0",
+    "promise": "^8.0.1",
+    "request": "^2.85.0",
+    "requestretry": "^1.13.0",
+    "socket.io": "^2.1.0",
+    "video.js": "^6.8.0",
+    "videojs-overlay": "^2.0.0"
+  }
+}
