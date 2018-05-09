@@ -9,6 +9,8 @@ Currently Supports:
 To Work On:
  - Support transcoding
  - Better config file, preferably JSON
+ - Edit page
+ - Settings page
  - Polishing, prettifying.
  - Clean up code
 
