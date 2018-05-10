@@ -25,6 +25,9 @@ In the meantime, you'll need to create a file named "config.js" in the project's
     config.mediaDirectory = 'where your video files are'
 	module.exports = config
 
+Next you'll need to install the dependencies (In the root directory)
+    `npm install`
+
 Then to start the server: `node ./server.js`
 
 
