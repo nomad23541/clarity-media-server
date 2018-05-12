@@ -51,6 +51,20 @@
                     <%}%>
                 </div>
             </div>
+            <div class="details-similar">
+                <h2>Similar Movies:</h2>
+                <div class="card-scrollpane">
+                    <% for(var member in doc.cast) { %>
+                        <div class="card profile-box">
+                            <a href="#">
+                                <img src="<%=doc.cast[member].profileWeb%>">
+                                <p class="profile-name"><%=doc.cast[member].name%></p>
+                                <p class="profile-role">as <%=doc.cast[member].character%></p>
+                            </a>
+                        </div>
+                    <%}%>
+                </div>
+            </div>
         </div>
 
         <div class="details-background">
