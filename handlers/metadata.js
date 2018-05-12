@@ -5,6 +5,7 @@ const path = require('path')
 const tmdb = require('../handlers/tmdb')
 const fs = require('fs')
 const getVideoInfo = require('get-video-info')
+const isVideo = require('is-video')
 const io = require('../utils/setup-socketio').io()
 
 const API_KEY = config.tmdbApiKey
@@ -17,6 +18,13 @@ module.exports.fetchMetadata = function() {
     // get current iteration, used for sending progress to client
     var currentIndex = 0;
     files.forEach(file => {
+        // skip this file if it isn't a video file
+        if(!isVideo(path.join(config.mediaDirectory, file))) {
+            // if we don't increase the current index, the client will stall
+            currentIndex++;
+            return;
+        }
+
         var cleaned = titleCleaner.cleanupTitle(file)
         var title = cleaned.title
         var year = cleaned.year
