@@ -1,6 +1,7 @@
 node_modules/
 config.js
 package-lock.json
-db/media.db
+database/media.db
+database/
 .jshintrc
 .vscode/
