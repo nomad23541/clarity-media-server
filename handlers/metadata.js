@@ -159,10 +159,3 @@ downloadImages = function(result) {
         backdrop_web: path.join('/posters', backdropOutput)
     }
 }
-
-/**
- * Will be moved to a utils file, later.
- */
-function getKeyByValue(object, value) {
-    return Object.keys(object).find(key => object[key] === value)
-}
