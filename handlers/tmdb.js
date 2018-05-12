@@ -74,6 +74,21 @@ module.exports.getReleaseDates = function(params) {
 }
 
 /**
+ * Retrieves credits for a specified media
+ * @param {Object} data Must contain TMDb id and api key
+ */
+module.exports.getCredits = function(data) {
+    return new Promise(function(resolve, reject) {
+        request({
+            url: url.resolve(baseURL, '/3/movie/' + data.id + '/credits?api_key=' + data.apiKey)
+        }, function(err, res, body) {
+            if(err) return reject(err)
+            resolve(body)
+        })
+    })
+}
+
+/**
  * Retrieves images for a specified media
  * @param {Object} data Details fetched from getMovieDetails() 
  */
@@ -97,17 +112,10 @@ module.exports.getImages = function(data) {
     })
 }
 
-module.exports.getCredits = function(data) {
-    return new Promise(function(resolve, reject) {
-        request({
-            url: url.resolve(baseURL, '/3/movie/' + data.id + '/credits?api_key=' + data.apiKey)
-        }, function(err, res, body) {
-            if(err) return reject(err)
-            resolve(body)
-        })
-    })
-}
-
+/**
+ * Grabs an image from TMDb
+ * @param {string} path TMDb path to image
+ */
 module.exports.getImage = function(path) {
     return new Promise(function(resolve, reject) {
         request({
