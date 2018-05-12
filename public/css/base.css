@@ -299,6 +299,8 @@ a {
         height: 30vw;
         max-height: 250px;
         object-fit: cover;
+
+        margin-bottom: 5px;
     }
 
     .profile-box a {
