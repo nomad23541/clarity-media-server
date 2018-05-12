@@ -32,10 +32,16 @@ module.exports = function(app) {
     })
 
     app.get('/details', function(req, res) {
+        // ugly pyramid going on here, maybe not too bad, we'll see...
         db.findOne({ _id: req.query.id }, function(err, doc) {
             if(!doc) return res.status(404).send('Not Found')
-            res.render('details',  {
-                doc: doc
+
+            // find movies that have the same genres
+            db.find({ genres: { $in: doc.genres }}, function(err, docs) {
+                res.render('details',  {
+                    doc: doc,
+                    similar: docs
+                })
             })
         })
     })
