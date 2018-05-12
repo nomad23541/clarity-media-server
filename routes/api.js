@@ -36,10 +36,6 @@ module.exports = function(app) {
         })
     })
 
-    app.put('/api/media/:id', function(req, res) {
-        
-    })
-
     app.get('/api/search', function(req, res) {
         db.find({ title: new RegExp(req.query.title, 'i') }, function(err, docs) {
             if(err) res.send(err)
