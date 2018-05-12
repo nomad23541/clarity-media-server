@@ -2,7 +2,7 @@ const metadata = require('../handlers/metadata')
 const config = require('../config')
 const fs = require('fs')
 const isVideo = require('is-video')
-const db = require('../db/db').db()
+const db = require('../utils/setup-db').db()
 const path = require('path')
 const getVideoInfo = require('get-video-info')
 

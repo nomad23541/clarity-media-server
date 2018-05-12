@@ -1,4 +1,4 @@
-const db = require('../db/db').db()
+const db = require('../utils/setup-db').db()
 
 module.exports = function(app) {
     app.get('/api/media', function(req, res) {

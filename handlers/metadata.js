@@ -1,4 +1,4 @@
-const db = require('../db/db').db()
+const db = require('../utils/setup-db').db()
 const config = require('../config')
 const titleCleaner = require('../utils/title-cleaner')
 const path = require('path')
