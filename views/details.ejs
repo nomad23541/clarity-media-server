@@ -47,7 +47,7 @@
                     <% for(var member in doc.cast) { %>
                         <div class="card profile-box">
                             <a href="#">
-                                <img src="<%=doc.cast[member].profileWeb%>">
+                                <img src="<%=doc.cast[member].profileWeb%>" onerror="this.onerror=null;this.src='/img/poster-unknown.png';">
                                 <p class="profile-name"><%=doc.cast[member].name%></p>
                                 <p class="profile-role">as <%=doc.cast[member].character%></p>
                             </a>
