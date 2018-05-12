@@ -21,8 +21,17 @@
                     <p><%=doc.runtime%> min</p>
                     <p class="details-rated"><%=doc.rated%></p>
                 </div>
-                <div class="details-wrapper row row-add-spacing">
+                <div class="details-wrapper">
                     <p>Directed by: <%=doc.director.name%></p>
+                    <p>Genres:
+                    <% for(var i = 0; i < doc.genres.length; i++) { %>
+                        <% if(i == doc.genres.length - 1) { %>
+                            <%=doc.genres[i].name%>
+                        <% } else { %>
+                            <%=doc.genres[i].name%>,
+                        <%}%>
+                    <%}%>
+                    </p>
                 </div>
                 <br>
                 <div class="row row-add-spacing">
