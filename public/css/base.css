@@ -395,4 +395,15 @@ a {
             transform: rotate(360deg);
         }
     }
+
+.textfield {
+    width: 60%;
+    padding: 6px;
+    border-radius: 5px;
+    border: 3px solid transparent;
+}
+
+.textfield:focus {
+    border-color: var(--primary);
+}
       
