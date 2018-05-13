@@ -13,18 +13,7 @@
                 <h1>Library</h1>
             </div>
             <div class="row row-add-spacing">
-                <p>Sort:</p>
-                <label class="select-wrapper">
-                    <select id="sortSelect">
-                        <option value="title+1">A to Z</option>
-                        <option value="title+-1">Z to A</option>
-                        <option value="year+1">Released Ascending</option>
-                        <option value="year+-1">Released Descending</option>
-                    </select>
-                </label>
-                <button id="sortBtn" class="btn btn-primary">Sort</button>
-            </div>
-            <div class="center-text">
+                <button id="openSortDialogBtn" class="btn">Sort <i class="fas fa-sort"></i></button>
                 <a id="scanLibrary" href="#">Scan Library</a>
             </div>
             <!-- Media is presented in #media -->
@@ -37,6 +26,34 @@
                 <div class="dialog">
                     <div class="lds-dual-ring"></div>
                     <p>Scanning Library... <span id="scanProgress">0%</span></p>
+                </div>
+            </div>
+
+            <div id="sortDialog" class="dialog-container dialog-closable">
+                <div class="dialog">
+                    <h3>Sort By</h3>
+                    <form id="sortType" class="radio-box-list">
+                        <div>
+                            <input type="radio" name="sortType" value="title" id="sortAlpha">
+                            <label for="sortAlpha">Alphabetical</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="sortType" value="year" id="sortYear">
+                            <label for="sortYear">Year</label>
+                        </div>
+                    </form>
+                    <h3>Order:</h3>
+                    <form id="sortOrder" class="radio-box-list">
+                        <div>
+                            <input type="radio" name="sortOrder" value="+1" id="ascending">
+                            <label for="acsending">Ascending</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="sortOrder" value="+-1" id="descending">
+                            <label for="acsending">Descending</label>
+                        </div>
+                    </form>
+                    <button id="sortBtn" class="btn btn-primary">Sort</button>
                 </div>
             </div>
         </div>
