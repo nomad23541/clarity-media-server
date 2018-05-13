@@ -112,9 +112,15 @@ downloadCreditImages = function(credits) {
     })
 
     // get only the details I want from each cast member
-    var cast = []
-    for(var obj in credits.cast) {
-        var member = credits.cast[obj]
+    let cast = []
+    // limit how many cast members we store
+    let castLimit = 15
+    for(let i = 0; i < credits.cast.length; i++) {
+        if(i == castLimit) {
+            break;
+        }
+
+        let member = credits.cast[i]
         cast.push({
             name: member.name,
             character: member.character,
@@ -125,7 +131,7 @@ downloadCreditImages = function(credits) {
     }
 
     // now get the director
-    var directorObj = credits.crew.find(member => member.job === 'Director')
+    let directorObj = credits.crew.find(member => member.job === 'Director')
     // also download their profile image
     tmdb.getImage(directorObj.profile_path).then(function(image) {
         fs.writeFile(path.join(profilesDirectory, directorObj.id + '.jpg'), image, 'binary', function(err) {
