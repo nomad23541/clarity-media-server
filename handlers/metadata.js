@@ -104,7 +104,7 @@ downloadCreditImages = function(credits) {
     
     // download profile images for each cast member
     credits.cast.forEach(member => {
-        tmdb.getImage(member.profile_path).then(function(image) {
+        tmdb.getImage(member.profile_path, 'w185').then(function(image) {
             fs.writeFile(path.join(profilesDirectory, member.id + '.jpg'), image, 'binary', function(err) {
                 if(err) return console.log('Failed to download profile for ' + member.id)
             })
@@ -133,7 +133,7 @@ downloadCreditImages = function(credits) {
     // now get the director
     let directorObj = credits.crew.find(member => member.job === 'Director')
     // also download their profile image
-    tmdb.getImage(directorObj.profile_path).then(function(image) {
+    tmdb.getImage(directorObj.profile_path, 'w185').then(function(image) {
         fs.writeFile(path.join(profilesDirectory, directorObj.id + '.jpg'), image, 'binary', function(err) {
             if(err) return console.log('Failed to download profile for director: ' + directorObj.id)
         })
