@@ -62,17 +62,10 @@
                     <%}%>
                 </div>
             </div>
-            <div class="details-file-details">
-                <div class="file-details row row-add-spacing">
-                    <p><%=doc.videoInfo.videoCodec%>, <%=doc.videoInfo.audioCodec%>,</p>
-                    <p><%=doc.videoInfo.width%> x <%=doc.videoInfo.height%>,</p>
-                    <p><%=doc.location%></p>
-                </div>
-            </div>
             <div class="details-similar">
                 <h2>Similar Movies:</h2>
                 <div class="card-scrollpane">
-                    <% for(var doc in similar) { %>
+                    <% for(let doc in similar) { %>
                         <div class="media-box">
                             <a href="/details?id=<%=similar[doc]._id%>">
                                 <div class="poster-wrapper">
@@ -87,6 +80,13 @@
                             <p class="media-year">(<%=similar[doc].year%>)</p>
                         </div>
                     <%}%>
+                </div>
+            </div>
+            <div class="details-file-details">
+                <div class="file-details row row-add-spacing">
+                    <p><%=doc.videoInfo.videoCodec%>, <%=doc.videoInfo.audioCodec%>,</p>
+                    <p><%=doc.videoInfo.width%> x <%=doc.videoInfo.height%>,</p>
+                    <p><%=doc.location%></p>
                 </div>
             </div>
         </div>
