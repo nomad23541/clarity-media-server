@@ -70,11 +70,10 @@
                 <div class="card-scrollpane">
                     <% for(var doc in similar) { %>
                         <div class="media-box">
-                            <a href="/watch?id=<%=similar[doc]._id%>">
+                            <a href="/details?id=<%=similar[doc]._id%>">
                                 <div class="poster-wrapper">
                                     <img src="<%=similar[doc].images.posterWeb%>">
                                     <div class="poster-overlay">
-                                        <a class="media-info" href="/details?id=<%=similar[doc]._id%>"><i class="fas fa-info-circle"></i></a>
                                         <a class="media-edit" href="/edit?id=<%=similar[doc]._id%>"><i class="fas fa-edit"></i></a>
                                         <a class="media-play" href="/watch?id=<%=similar[doc]._id%>"><i class="fas fa-play"></i></a>
                                     </div>

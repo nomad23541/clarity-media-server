@@ -73,11 +73,10 @@ $(document).ready(function() {
             data.forEach(obj => {
                 let content = 
                     '<div class="media-box">' +
-                        '<a href="/watch?id=' + obj._id + '">' +
+                        '<a href="/details?id=' + obj._id + '">' +
                             '<div class="poster-wrapper">' +
                                 '<img src="' + obj.images.posterWeb + '">' +
                                 '<div class="poster-overlay">' +
-                                    '<a class="media-info" href="/details?id=' + obj._id + '"><i class="fas fa-info-circle"></i></a>' +
                                     '<a class="media-edit" href="/edit?id=' + obj._id + '"><i class="fas fa-edit"></i></a>' +
                                     '<a class="media-play" href="/watch?id=' + obj._id + '"><i class="fas fa-play"></i></a>' +
                                 '</div>' +

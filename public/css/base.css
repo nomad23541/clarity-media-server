@@ -116,7 +116,7 @@ a {
         border-color: var(--primary)
     }
 
-    .media-edit, .media-player, .media-info {
+    .media-edit, .media-play {
         pointer-events: auto;
     }
 
@@ -126,18 +126,15 @@ a {
         top: 5px;
     }
 
-    .media-info {
+    .media-play {
         position: absolute;
         right: 5px;
-        top: 5px;
+        bottom: 5px;
+        font-size: 1.3em;
     }
 
-    .media-edit:hover, .media-info:hover {
+    .media-edit:hover, .media-play:hover {
         color: var(--primary);
-    }
-
-    .media-play {
-        font-size: 5vh;
     }
 
     .media-year {
