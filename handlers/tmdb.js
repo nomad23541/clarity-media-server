@@ -116,10 +116,10 @@ module.exports.getImages = function(data) {
  * Grabs an image from TMDb
  * @param {string} path TMDb path to image
  */
-module.exports.getImage = function(path) {
+module.exports.getImage = function(path, size) {
     return new Promise(function(resolve, reject) {
         request({
-            url: url.resolve(imageURL, '/t/p/original/' + path),
+            url: url.resolve(imageURL, '/t/p/' + size + '/' + path),
             encoding: 'binary'
         }, function(err, res, body) {
             if(err) return reject(err)
