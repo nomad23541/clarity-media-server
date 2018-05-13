@@ -9,7 +9,8 @@
         "poster"
         "info"
         "actors"
-        "similar";
+        "similar"
+        "file-details";
     margin: 30px;
 }
     
@@ -31,13 +32,18 @@
         overflow: hidden;
     }
 
+    .details-file-details {
+        grid-area: file-details;
+    }
+
 /* Resizing */
 @media (min-width: 700px) {
     .details-container {
         grid-template-areas: 
             "poster info"
             "actors actors"
-            "similar similar";
+            "similar similar"
+            "file-details file-details";
     }
 }
 
