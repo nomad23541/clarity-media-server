@@ -61,7 +61,7 @@
     flex-wrap: nowrap;
     align-content: flex-start;
     align-items: flex-start;
-    overflow-x: scroll;
+    overflow-x: auto;
     width: 100%;
 }
     .card {
