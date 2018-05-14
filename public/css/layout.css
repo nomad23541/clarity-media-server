@@ -47,6 +47,28 @@
     }
 }
 
+.settings-container {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-gap: 10px;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "settings-content"
+        "button-bar";
+    margin: 30px;
+}
+
+    .settings-content {
+        grid-area: settings-content;
+        width: 100%;
+        text-align: center;
+    }
+
+    .settings-button-bar {
+        grid-area: button-bar;
+    }
+
 /* A horizontal scrollpane (think netflix) */
 .scrollpane-wrapper {
     display: flex;

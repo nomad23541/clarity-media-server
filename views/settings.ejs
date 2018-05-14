@@ -8,9 +8,27 @@
     </head>
     <body>
         <% include partials/navbar.ejs %>
-        <div class="vertical-align center-align">
-            <h2>Settings:</h2>
-            <h1>THIS PAGE ISN'T FUNCTIONAL YET</h1>
+        <div class="settings-container">
+            <div class="settings-content">
+                <div clsas="header">
+                    <h1>Settings</h1>
+                </div>
+    
+                <div class="input-wrapper">
+                    <label>Server Port:</label>
+                    <input class="textfield" type="text">
+                </div>
+                <div class="input-wrapper">
+                    <label>Media Directory: </label>
+                    <input class="textfield" type="text">
+                </div>
+            </div>
+            <div class="settings-button-bar">
+                <div class="row row-add-spacing">
+                    <button class="btn">Scan Library <i class="fas fa-barcode"></i></button>
+                    <button class="btn btn-primary">Save Settings <i class="fas fa-save"></i></button>
+                </div>
+            </div>
         </div>
     </body>
 </html>
