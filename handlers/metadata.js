@@ -157,6 +157,11 @@ downloadCreditImages = function(credits) {
 }
 
 downloadImages = function(result) {
+    // create poster folder if it doesn't exist
+    if(!fs.existsSync(config.posterDirectory)) {
+        fs.mkdirSync(config.posterDirectory)
+    }
+
     var posterOutput = 'poster_' + result.id + '.jpg'
     var backdropOutput = 'backdrop_' + result.id + '.jpg'
 
