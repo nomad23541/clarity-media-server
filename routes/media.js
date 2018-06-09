@@ -6,6 +6,11 @@ const path = require('path')
 
 module.exports = function(app) {
     app.get('/media/scanlibrary', function(req, res) { 
+        // create media directory if it doesn't exist
+        if(!fs.existsSync(config.mediaDirectory)) {
+            fs.mkdirSync(config.mediaDirectory)
+        }
+
         db.remove({}, { multi: true })
         metadata.fetchMetadata()
     })
