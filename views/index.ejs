@@ -4,7 +4,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/css/style.css">
         <script src="/scripts_server/jquery/dist/jquery.min.js"></script>
-        <script src="/scripts_server/socket.io-client/dist/socket.io.js"></script>
         <script src="/scripts/index.js"></script>
     </head>
     <body>
@@ -15,19 +14,11 @@
             </div>
             <div class="row row-add-spacing">
                 <button id="openSortDialogBtn" class="btn">Sort <i class="fas fa-sort"></i></button>
-                <a id="scanLibrary" href="#">Scan Library</a>
             </div>
             <!-- Media is presented in #media -->
             <div id="media" class="row row-container row-center"></div>
             <div id="noDocsFound" class="center-text">
-                <p>No media found :(</p>
-            </div>
-
-            <div id="scanLibraryDialog" class="dialog-container">
-                <div class="dialog">
-                    <div class="lds-dual-ring"></div>
-                    <p id="scanLibraryTxt">Scanning Library... <span id="scanProgress">0%</span></p>
-                </div>
+                <p>No media found! Click go to <a href="/settings">Settings</a> and scan your library!</p>
             </div>
 
             <div id="sortDialog" class="dialog-container dialog-closable">

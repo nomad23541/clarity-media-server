@@ -3,7 +3,6 @@ $(document).ready(function() {
     const media = $('#media')
     const noDocsFound = $('#noDocsFound')
     const sortDialog = $('#sortDialog')
-    const scanLibraryDialog = $('#scanLibraryDialog')
     const openSortDialogBtn = $('#openSortDialogBtn')
     const sortBtn = $('#sortBtn')
 
@@ -12,7 +11,6 @@ $(document).ready(function() {
     // dialogs need to be hidden on DOM load, display: hidden in css
     // causes strange placement when show() is called
     sortDialog.hide()
-    scanLibraryDialog.hide()
 
     // handle dialog functions
     // if dialog contains .dialog-closable, user can click outside to close
@@ -48,27 +46,6 @@ $(document).ready(function() {
         // then sort by those values
         sort(sortType + orderType)
         sortDialog.hide()
-    })
-
-    $('#scanLibrary').click(function() {
-        scanLibraryDialog.show()
-        $.ajax({
-            url: '/media/scanlibrary',
-            method: 'GET'
-        })
-    })
-
-    // listen for library scan progress and update the client
-    const socket = io()
-    socket.on('scanProgress', function(data) {
-        $('#scanProgress').text(data.msg + '%')
-        if(data.msg == 100) {
-            location.reload()
-        }
-
-        if(data.msg == 'NOMEDIA') {
-            $('#scanLibraryTxt').text('Media directory is empty!')
-        }
     })
 
     function sort(query) {
