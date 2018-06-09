@@ -1,4 +1,5 @@
 const db = require('../utils/setup-db').db()
+const config = require('../config.js')
 
 module.exports = function(app) {
     app.get('/api/media', function(req, res) {
@@ -41,5 +42,9 @@ module.exports = function(app) {
             if(err) res.send(err)
             res.json(docs)
         })
+    })
+
+    app.get('/api/settings', function(req, res) {
+        res.json(config)
     })
 }
