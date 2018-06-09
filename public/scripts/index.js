@@ -65,6 +65,10 @@ $(document).ready(function() {
         if(data.msg == 100) {
             location.reload()
         }
+
+        if(data.msg == 'NOMEDIA') {
+            $('#scanLibraryTxt').text('Media directory is empty!')
+        }
     })
 
     function sort(query) {

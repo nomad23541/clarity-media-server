@@ -17,12 +17,19 @@ module.exports.fetchMetadata = function() {
     var files = fs.readdirSync(config.mediaDirectory)
     // get current iteration, used for sending progress to client
     var currentIndex = 0;
+
+    // tell the client that there is no media to scan
+    if(files.length == 0) {
+        io.emit('scanProgress', { msg: "NOMEDIA" })
+        return
+    }
+
     files.forEach(file => {
         // skip this file if it isn't a video file
         if(!isVideo(path.join(config.mediaDirectory, file))) {
             // if we don't increase the current index, the client will stall
-            currentIndex++;
-            return;
+            currentIndex++
+            return
         }
 
         var cleaned = titleCleaner.cleanupTitle(file)
