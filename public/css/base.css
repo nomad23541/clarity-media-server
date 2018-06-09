@@ -406,4 +406,13 @@ a {
 .textfield:focus {
     border-color: var(--primary);
 }
+
+.input-wrapper {
+    text-align: left;
+}
+
+    .input-wrapper .textfield {
+        width: 100%;
+        margin: 5px 0;
+    }
       

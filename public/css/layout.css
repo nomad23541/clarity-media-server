@@ -61,7 +61,7 @@
 
     .settings-content {
         grid-area: settings-content;
-        width: 100%;
+        width: 80%;
         text-align: center;
     }
 
