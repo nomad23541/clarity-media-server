@@ -14,9 +14,9 @@ const API_KEY = config.tmdbApiKey
  * Read a file and fetch it's metadata, if found
  */
 module.exports.fetchMetadata = function() {
-    var files = fs.readdirSync(config.mediaDirectory)
+    let files = fs.readdirSync(config.mediaDirectory)
     // get current iteration, used for sending progress to client
-    var currentIndex = 0;
+    let currentIndex = 0;
 
     // tell the client that there is no media to scan
     if(files.length == 0) {
@@ -32,9 +32,9 @@ module.exports.fetchMetadata = function() {
             return
         }
 
-        var cleaned = titleCleaner.cleanupTitle(file)
-        var title = cleaned.title
-        var year = cleaned.year
+        let cleaned = titleCleaner.cleanupTitle(file)
+        let title = cleaned.title
+        let year = cleaned.year
     
         tmdb.search({
             title: title,
@@ -42,23 +42,23 @@ module.exports.fetchMetadata = function() {
             apiKey: API_KEY
         }).then(function(results) {
             const id = results.results[0].id
-            var detailsPromise = tmdb.getMovieDetails({ id: id, apiKey: API_KEY })
-            var releaseDatesPromise = tmdb.getReleaseDates({ id: id, apiKey: API_KEY })
-            var creditsPromise = tmdb.getCredits({ id: id, apiKey: API_KEY })
-            var videoInfo = getVideoInfo(path.join(config.mediaDirectory, file))
+            let detailsPromise = tmdb.getMovieDetails({ id: id, apiKey: API_KEY })
+            let releaseDatesPromise = tmdb.getReleaseDates({ id: id, apiKey: API_KEY })
+            let creditsPromise = tmdb.getCredits({ id: id, apiKey: API_KEY })
+            let videoInfo = getVideoInfo(path.join(config.mediaDirectory, file))
     
             Promise.all([detailsPromise, releaseDatesPromise, creditsPromise, videoInfo]).then(function(results) {
-                var details = results[0]
-                var releaseDates = results[1]
-                var credits = results[2]
-                var videoInfo = results[3]
+                let details = results[0]
+                let releaseDates = results[1]
+                let credits = results[2]
+                let videoInfo = results[3]
     
-                var images = downloadImages(details)
-                var creditImages = downloadCreditImages(credits)
+                let images = downloadImages(details)
+                let creditImages = downloadCreditImages(credits)
                 // find the US release and grab the MPAA rating
-                var rated = releaseDates.results.find(release => release.iso_3166_1 === 'US').release_dates[0].certification
+                let rated = releaseDates.results.find(release => release.iso_3166_1 === 'US').release_dates[0].certification
                 // object to be inserted into db
-                var doc = {
+                let doc = {
                     title: details.title,
                     year: details.release_date.split('-')[0],
                     releaseDate: details.relase_date,
@@ -89,7 +89,7 @@ module.exports.fetchMetadata = function() {
             
                 db.insert(doc, function(err, newDoc) {
                     currentIndex++
-                    var percentage = parseInt((currentIndex / files.length) * 100)
+                    let percentage = parseInt((currentIndex / files.length) * 100)
                     io.emit('scanProgress', { msg: percentage })
                 })
             }).catch(function(err) {
@@ -104,7 +104,7 @@ module.exports.fetchMetadata = function() {
 
 downloadCreditImages = function(credits) {
     // create profiles folder if it doesn't exist
-    var profilesDirectory = path.join(config.posterDirectory, '/profiles')
+    let profilesDirectory = path.join(config.posterDirectory, '/profiles')
     if(!fs.existsSync(profilesDirectory)) {
         fs.mkdirSync(profilesDirectory)
     }
@@ -146,7 +146,7 @@ downloadCreditImages = function(credits) {
         })
     })
 
-    var director = {
+    let director = {
         name: directorObj.name,
         id: directorObj.id,
         profileLocal: path.join(profilesDirectory, directorObj.id + '.jpg'),
@@ -162,8 +162,8 @@ downloadImages = function(result) {
         fs.mkdirSync(config.posterDirectory)
     }
 
-    var posterOutput = 'poster_' + result.id + '.jpg'
-    var backdropOutput = 'backdrop_' + result.id + '.jpg'
+    let posterOutput = 'poster_' + result.id + '.jpg'
+    let backdropOutput = 'backdrop_' + result.id + '.jpg'
 
     tmdb.getImages({
         poster_path: result.poster_path,
