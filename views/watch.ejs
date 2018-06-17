@@ -6,15 +6,13 @@
         <link rel="stylesheet" href="/scripts_server/video.js/dist/video-js.min.css">
         <link rel="stylesheet" href="/css/videojs-skin.css">
         <script src="/scripts_server/video.js/dist/video.min.js"></script>
-        <script src="/scripts_server/videojs-overlay/dist/videojs-overlay.min.js"></script>
         <script src="/scripts_server/jquery/dist/jquery.min.js"></script>
-
         <!--<script src="/scripts/watch.js"></script>-->
     </head>
     <body>
         <!-- <% include partials/navbar.ejs %> -->
         <div class="container-fullscreen">
-            <video id="player" class="video-js vjs-default-skin" poster="<%=doc.poster%>">
+            <video id="player" class="video-js vjs-default-skin" poster="<%=doc.poster%>" autoplay controls preload="auto">
             </video>
             <div class="player-overlay">
                 <a id="backArrow" href="#"><i class="fas fa-chevron-left"></i></a>
@@ -24,39 +22,52 @@
             </div>
             
             <script>
-                videojs('player', {
-                    preload: 'auto',
-                    controls: true,
-                    autoplay: true,
-                    controlBar: {
-                        CurrentTimeDisplay: true,
-                        TimeDivider: true,
-                        DurationDisplay: true
-                    }
-                }).ready(function() {
-                    this.src({ type: 'video/mp4', src: '/media?id=<%=doc._id%>'})
+                var video = videojs('player')
+                video.src({ type: 'video/mp4', src: '/media?id=<%=doc._id%>'})
 
-                    this.on('pause', function() {
-                        $('.player-overlay').css('opacity', '1')
-                        console.log('paused')
-                    })
-
-                    this.on('playing', function() {
-                        $('.player-overlay').css('opacity', '0')
-                        console.log('playing')
-                    })
-
-                    this.on('useractive', function() {
-                        $('.player-overlay').css('opacity', '1')
-                        console.log('useractive')
-                    })
-
-                    this.on('userinactive', function() {
-                        $('.player-overlay').css('opacity', '0')
-                        console.log('userinactive')
-                    })
+                video.on('pause', function() {
+                    $('.player-overlay').css('opacity', '1')
+                    console.log('paused')
                 })
 
+                video.on('playing', function() {
+                    $('.player-overlay').css('opacity', '0')
+                    console.log('playing')
+                })
+
+                video.on('useractive', function() {
+                    $('.player-overlay').css('opacity', '1')
+                    console.log('useractive')
+                })
+
+                video.on('userinactive', function() {
+                    $('.player-overlay').css('opacity', '0')
+                    console.log('userinactive')
+                })
+
+                // this will work for all media, transcoding or not, will need to change that.
+                // graciously taken from https://stackoverflow.com/questions/3639604/html5-audio-video-and-live-transcoding-with-ffmpeg
+                // duration hack
+                video.duration = function() { return video.theDuration }
+                video.start = 0
+                video.oldCurrentTime = video.currentTime
+                video.currentTime = function(time) {
+                    if(time === undefined) {
+                        return video.oldCurrentTime() + video.start
+                    }
+                    console.log(time)
+                    video.start = time
+                    video.oldCurrentTime(0)
+                    video.src({ type: 'video/mp4', src: '/media?id=<%=doc._id%>&ss=' + time })
+                    video.play()
+                    return this
+                }
+
+                $.getJSON('/api/media/<%=doc._id%>', function(data) {
+                    video.theDuration = data.videoInfo.duration
+                })
+
+                // deal with back arrow
                 $(document).on('click', '#backArrow', function() {
                     window.history.go(-1)
                     console.log('test')
@@ -64,7 +75,6 @@
                 })
 
                 $('#backArrow').click(function() {
-
                     console.log('test')
                 })
             </script>
