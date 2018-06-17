@@ -43,7 +43,14 @@ $(document).ready(function() {
             url: '/settings',
             method: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify(settings)
+            data: JSON.stringify(settings),
+            success: function(data) {
+                console.log('Saved Settings')
+            },
+            error: function(data) {
+                console.log('Error occurred while saving')
+                console.err(data.message)
+            }
         })
     })
 

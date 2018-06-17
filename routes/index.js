@@ -24,7 +24,13 @@ module.exports = function(app) {
     })
 
     app.post('/settings', function(req, res) {
-        fs.writeFileSync('./config.json', JSON.stringify(req.body))
+        try {
+            fs.writeFileSync('./config.json', JSON.stringify(req.body))
+            res.send(JSON.stringify({ message: 'success'}))
+        } catch(err) {
+            res.status(500)
+            res.send(JSON.stringify({ message: err }))
+        }
     })
 
     app.get('/edit', function(req, res) {
