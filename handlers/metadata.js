@@ -57,6 +57,15 @@ module.exports.fetchMetadata = function() {
                 let creditImages = downloadCreditImages(credits)
                 // find the US release and grab the MPAA rating
                 let rated = releaseDates.results.find(release => release.iso_3166_1 === 'US').release_dates[0].certification
+
+                // determine if this file will need to be transcoded.
+                // must check for file extension instead of codec, browser won't playback
+                // if codec is h264 but the file container is .mkv
+                let needsTranscoding = false
+                if(file.split('.').pop() != 'mp4') {
+                    needsTranscoding = true
+                }
+
                 // object to be inserted into db
                 let doc = {
                     title: details.title,
@@ -84,7 +93,8 @@ module.exports.fetchMetadata = function() {
                         height: videoInfo.streams[0].height
                     },
                     cast: creditImages.cast,
-                    director: creditImages.director
+                    director: creditImages.director,
+                    needsTranscoding
                 }
             
                 db.insert(doc, function(err, newDoc) {
