@@ -16,14 +16,16 @@ To Work On:
 
 # Getting Started
 The config file that contains TMDb api key, and required folders is not included (currently).
-In the meantime, you'll need to create a file named "config.js" in the project's root directory. Example of what this would contain:
+In the meantime, you'll need to create a file named "config.json" in the project's root directory. This will change once I have implemented a "first-time setup" process. 
 
-    var config = {}
-    config.port = 3000
-    config.tmdbApiKey = 'your TMDb api key'
-    config.posterDirectory = 'where the posters (any image fetched) will be stored'
-    config.mediaDirectory = 'where your video files are'
-	module.exports = config
+Example of what this would contain:
+
+    {
+    	"port": "port you'd like to use",
+	"posterDirectory": "where you'd like posters (and other images) to be stored",
+	"mediaDirectory": "where all your media is",
+	"tmdbApiKey": "your tmdb api key"
+    }
 
 Next you'll need to install the dependencies (In the root directory):
     `npm install`
