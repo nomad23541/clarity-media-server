@@ -1,4 +1,5 @@
 const db = require('../utils/setup-db').db()
+const fs = require('fs')
 
 module.exports = function(app) {
     app.get('/', function(req, res) {
@@ -20,6 +21,10 @@ module.exports = function(app) {
 
     app.get('/settings', function(req, res) {
         res.render('settings')
+    })
+
+    app.post('/settings', function(req, res) {
+        fs.writeFileSync('./config.json', JSON.stringify(req.body))
     })
 
     app.get('/edit', function(req, res) {

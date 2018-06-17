@@ -29,6 +29,24 @@ $(document).ready(function() {
         })
     })
 
+    // save settings to config.json
+    btnSaveSettings.click(function() {
+        // gather all values in fields and put into obj
+        let settings = {
+            port: serverPort.find('.textfield').val(),
+            posterDirectory: posterDir.find('.textfield').val(),
+            mediaDirectory: mediaDir.find('.textfield').val(),
+            tmdbApiKey: apiKey.find('.textfield').val()
+        }
+
+        $.ajax({
+            url: '/settings',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(settings)
+        })
+    })
+
     // listen for library scan progress and update the client
     const socket = io()
     socket.on('scanProgress', function(data) {
