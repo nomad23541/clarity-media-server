@@ -90,7 +90,8 @@ module.exports.fetchMetadata = function() {
                         videoCodec: videoInfo.streams[0].codec_name,
                         audioCodec: videoInfo.streams[1].codec_name,
                         width: videoInfo.streams[0].width,
-                        height: videoInfo.streams[0].height
+                        height: videoInfo.streams[0].height,
+                        duration: videoInfo.format.duration,
                     },
                     cast: creditImages.cast,
                     director: creditImages.director,
