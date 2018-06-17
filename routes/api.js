@@ -1,5 +1,5 @@
 const db = require('../utils/setup-db').db()
-const config = require('../config.js')
+const config = require('../config')
 
 module.exports = function(app) {
     app.get('/api/media', function(req, res) {
