@@ -53,13 +53,14 @@ module.exports = function(app) {
             res.writeHead(206, head);
 
             if(needsTranscoding) {
-                // it works! will need to clean up and up the quality, but for now, i rest.
+                // NOTE TO SELF: -crf (50 is worse, 0 is best)
+                // get transcoding settings from config
+                let crf = config.transcoding.crf
+
                 const command = new ffmpeg(path)
                     .seekInput(ss)
                     .format('mp4')
-                    .outputOptions([ '-movflags frag_keyframe+empty_moov' ])
-                    .videoBitrate(640, true)
-                    .audioBitrate(128)
+                    .outputOptions([ '-movflags frag_keyframe+empty_moov', '-crf ' + crf ])
                     .audioCodec('aac')
                     .videoCodec('libx264')
                     .output(res, { end: true })
