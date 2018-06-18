@@ -26,7 +26,7 @@ Example of what this would contain:
 	"mediaDirectory": "where all your media is",
 	"tmdbApiKey": "your tmdb api key"
 	"transcoding": {
-		"crf": "20" <- crf is the quality of the transcoding with 0 being best and 50 being worst
+		"crf": "20 (crf is quality, 0 best, 50 worst	"
 	}
     }
 ```
