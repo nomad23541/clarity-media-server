@@ -4,6 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/css/style.css">
         <script src="/scripts_server/jquery/dist/jquery.min.js"></script>
+        <script src="/scripts/components/dialog.js"></script>
         <script src="/scripts/index.js"></script>
     </head>
     <body>
@@ -13,40 +14,20 @@
                 <h1>Library</h1>
             </div>
             <div class="row row-add-spacing">
-                <button id="openSortDialogBtn" class="btn">Sort <i class="fas fa-sort"></i></button>
+                <select id="selectType">
+                    <option value="title">Alphabetical</option>
+                    <option value="year">Year</option>
+                </select>
+                <select id="selectOrder">
+                    <option value="+1">Ascending</option>
+                    <option value="+-1">Descending</option>
+                </select>
+                <button id="btnSort" class="btn">Sort <i class="fas fa-sort"></i></button>
             </div>
             <!-- Media is presented in #media -->
             <div id="media" class="row row-container row-center"></div>
-            <div id="noDocsFound" class="center-text">
+            <div id="noMediaFound" class="center-text">
                 <p>No media found, go to <a href="/settings">Settings</a> and scan your library!</p>
-            </div>
-
-            <div id="sortDialog" class="dialog-container dialog-closable">
-                <div class="dialog">
-                    <h3>Sort By</h3>
-                    <form id="sortType" class="radio-box-list">
-                        <div>
-                            <input type="radio" name="sortType" value="title" id="sortAlpha">
-                            <label for="sortAlpha">Alphabetical</label>
-                        </div>
-                        <div>
-                            <input type="radio" name="sortType" value="year" id="sortYear">
-                            <label for="sortYear">Year</label>
-                        </div>
-                    </form>
-                    <h3>Order:</h3>
-                    <form id="sortOrder" class="radio-box-list">
-                        <div>
-                            <input type="radio" name="sortOrder" value="+1" id="ascending">
-                            <label for="acsending">Ascending</label>
-                        </div>
-                        <div>
-                            <input type="radio" name="sortOrder" value="+-1" id="descending">
-                            <label for="acsending">Descending</label>
-                        </div>
-                    </form>
-                    <button id="sortBtn" class="btn btn-primary">Sort</button>
-                </div>
             </div>
         </div>
     </body>

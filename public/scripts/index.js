@@ -1,51 +1,18 @@
 $(document).ready(function() {
     // all media in the db is populated in #media
     const media = $('#media')
-    const noDocsFound = $('#noDocsFound')
-    const sortDialog = $('#sortDialog')
-    const openSortDialogBtn = $('#openSortDialogBtn')
-    const sortBtn = $('#sortBtn')
+    const btnSort = $('#btnSort')
+    const noMediaFound = $('#noMediaFound')
+    noMediaFound.hide()
 
-    // initially hide these
-    noDocsFound.hide()
-    // dialogs need to be hidden on DOM load, display: hidden in css
-    // causes strange placement when show() is called
-    sortDialog.hide()
+    // sort based on what has been already selected on load
+    let selectType = $('#selectType')
+    let selectOrder = $('#selectOrder')
+    sort(selectType.val() + selectOrder.val())  
 
-    // handle dialog functions
-    // if dialog contains .dialog-closable, user can click outside to close
-    $('.dialog-container.dialog-closable').mouseup(function(e) {
-        let dialog = $('.dialog')
-        if(e.target.id != dialog.attr('id') && !dialog.has(e.target).length) {
-            $(this).hide()
-        }
-    })
-
-    let sortType = $('input[name=sortType]:checked', '#sortType')
-    let orderType = $('input[name=sortOrder]:checked', '#sortOrder')
-
-    // if these radio buttons haven't been selected yet (first time on page)
-    // default to sorting by title + ascending
-    if(!sortType.is(':checked') || !orderType.is(':checked')) {
-        let newSort = $('input[name=sortType][value="title"]').prop('checked', true)
-        let newOrder = $('input[name=sortOrder][value="+1"]').prop('checked', true)
-        sort(newSort.val() + newOrder.val())
-    } else {
-        // otherwise, sort by the last selected value 
-        sort(sortType.val() + orderType.val())
-    }
-
-    openSortDialogBtn.click(function() {
-        sortDialog.show()
-    })
-
-    sortBtn.click(function() {
-        // get selected radio buttons
-        let sortType = $('input[name=sortType]:checked', '#sortType').val()
-        let orderType = $('input[name=sortOrder]:checked', '#sortOrder').val()
-        // then sort by those values
-        sort(sortType + orderType)
-        sortDialog.hide()
+    // sort when clicked
+    btnSort.click(function() {
+        sort(selectType.val() + selectOrder.val()) 
     })
 
     function sort(query) {
@@ -70,7 +37,7 @@ $(document).ready(function() {
             })
     
             if(data.length == 0) {
-                noDocsFound.show()
+                noMediaFound.show()
             }
         })
     }
