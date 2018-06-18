@@ -22,9 +22,12 @@ Example of what this would contain:
 
     {
     	"port": "port you'd like to use",
-	"posterDirectory": "where you'd like posters (and other images) to be stored",
+        "posterDirectory": "where you'd like posters (and other images) to be stored",
 	"mediaDirectory": "where all your media is",
 	"tmdbApiKey": "your tmdb api key"
+	"transcoding": {
+	    "crf": "20" <- crf is the quality of the transcoding with 0 being best and 50 being worst
+	}
     }
 
 Next you'll need to install the dependencies (In the root directory):
