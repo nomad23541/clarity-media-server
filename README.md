@@ -24,7 +24,7 @@ Example of what this would contain:
     	"port": "port you'd like to use",
 	"posterDirectory": "where you'd like posters (and other images) to be stored",
 	"mediaDirectory": "where all your media is",
-	"tmdbApiKey": "your tmdb api key"
+	"tmdbApiKey": "your tmdb api key",
 	"transcoding": {
 		"crf": "20 (crf is quality, 0 best, 50 worst	"
 	}
