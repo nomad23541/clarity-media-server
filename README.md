@@ -19,16 +19,17 @@ The config file that contains TMDb api key, and required folders is not included
 In the meantime, you'll need to create a file named "config.json" in the project's root directory. This will change once I have implemented a "first-time setup" process. 
 
 Example of what this would contain:
-
+```json
     {
     	"port": "port you'd like to use",
-        "posterDirectory": "where you'd like posters (and other images) to be stored",
+	"posterDirectory": "where you'd like posters (and other images) to be stored",
 	"mediaDirectory": "where all your media is",
 	"tmdbApiKey": "your tmdb api key"
 	"transcoding": {
-	    "crf": "20" <- crf is the quality of the transcoding with 0 being best and 50 being worst
+		"crf": "20" <- crf is the quality of the transcoding with 0 being best and 50 being worst
 	}
     }
+```
 
 Next you'll need to install the dependencies (In the root directory):
     `npm install`
