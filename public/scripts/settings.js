@@ -14,10 +14,10 @@ $(document).ready(function() {
     // get config and fill in fields
     $.getJSON('/api/settings', function(data) {
         console.log(data)
-        serverPort.find('.textfield').val(data.port)
-        mediaDir.find('.textfield').val(data.mediaDirectory)
-        posterDir.find('.textfield').val(data.posterDirectory)
-        apiKey.find('.textfield').val(data.tmdbApiKey)
+        serverPort.find('input').val(data.port)
+        mediaDir.find('input').val(data.mediaDirectory)
+        posterDir.find('input').val(data.posterDirectory)
+        apiKey.find('input').val(data.tmdbApiKey)
     })
 
     // scan library stuff
@@ -33,10 +33,10 @@ $(document).ready(function() {
     btnSaveSettings.click(function() {
         // gather all values in fields and put into obj
         let settings = {
-            port: serverPort.find('.textfield').val(),
-            posterDirectory: posterDir.find('.textfield').val(),
-            mediaDirectory: mediaDir.find('.textfield').val(),
-            tmdbApiKey: apiKey.find('.textfield').val()
+            port: serverPort.find('input').val(),
+            posterDirectory: posterDir.find('input').val(),
+            mediaDirectory: mediaDir.find('input').val(),
+            tmdbApiKey: apiKey.find('input').val()
         }
 
         $.ajax({

@@ -65,10 +65,6 @@
         text-align: center;
     }
 
-    .settings-button-bar {
-        grid-area: button-bar;
-    }
-
 /* A horizontal scrollpane (think netflix) */
 .scrollpane-wrapper {
     display: flex;

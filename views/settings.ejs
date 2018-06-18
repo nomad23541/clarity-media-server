@@ -11,32 +11,31 @@
         <% include partials/navbar.ejs %>
         <div class="settings-container">
             <div class="settings-content">
-                <div clsas="header">
+                <div class="header">
                     <h1>Settings</h1>
                 </div>
-    
+                <!-- General Settings -->
                 <div class="input-wrapper" id="settingsServerPort">
+                    <input type="text">
                     <label>Server Port:</label>
-                    <input class="textfield" type="text">
                 </div>
                 <div class="input-wrapper" id="settingsMediaDir">
+                    <input type="text">
                     <label>Media Directory: </label>
-                    <input class="textfield" type="text">
                 </div>
                 <div class="input-wrapper" id="settingsPosterDir">
+                    <input type="text">
                     <label>Poster Directory: </label>
-                    <input class="textfield" type="text">
                 </div>
                 <div class="input-wrapper" id="settingsApiKey">
+                    <input type="text">
                     <label>TMDb Api Key: </label>
-                    <input class="textfield" type="text">
                 </div>
+                <!-- Transcoding Settings -->
             </div>
-            <div class="settings-button-bar">
-                <div class="row row-add-spacing">
-                    <button id="btnScanLibrary" class="btn">Scan Library <i class="fas fa-barcode"></i></button>
-                    <button id="btnSaveSettings" class="btn btn-primary">Save Settings <i class="fas fa-save"></i></button>
-                </div>
+            <div class="row row-add-spacing">
+                <button id="btnScanLibrary" class="btn">Scan Library</button>
+                <button id="btnSaveSettings" class="btn btn-primary">Save Settings <i class="fas fa-save"></i></button>
             </div>
 
             <div id="scanLibraryDialog" class="dialog-container">
