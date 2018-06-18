@@ -57,14 +57,12 @@ module.exports = function(app) {
                 // get transcoding settings from config
                 let crf = config.transcoding.crf
                 let preset = config.transcoding.preset
-                let threads = config.transcoding.threads
                 let normalizeAudio = config.transcoding.normalizeAudio
 
                 let transcodeArgs = [ 
                     '-movflags frag_keyframe+empty_moov',
                     '-crf ' + crf,
                     '-preset ' + preset,
-                    '-threads ' + threads,
                 ]
 
                 if(normalizeAudio) {
