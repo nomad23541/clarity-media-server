@@ -56,11 +56,25 @@ module.exports = function(app) {
                 // NOTE TO SELF: -crf (50 is worse, 0 is best)
                 // get transcoding settings from config
                 let crf = config.transcoding.crf
+                let preset = config.transcoding.preset
+                let threads = config.transcoding.threads
+                let normalizeAudio = config.transcoding.normalizeAudio
+
+                let transcodeArgs = [ 
+                    '-movflags frag_keyframe+empty_moov',
+                    '-crf ' + crf,
+                    '-preset ' + preset,
+                    '-threads ' + threads,
+                ]
+
+                if(normalizeAudio) {
+                    transcodeArgs.push('-af dynaudnorm=p=0.71:m=100:s=12:g=15')
+                }
 
                 const command = new ffmpeg(path)
                     .seekInput(ss)
                     .format('mp4')
-                    .outputOptions([ '-movflags frag_keyframe+empty_moov', '-crf ' + crf ])
+                    .outputOptions(transcodeArgs)
                     .audioCodec('aac')
                     .videoCodec('libx264')
                     .output(res, { end: true })
