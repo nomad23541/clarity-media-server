@@ -7,10 +7,10 @@ Currently Supports:
  - Reading filenames and fetching metadata from TMDb
 
 To Work On:
- - Support transcoding
- - Better config file, preferably JSON
+ - ~~Support transcoding~~
+ - ~~Better config file, preferably JSON~~
  - Edit page
- - Settings page
+ - ~~Settings page~~
  - Polishing, prettifying.
  - Clean up code
 
@@ -26,7 +26,9 @@ Example of what this would contain:
 	"mediaDirectory": "where all your media is",
 	"tmdbApiKey": "your tmdb api key",
 	"transcoding": {
-		"crf": "20 (crf is quality, 0 best, 50 worst	"
+		"crf": "20 (crf is quality, 0 best, 50 worst)",
+		"preset": "veryfast (check ffmpeg docs for preset values)",
+		"normalizeAudio": "true (takes boolean value, does what it implies)"
 	}
     }
 ```
