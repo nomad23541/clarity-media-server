@@ -426,6 +426,13 @@ input:focus {
 
     .input-wrapper input {
         width: 100%;
+    }
+
+    .input-wrapper select {
+        width: 50%;
+    }
+
+    .input-wrapper input, select {
         margin: 5px 0;
         display: block;
     }
