@@ -7,7 +7,11 @@
         <link rel="stylesheet" href="/css/videojs-skin.css">
         <script src="/scripts_server/video.js/dist/video.min.js"></script>
         <script src="/scripts_server/jquery/dist/jquery.min.js"></script>
-        <!--<script src="/scripts/watch.js"></script>-->
+        <script>
+            // make id usable in details.js
+            const id = '<%=doc._id%>'
+        </script>
+        <script src="/scripts/watch.js"></script>
     </head>
     <body>
         <!-- <% include partials/navbar.ejs %> -->
@@ -22,61 +26,7 @@
             </div>
             
             <script>
-                var video = videojs('player')
-                video.src({ type: 'video/mp4', src: '/media?id=<%=doc._id%>'})
-
-                video.on('pause', function() {
-                    $('.player-overlay').css('opacity', '1')
-                    console.log('paused')
-                })
-
-                video.on('playing', function() {
-                    $('.player-overlay').css('opacity', '0')
-                    console.log('playing')
-                })
-
-                video.on('useractive', function() {
-                    $('.player-overlay').css('opacity', '1')
-                    console.log('useractive')
-                })
-
-                video.on('userinactive', function() {
-                    $('.player-overlay').css('opacity', '0')
-                    console.log('userinactive')
-                })
-
-                // this will work for all media, transcoding or not, will need to change that.
-                // graciously taken from https://stackoverflow.com/questions/3639604/html5-audio-video-and-live-transcoding-with-ffmpeg
-                // duration hack
-                video.duration = function() { return video.theDuration }
-                video.start = 0
-                video.oldCurrentTime = video.currentTime
-                video.currentTime = function(time) {
-                    if(time === undefined) {
-                        return video.oldCurrentTime() + video.start
-                    }
-                    console.log(time)
-                    video.start = time
-                    video.oldCurrentTime(0)
-                    video.src({ type: 'video/mp4', src: '/media?id=<%=doc._id%>&ss=' + time })
-                    video.play()
-                    return this
-                }
-
-                $.getJSON('/api/media/<%=doc._id%>', function(data) {
-                    video.theDuration = data.videoInfo.duration
-                })
-
-                // deal with back arrow
-                $(document).on('click', '#backArrow', function() {
-                    window.history.go(-1)
-                    console.log('test')
-                    return false
-                })
-
-                $('#backArrow').click(function() {
-                    console.log('test')
-                })
+                
             </script>
         </div>
     </body>
