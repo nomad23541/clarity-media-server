@@ -19,7 +19,7 @@ module.exports = function(app) {
 
     app.use('/media', function(req, res, next) {
         db.findOne({ _id: req.query.id }, function(err, doc) {
-            req.body.path = config.mediaDirectory + '/' + doc.file
+            req.body.path = doc.location
             req.body.needsTranscoding = doc.needsTranscoding
             next()
         })
@@ -44,16 +44,15 @@ module.exports = function(app) {
             const chunksize = (end - start) + 1
             const file = fs.createReadStream(path, {start, end})
             const head = {
-                'Content-Range': `bytes $f{start}-${end}/${fileSize}`,
+                'Content-Range': `bytes ${start}-${end}/${fileSize}`,
                 'Accept-Ranges': 'bytes',
                 'Content-Length': chunksize,
                 'Content-Type': 'video/mp4',
             }
 
-            res.writeHead(206, head);
+            res.writeHead(206, head)
 
             if(needsTranscoding) {
-                // NOTE TO SELF: -crf (50 is worse, 0 is best)
                 // get transcoding settings from config
                 let crf = config.transcoding.crf
                 let preset = config.transcoding.preset
@@ -87,7 +86,7 @@ module.exports = function(app) {
                     })
                     .run()
             } else {
-                file.pipe(res);
+                file.pipe(res)
             }
         } else {
             const head = {
