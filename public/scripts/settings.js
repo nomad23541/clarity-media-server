@@ -60,6 +60,15 @@ $(document).ready(function() {
         })
     })
 
+    // scan library on btn click
+    btnScanLibrary.click(function() {
+        scanLibraryDialog.show()
+        $.ajax({
+            url: '/media/scanlibrary',
+            method: 'GET'
+        })
+    })
+
     // listen for library scan progress and update the client
     const socket = io()
     socket.on('scanProgress', function(data) {
