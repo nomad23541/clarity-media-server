@@ -454,12 +454,16 @@ select::-ms-expand {
         width: 50%;
     }
 
+    .input-wrapper select:focus + label {
+        color: var(--primary);
+    }
+
     .input-wrapper input, select {
         margin: 5px 0;
         display: block;
     }
 
     .input-wrapper input:focus + label {
-        color: var(--primary)
+        color: var(--primary);
     }
       
