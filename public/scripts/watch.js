@@ -33,22 +33,24 @@ $(document).ready(function() {
     // this will work for all media, transcoding or not, will need to change that.
     // graciously taken from https://stackoverflow.com/questions/3639604/html5-audio-video-and-live-transcoding-with-ffmpeg
     // duration hack
-    video.duration = function() { return video.theDuration }
-    video.start = 0
-    video.oldCurrentTime = video.currentTime
-    video.currentTime = function(time) {
-        if(time === undefined) {
-            return video.oldCurrentTime() + video.start
+    if(needsTranscoding === 'true') {
+        video.duration = function() { return video.theDuration }
+        video.start = 0
+        video.oldCurrentTime = video.currentTime
+        video.currentTime = function(time) {
+            if(time === undefined) {
+                return video.oldCurrentTime() + video.start
+            }
+            console.log(time)
+            video.start = time
+            video.oldCurrentTime(0)
+            video.src({ type: 'video/mp4', src: '/media?id=' + id + '&ss=' + time })
+            video.play()
+            return this
         }
-        console.log(time)
-        video.start = time
-        video.oldCurrentTime(0)
-        video.src({ type: 'video/mp4', src: '/media?id=' + id + '&ss=' + time })
-        video.play()
-        return this
-    }
 
-    $.getJSON('/api/media/' + id, function(data) {
-        video.theDuration = data.videoInfo.duration
-    })
+        $.getJSON('/api/media/' + id, function(data) {
+            video.theDuration = data.videoInfo.duration
+        })
+    }
 })
