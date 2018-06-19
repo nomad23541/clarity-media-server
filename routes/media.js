@@ -37,7 +37,45 @@ module.exports = function(app) {
             ss = 0
         }
 
-        if(range) {
+        if(needsTranscoding) {
+            // get transcoding settings from config
+            let crf = config.transcoding.crf
+            let preset = config.transcoding.preset
+            let normalizeAudio = config.transcoding.normalizeAudio
+            let transcodeArgs = [ 
+                '-movflags frag_keyframe+empty_moov',
+                '-crf ' + crf,
+                '-preset ' + preset,
+            ]
+
+            if(normalizeAudio) {
+                transcodeArgs.push('-af dynaudnorm=p=0.71:m=100:s=12:g=15')
+            }
+
+            const head = {
+                'Content-Length': fileSize,
+                'Content-Type': 'video/mp4',
+            }
+            
+            res.writeHead(200, head)
+            const command = new ffmpeg(path)
+                .seekInput(ss)
+                .format('mp4')
+                .outputOptions(transcodeArgs)
+                .audioCodec('aac')
+                .videoCodec('libx264')
+                .output(res, { end: true })
+                .on('start', function(args) {
+                    console.log('Start - Spawned ffmpeg with arguments: ' + args)
+                })
+                .on('progress', function(progress) {
+                    console.log('Progress - ' + 'frames: ' + progress.frames + ' percent: ' + progress.percent + ' time: ' + progress.timemark)
+                })
+                .on('error', function(err, stdout, stderr) {
+                    console.log('Error - ' + err)
+                })
+                .run()
+        } else if(!needsTranscoding && range) {
             const parts = range.replace(/bytes=/, '').split('-')
             const start = parseInt(parts[0], 10)
             const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1
@@ -51,43 +89,7 @@ module.exports = function(app) {
             }
 
             res.writeHead(206, head)
-
-            if(needsTranscoding) {
-                // get transcoding settings from config
-                let crf = config.transcoding.crf
-                let preset = config.transcoding.preset
-                let normalizeAudio = config.transcoding.normalizeAudio
-
-                let transcodeArgs = [ 
-                    '-movflags frag_keyframe+empty_moov',
-                    '-crf ' + crf,
-                    '-preset ' + preset,
-                ]
-
-                if(normalizeAudio) {
-                    transcodeArgs.push('-af dynaudnorm=p=0.71:m=100:s=12:g=15')
-                }
-
-                const command = new ffmpeg(path)
-                    .seekInput(ss)
-                    .format('mp4')
-                    .outputOptions(transcodeArgs)
-                    .audioCodec('aac')
-                    .videoCodec('libx264')
-                    .output(res, { end: true })
-                    .on('start', function(args) {
-                        console.log('Start - Spawned ffmpeg with arguments: ' + args)
-                    })
-                    .on('progress', function(progress) {
-                        console.log('Progress - ' + 'frames: ' + progress.frames + ' percent: ' + progress.percent + ' time: ' + progress.timemark)
-                    })
-                    .on('error', function(err, stdout, stderr) {
-                        console.log('Error - ' + err)
-                    })
-                    .run()
-            } else {
-                file.pipe(res)
-            }
+            file.pipe(res)
         } else {
             const head = {
                 'Content-Length': fileSize,
