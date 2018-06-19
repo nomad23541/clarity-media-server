@@ -407,6 +407,28 @@ input:focus {
     border-color: var(--primary);
 }
 
+select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -webkit-user-select: none;
+    background-image: url('../img/drop-arrow.png');
+    background-size: 12px 8px;
+    background-position: 95% center;
+    background-repeat: no-repeat;
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 6px 15px;
+    padding-right: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
 .input-wrapper {
     max-width: 600px;
     margin: 5px auto;
