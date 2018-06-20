@@ -416,10 +416,10 @@ select {
     background-position: 95% center;
     background-repeat: no-repeat;
     background-color: white;
-    border: none;
+    border: 2px solid transparent;
     border-radius: 5px;
     overflow: hidden;
-    padding: 6px 15px;
+    padding: 4px 15px;
     padding-right: 20px;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -427,6 +427,10 @@ select {
 
 select::-ms-expand {
     display: none;
+}
+
+select:focus {
+    border: 2px solid var(--primary);
 }
 
 .input-wrapper {
