@@ -4,14 +4,14 @@ const http = require('http').Server(app)
 const config = require('./config')
 const fs = require('fs')
 const path = require('path')
-const db = require('./utils/setup-db')
+const db = require('./lib/setup/setup-db')
+const socketIO = require('./lib/setup/setup-socket-io')
 const bodyParser = require('body-parser')
-const socketio = require('./utils/setup-socketio')
 
 // setup socket io
-socketio.init(http)
+socketIO.init(http)
 // intialize database
-db.init('./database/media.db')
+db.init(path.join(__dirname, '/db/media.db'))
 
 app.set('view engine', 'ejs')
 app.use(bodyParser.json())
