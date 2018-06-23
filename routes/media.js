@@ -5,6 +5,7 @@ const db = require('../lib/setup/setup-db').db()
 const path = require('path')
 const process = require('child_process')
 const ffmpeg = require('fluent-ffmpeg')
+const transcode = require('../lib/transcoding/transcode')
 
 module.exports = function(app) {
     app.get('/media/scanlibrary', function(req, res) { 
@@ -31,50 +32,9 @@ module.exports = function(app) {
         const fileSize = stat.size
         const range = req.headers.range
         const needsTranscoding = req.body.needsTranscoding
-        // if there is no timestamp query, set the value to zero
-        let ss = req.query.ss
-        if(!ss) {
-            ss = 0
-        }
 
         if(needsTranscoding) {
-            // get transcoding settings from config
-            let crf = config.transcoding.crf
-            let preset = config.transcoding.preset
-            let normalizeAudio = config.transcoding.normalizeAudio
-            let transcodeArgs = [ 
-                '-movflags frag_keyframe+empty_moov',
-                '-crf ' + crf,
-                '-preset ' + preset,
-            ]
-
-            if(normalizeAudio) {
-                transcodeArgs.push('-af dynaudnorm=p=0.71:m=100:s=12:g=15')
-            }
-
-            const head = {
-                'Content-Length': fileSize,
-                'Content-Type': 'video/mp4',
-            }
-            
-            res.writeHead(200, head)
-            const command = new ffmpeg(path)
-                .seekInput(ss)
-                .format('mp4')
-                .outputOptions(transcodeArgs)
-                .audioCodec('aac')
-                .videoCodec('libx264')
-                .output(res, { end: true })
-                .on('start', function(args) {
-                    console.log('Start - Spawned ffmpeg with arguments: ' + args)
-                })
-                .on('progress', function(progress) {
-                    console.log('Progress - ' + 'frames: ' + progress.frames + ' percent: ' + progress.percent + ' time: ' + progress.timemark)
-                })
-                .on('error', function(err, stdout, stderr) {
-                    console.log('Error - ' + err)
-                })
-                .run()
+            transcode.startTranscoding(req, res, fileSize)
         } else if(!needsTranscoding && range) {
             const parts = range.replace(/bytes=/, '').split('-')
             const start = parseInt(parts[0], 10)
