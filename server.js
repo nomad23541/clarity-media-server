@@ -7,6 +7,7 @@ const path = require('path')
 const db = require('./lib/setup/setup-db')
 const socketIO = require('./lib/setup/setup-socket-io')
 const bodyParser = require('body-parser')
+const expressDevice = require('express-device')
 
 // setup socket io
 socketIO.init(http)
@@ -15,6 +16,7 @@ db.init(path.join(__dirname, '/db/media.db'))
 
 app.set('view engine', 'ejs')
 app.use(bodyParser.json())
+app.use(expressDevice.capture())    
 app.use(express.static(path.join(__dirname, 'public')))
 app.use('/posters', express.static(config.posterDirectory))
 app.use('/profiles', express.static(path.join(config.posterDirectory, '/profiles')))
