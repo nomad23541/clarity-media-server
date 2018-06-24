@@ -70,7 +70,7 @@ $(document).ready(function() {
             btnNextPage.removeClass('btn-icon-disabled')
 
             // determine listing values
-            let amountStarting = skip
+            let amountStarting = skip + 1
             let amountInPage = skip + limit
             if(amountInPage > size) {
                 amountInPage = size
