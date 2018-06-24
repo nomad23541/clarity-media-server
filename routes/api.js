@@ -7,11 +7,16 @@ module.exports = function(app) {
         // get the value of the query 'sort', and parse it's value
         // ex: ?sort=title+-1 -> sort by the key title and the value -1
         // if the query exists, sort by that query, otherwise, just send entire doc
+        let skip = req.query.skip
+        let limit = req.query.limit
+        if(!skip) skip = 0
+        if(!limit) limit = 0
+        
         if(req.query.sort) {
             var query = req.query.sort.split(' ')
             var key = query[0]
             var value = query[1]
-            db.find({}).sort({ [key]: value }).exec(function(err, docs) {
+            db.find({}).sort({ [key]: value }).skip(parseInt(skip)).limit(parseInt(limit)).exec(function(err, docs) {
                 if(err) res.send(err)
                 res.json(docs)
             })

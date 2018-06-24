@@ -246,6 +246,14 @@ a {
         color: var(--primary);
     }
 
+    .btn-icon-disabled {
+        opacity: 0.5;
+    }
+
+    .btn-icon-disabled:hover {
+        color: white;
+    }
+
     .btn-icon.toggled {
         color: var(--primary);
     }

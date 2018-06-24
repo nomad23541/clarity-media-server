@@ -10,9 +10,13 @@ module.exports = function(app) {
     })
 
     app.get('/library/movies', function(req, res) {
-        res.render('movies/movies')
+        db.find({}, function(err, docs) {
+            res.render('movies/movies', {
+                size: docs.length
+            })
+        })
     })
-    
+
     app.use('/library/movies/movie', function(req, res, next) {
         db.findOne({ _id: req.query.id }, function(err, doc) {
             if(!doc) return res.status(404).send('Not Found')

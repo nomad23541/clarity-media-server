@@ -5,6 +5,9 @@
         <link rel="stylesheet" href="/css/style.css">
         <script src="/scripts_server/jquery/dist/jquery.min.js"></script>
         <script src="/scripts/movies/movies.js"></script>
+        <script>
+            let size = '<%=size%>'
+        </script>
     </head>
     <body>
         <% include ../partials/navbar.ejs %>
@@ -13,6 +16,9 @@
                 <h1>Movies</h1>
             </div>
             <div class="row row-add-spacing">
+                <button id="btnPreviousPage" class="btn btn-icon"><i class="fas fa-angle-left"></i></button>
+                <p id="listing"></p>
+                <button id="btnNextPage" class="btn btn-icon"><i class="fas fa-angle-right"></i></button>
                 <select id="selectType">
                     <option value="title">Alphabetical</option>
                     <option value="year">Year</option>
@@ -25,6 +31,7 @@
             </div>
             <!-- Media is presented here -->
             <div id="media" class="row row-container row-center"></div>
+            <div id="tempMedia" class="row row-container row-center"></div>
             <!-- This shows if no media is found -->
             <div id="noMediaFound" class="center-text">
                 <p>No media found, go to <a href="/settings">Settings</a> and scan your library!</p>
