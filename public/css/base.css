@@ -428,6 +428,7 @@ select {
     padding-right: 20px;
     text-overflow: ellipsis;
     white-space: nowrap;
+    transition: 0.2s;
 }
 
 select::-ms-expand {
