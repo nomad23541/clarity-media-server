@@ -59,6 +59,10 @@ a {
     .navbar-header h1 {
         font-weight: 300;
     }
+
+    .navbar-header #back {
+        font-size: 20px;
+    }
     
 .media-box {
     width: 30%;

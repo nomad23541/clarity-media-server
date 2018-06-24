@@ -1,5 +1,6 @@
 <div class="navbar">
-    <div class="navbar-header">
+    <div class="navbar-header row row-add-spacing">
+        <a id="back" href="#"><i class="fas fa-chevron-left"></i></a>
         <h1><a href="/"><i class="fas fa-film"></i> Clarity</a></h1>
     </div>
     <div class="navbar-links">
@@ -9,3 +10,14 @@
         </ul>
     </div>
 </div>
+
+<script>
+    let back = $('#back')
+    back.click(function() {
+        window.history.back()
+    })
+
+    if(window.location.pathname == '/library') {
+        back.hide()
+    }
+</script>
