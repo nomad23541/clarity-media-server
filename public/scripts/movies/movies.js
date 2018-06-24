@@ -3,6 +3,7 @@ $(document).ready(function() {
     $('body').css('overflow-y', 'scroll')
 
     // all media in the db is populated in #media
+    const tempMedia = $('#tempMedia')
     const media = $('#media')
     const btnSort = $('#btnSort')
     const noMediaFound = $('#noMediaFound')
@@ -61,8 +62,8 @@ $(document).ready(function() {
 
             // this helps with the jumping when emptying the media
             // although doesn't fully work, will update
-            media.html($('#tempMedia').html())
-            $('#tempMedia').empty()
+            media.html(tempMedia.html())
+            tempMedia.empty()
 
             // remove disabled class on every sort
             btnPreviousPage.removeClass('btn-icon-disabled')
