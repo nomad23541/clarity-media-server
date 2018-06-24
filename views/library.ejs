@@ -1,10 +1,9 @@
 <html>
     <head>
-        <title>Movies - Clarity</title>
+        <title>Library - Clarity</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/css/style.css">
         <script src="/scripts_server/jquery/dist/jquery.min.js"></script>
-        <script src="/scripts/movies.js"></script>
     </head>
     <body>
         <% include partials/navbar.ejs %>
@@ -12,7 +11,10 @@
             <div class="header">
                 <h1>Library</h1>
             </div>
-            <a href="/library/movies">Movies</a>
+            <div class="library-tile-wrapper">
+                <a class="library-tile" href="/library/movies">Movies</a>
+                <a class="library-tile" href="/library/shows">Shows</a>
+            </div>
         </div>
     </body>
 </html>

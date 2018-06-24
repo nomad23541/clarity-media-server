@@ -480,4 +480,26 @@ select:focus {
     .input-wrapper input:focus + label {
         color: var(--primary);
     }
-      
+
+/* tile on /library */
+.library-tile-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.library-tile {
+    background-color: var(--primary);
+    color: white;
+    font-size: 2em;
+    font-weight: 300;
+    text-decoration: none;
+    padding: 30px 0;
+    margin: 2px 0;
+    text-align: center;
+    transition: 0.2s;
+}
+
+    .library-tile:hover {
+        background-color: var(--primary-dark);
+    }
