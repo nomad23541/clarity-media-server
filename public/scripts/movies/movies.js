@@ -79,7 +79,7 @@ $(document).ready(function() {
             $('#listing').text(amountStarting + ' - ' + amountInPage + ' of ' + size)
 
             // handle add the disable class to the icon buttons when needed
-            if(amountStarting == 0) {
+            if(amountStarting == 1) {
                 btnPreviousPage.addClass('btn-icon-disabled')
             }
 
