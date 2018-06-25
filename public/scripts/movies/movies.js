@@ -15,7 +15,7 @@ $(document).ready(function() {
     })
 
     // for testing purposes, only show 10 per page
-    let limit = 10
+    let limit = 25
     let skip = 0
     const btnPreviousPage = $('#btnPreviousPage')
     const btnNextPage = $('#btnNextPage')
