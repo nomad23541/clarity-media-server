@@ -8,6 +8,27 @@ const ffmpeg = require('fluent-ffmpeg')
 const transcode = require('../lib/transcoding/transcode')
 
 module.exports = function(app) {
+    app.get('/media/scannewfiles', function(req, res) {
+        // create media directory if it doesn't exist
+        if(!fs.existsSync(config.mediaDirectory)) {
+            fs.mkdirSync(config.mediaDirectory)
+        }
+
+        // compare files in media directory with files in database
+        let files = fs.readdirSync(config.mediaDirectory)
+        db.find({}, function(err, docs) {
+            let filesInDB = []
+            for(let doc in docs) {
+                filesInDB.push(docs[doc].file)
+            }
+
+            // now get what files aren't in the db
+            let difference = files.filter(x => !filesInDB.includes(x)).concat(filesInDB.filter(x => !files.includes(x)))
+            // then scan those files only
+            metadata.fetchMetadata(difference)
+        })
+    })
+
     app.get('/media/scanlibrary', function(req, res) { 
         // create media directory if it doesn't exist
         if(!fs.existsSync(config.mediaDirectory)) {
@@ -15,7 +36,7 @@ module.exports = function(app) {
         }
 
         db.remove({}, { multi: true })
-        metadata.fetchMetadata()
+        metadata.fetchMetadata(fs.readdirSync(config.mediaDirectory))
     })
 
     app.use('/media', function(req, res, next) {

@@ -1,10 +1,14 @@
 $(document).ready(function() {
     let btnSave = $('#btnSave')
-    let btnScanLibrary = $('#btnScanLibrary')
+    let btnScanNewFiles = $('#btnScanNewFiles')
+    let btnScanEntireLibrary = $('#btnScanEntireLibrary')
     let scanLibraryDialog = $('#scanLibraryDialog')
+    let scanNewFilesDialog = $('#scanNewFilesDialog')
 
     // hide on load
     scanLibraryDialog.hide()
+    scanNewFilesDialog.hide()
+
 
     // load settings from config
     $.getJSON('/api/settings', function(obj) {
@@ -30,8 +34,8 @@ $(document).ready(function() {
             let value = $(this).val()
             
             // convert string booleans to a literal boolean
-            if(value == "true" || value == "false") {
-                value = (value === "true")
+            if(value == 'true' || value == 'false') {
+                value = (value === 'true')
             }
             // same with numbers
             if(/^-{0,1}\d+$/.test(value)) {
@@ -60,8 +64,17 @@ $(document).ready(function() {
         })
     })
 
-    // scan library on btn click
-    btnScanLibrary.click(function() {
+    // only scan new files to the library
+    btnScanNewFiles.click(function() {
+        scanNewFilesDialog.show()
+        $.ajax({
+            url: '/media/scannewfiles',
+            method: 'GET'
+        })
+    })
+
+    // scan entire library on btn click
+    btnScanEntireLibrary.click(function() {
         scanLibraryDialog.show()
         $.ajax({
             url: '/media/scanlibrary',
@@ -72,7 +85,8 @@ $(document).ready(function() {
     // listen for library scan progress and update the client
     const socket = io()
     socket.on('scanProgress', function(data) {
-        $('#scanProgress').text(data.msg + '%')
+        $('#scanProgressNewFiles').text(data.msg + '%')
+        $('#scanProgressLibrary').text(data.msg + '%')
         if(data.msg == 100) {
             location.reload()
         }
