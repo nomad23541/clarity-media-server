@@ -144,6 +144,10 @@ a {
         font-weight: 300;
         opacity: 0.7;
     }
+    
+    .media-box.fix .poster-overlay {
+        pointer-events: all;
+    }
 
 #player {
     width: 100%;
