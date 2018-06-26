@@ -22,4 +22,13 @@ module.exports = function(app) {
             })
         })
     })
+
+    app.get('/fix', function(req, res) {
+        db.findOne({ _id: req.query.id }, function(err, doc) {
+            if(!doc) return res.status(404).send('Not Found')
+            res.render('fix', {
+                doc: doc
+            })
+        })
+    })
 }

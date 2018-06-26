@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>Fix - <%=doc.title%> (<%=doc.year%>) - Clarity</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/style.css">
+        <script src="/scripts_server/jquery/dist/jquery.min.js"></script>
+        <script src="/scripts/fix.js"></script>
+    </head>
+    <body>
+        <% include partials/navbar.ejs %>
+        <div class="container">
+            <div class="header">
+                <h1>Fix - <%=doc.title%> (<%=doc.year%>)</h1>
+                <p>File: <%=doc.file%></p>
+            </div>
+            <p>Wrong metadata for the file? Search a query in the search box and see if the correct metadata pops up!</p>
+            <div class="row row-container row-center row-add-spacing">
+                <input id="fieldQuery" type="text" placeholder="Title">
+                <input id="fieldYear" type="text" placeholder="Year">
+                <button id="btnSearch" class="btn"<i class="fas fa-search"></i> Search</button>
+            </div>
+            <div id="results" class="row row-container row-center"></div>
+        </div>
+    </body>
+</html>

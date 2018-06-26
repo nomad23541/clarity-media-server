@@ -1,6 +1,7 @@
 $(document).ready(function() {
     let btnPlay = $('#btnPlay')
     let btnEdit = $('#btnEdit')
+    let btnFixMetadata = $('#btnFixMetadata')
     let btnShowMore = $('#btnShowMore')
     let actors = $('#actors')
 
@@ -10,6 +11,10 @@ $(document).ready(function() {
 
     btnEdit.click(function() {
         window.location.href = '/edit?id=' + id
+    })
+
+    btnFixMetadata.click(function() {
+        window.location.href = '/fix?id=' + id
     })
 
     btnShowMore.click(function() {

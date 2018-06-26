@@ -52,4 +52,19 @@ module.exports = function(app) {
     app.get('/api/settings', function(req, res) {
         res.json(config)
     })
+
+    const tmdb = require('../lib/tmdb')
+
+    app.get('/api/fix', function(req, res) {
+        tmdb.search({
+            title: req.query.query,
+            year: req.query.year,
+            apiKey: config.tmdbApiKey
+        }).then(function(results) {
+            res.json(results)
+        }).catch(function(err) {
+            console.log(err)
+            res.err(err)
+        })
+    })
 }
