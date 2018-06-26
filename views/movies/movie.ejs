@@ -59,19 +59,19 @@
             <div class="details-similar">
                 <h2>Similar Movies:</h2>
                 <div class="card-wrapper">
-                    <% for(let doc in similar) { %>
+                    <% for(var i = 0; i < 8; i++) { %>
                         <div class="media-box">
-                            <a href="/details?id=<%=similar[doc]._id%>">
+                            <a href="/details?id=<%=similar[i]._id%>">
                                 <div class="poster-wrapper">
-                                    <img src="<%=similar[doc].images.posterWeb%>">
+                                    <img src="<%=similar[i].images.posterWeb%>">
                                     <div class="poster-overlay">
-                                        <a class="media-edit" href="/edit?id=<%=similar[doc]._id%>"><i class="fas fa-edit"></i></a>
-                                        <a class="media-play" href="/watch?id=<%=similar[doc]._id%>"><i class="fas fa-play"></i></a>
+                                        <a class="media-edit" href="/edit?id=<%=similar[i]._id%>"><i class="fas fa-edit"></i></a>
+                                        <a class="media-play" href="/watch?id=<%=similar[i]._id%>"><i class="fas fa-play"></i></a>
                                     </div>
                                 </div>
                             </a>
-                            <p class="media-title"><%=similar[doc].title%></p>
-                            <p class="media-year">(<%=similar[doc].year%>)</p>
+                            <p class="media-title"><%=similar[i].title%></p>
+                            <p class="media-year">(<%=similar[i].year%>)</p>
                         </div>
                     <%}%>
                 </div>
