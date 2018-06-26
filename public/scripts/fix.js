@@ -47,8 +47,8 @@ $(document).ready(function() {
                         method: 'POST',
                         contentType: 'application/json',
                         data: JSON.stringify({ tmdbid, docid }),
-                        success: function(id) {
-                            let id = JSON.parse(id)
+                        success: function(newID) {
+                            let id = JSON.parse(newID)
                             window.location.href = '/library/movies/movie?id=' + id.id
                         }
                     })
