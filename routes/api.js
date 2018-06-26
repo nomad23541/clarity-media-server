@@ -1,5 +1,7 @@
 const db = require('../lib/setup/setup-db').db()
 const config = require('../config')
+const tmdb = require('../lib/tmdb')
+const metadata = require('../lib/handlers/metadata-handler')
 
 module.exports = function(app) {
     app.get('/api/media', function(req, res) {
@@ -53,9 +55,8 @@ module.exports = function(app) {
         res.json(config)
     })
 
-    const tmdb = require('../lib/tmdb')
-
     app.get('/api/fix', function(req, res) {
+        // search tmdb api and send results back to client
         tmdb.search({
             title: req.query.query,
             year: req.query.year,
@@ -65,6 +66,13 @@ module.exports = function(app) {
         }).catch(function(err) {
             console.log(err)
             res.err(err)
+        })
+    })
+
+    app.post('/api/fix', function(req, res) {
+        // time to update with new tmdbid
+        metadata.fixMetadata(req.body.tmdbid, req.body.docid, function(newDoc) {
+            res.send(JSON.stringify({ id: newDoc._id }))
         })
     })
 }
