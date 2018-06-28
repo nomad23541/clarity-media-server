@@ -28,7 +28,7 @@ $(document).ready(function() {
                 data.forEach(obj => {
                     var content = 
                     '<div class="media-box">' +
-                        '<a href="/watch?id=' + obj._id + '">' +
+                        '<a href="/library/movies/movie?id=' + obj._id + '">' +
                             '<div class="poster-wrapper">' +
                                 '<img src="' + obj.images.posterWeb + '">' +
                                 '<div class="poster-overlay">' +
