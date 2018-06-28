@@ -16,9 +16,9 @@
                 <h1>Movies</h1>
             </div>
             <div class="row row-add-spacing">
-                <button id="btnPreviousPage" class="btn btn-icon"><i class="fas fa-angle-left"></i></button>
-                <p id="listing"></p>
-                <button id="btnNextPage" class="btn btn-icon"><i class="fas fa-angle-right"></i></button>
+                <button class="btn btn-icon btnPreviousPage"><i class="fas fa-angle-left"></i></button>
+                <p class="listing"></p>
+                <button class="btn btn-icon btnNextPage"><i class="fas fa-angle-right"></i></button>
                 <select id="selectType">
                     <option value="title">Alphabetical</option>
                     <option value="year">Year</option>
@@ -32,6 +32,11 @@
             <!-- Media is presented here -->
             <div id="media" class="media-grid-container"></div>
             <div id="tempMedia" class="media-grid-container"></div>
+            <div class="row row-add-spacing">
+                <button class="btn btn-icon btnPreviousPage"><i class="fas fa-angle-left"></i></button>
+                <p class="listing"></p>
+                <button class="btn btn-icon btnNextPage"><i class="fas fa-angle-right"></i></button>
+            </div>
             <!-- This shows if no media is found -->
             <div id="noMediaFound" class="center-text">
                 <p>No media found, go to <a href="/settings">Settings</a> and scan your library!</p>

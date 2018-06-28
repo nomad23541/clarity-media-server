@@ -17,8 +17,8 @@ $(document).ready(function() {
     // for testing purposes, only show 10 per page
     let limit = 25
     let skip = 0
-    const btnPreviousPage = $('#btnPreviousPage')
-    const btnNextPage = $('#btnNextPage')
+    const btnPreviousPage = $('.btnPreviousPage')
+    const btnNextPage = $('.btnNextPage')
 
     // sort based on what has been already selected on load
     let selectType = $('#selectType')
@@ -75,7 +75,7 @@ $(document).ready(function() {
                 amountInPage = size
             }
             // then set that into the listing <p>
-            $('#listing').text(amountStarting + ' - ' + amountInPage + ' of ' + size)
+            $('.listing').text(amountStarting + ' - ' + amountInPage + ' of ' + size)
 
             // handle add the disable class to the icon buttons when needed
             if(amountStarting == 1) {
