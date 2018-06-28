@@ -119,21 +119,12 @@ a {
         border-color: var(--primary)
     }
 
-    .media-edit, .media-play {
-        pointer-events: auto;
-    }
-
-    .media-edit {
-        position: absolute;
-        left: 5px;
-        top: 5px;
-    }
-
     .media-play {
         position: absolute;
         right: 5px;
         bottom: 5px;
         font-size: 1.3em;
+        pointer-events: auto;
     }
 
     .media-edit:hover, .media-play:hover {

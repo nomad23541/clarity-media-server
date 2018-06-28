@@ -14,15 +14,6 @@ module.exports = function(app) {
         res.render('search')
     })
 
-    app.get('/edit', function(req, res) {
-        db.findOne({ _id: req.query.id }, function(err, doc) {
-            if(!doc) return res.status(404).send('Not Found')
-            res.render('edit', {
-                doc: doc
-            })
-        })
-    })
-
     app.get('/fix', function(req, res) {
         db.findOne({ _id: req.query.id }, function(err, doc) {
             if(!doc) return res.status(404).send('Not Found')
