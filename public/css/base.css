@@ -78,6 +78,12 @@ a {
     .navbar-header #back {
         font-size: 20px;
     }
+
+.footer {
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 15px;
+}
     
 .media-box {
     min-width: 100px;
