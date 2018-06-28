@@ -10,12 +10,12 @@ const transcode = require('../lib/transcoding/transcode')
 module.exports = function(app) {
     app.get('/media/scannewfiles', function(req, res) {
         // create media directory if it doesn't exist
-        if(!fs.existsSync(config.mediaDirectory)) {
-            fs.mkdirSync(config.mediaDirectory)
+        if(!fs.existsSync(config.moviesDirectory)) {
+            fs.mkdirSync(config.moviesDirectory)
         }
 
         // compare files in media directory with files in database
-        let files = fs.readdirSync(config.mediaDirectory)
+        let files = fs.readdirSync(config.moviesDirectory)
         db.find({}, function(err, docs) {
             let filesInDB = []
             for(let doc in docs) {
@@ -31,12 +31,12 @@ module.exports = function(app) {
 
     app.get('/media/scanlibrary', function(req, res) { 
         // create media directory if it doesn't exist
-        if(!fs.existsSync(config.mediaDirectory)) {
-            fs.mkdirSync(config.mediaDirectory)
+        if(!fs.existsSync(config.moviesDirectory)) {
+            fs.mkdirSync(config.moviesDirectory)
         }
 
         db.remove({}, { multi: true })
-        metadata.fetchMetadata(fs.readdirSync(config.mediaDirectory))
+        metadata.fetchMetadata(fs.readdirSync(config.moviesDirectory))
     })
 
     app.use('/media', function(req, res, next) {

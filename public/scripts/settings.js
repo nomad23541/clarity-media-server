@@ -92,7 +92,7 @@ $(document).ready(function() {
         }
 
         if(data.msg == 'NOMEDIA') {
-            $('#scanLibraryTxt').text('Media directory is empty!')
+            $('#scanLibraryTxt').text('Movies directory is empty!')
         }
     })
 })
