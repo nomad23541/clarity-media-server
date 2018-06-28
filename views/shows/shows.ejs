@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>Shows - Clarity</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/style.css">
+        <script src="/scripts_server/jquery/dist/jquery.min.js"></script>
+        <script src="/scripts/partials/navbar.js"></script>
+        <script src="/scripts/movies/shows.js"></script>
+        <script>
+            let size = '<%=size%>'
+        </script>
+    </head>
+    <body>
+        <% include ../partials/navbar.ejs %>
+        <div class="container">
+            <div class="header">
+                <h1>Shows</h1>
+            </div>
+            <div class="row row-add-spacing">
+                <button class="btn btn-icon btnPreviousPage"><i class="fas fa-angle-left"></i></button>
+                <p class="listing"></p>
+                <button class="btn btn-icon btnNextPage"><i class="fas fa-angle-right"></i></button>
+                <select id="selectType">
+                    <option value="title">Alphabetical</option>
+                    <option value="year">Year</option>
+                </select>
+                <select id="selectOrder">
+                    <option value="+1">Ascending</option>
+                    <option value="+-1">Descending</option>
+                </select>
+                <button id="btnSort" class="btn">Sort <i class="fas fa-sort"></i></button>
+            </div>
+            <!-- Media is presented here -->
+            <div id="media" class="media-grid-container"></div>
+            <div id="tempMedia" class="media-grid-container"></div>
+            <div class="row row-add-spacing">
+                <button class="btn btn-icon btnPreviousPage"><i class="fas fa-angle-left"></i></button>
+                <p class="listing"></p>
+                <button class="btn btn-icon btnNextPage"><i class="fas fa-angle-right"></i></button>
+            </div>
+            <!-- This shows if no media is found -->
+            <div id="noMediaFound" class="center-text">
+                <p>No media found, go to <a href="/settings">Settings</a> and scan your library!</p>
+            </div>
+        </div>
+    </body>
+</html>
