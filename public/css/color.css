@@ -1,6 +1,7 @@
 /* Define Colors */
 :root {
     --background: #1e272e;
+    --background-dark: #12191f;
     --background-alt: #485460;
     --primary: #2ecc71;
     --primary-dark: #27ae60;
