@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <title>Similar to <%=doc.title%> - Clarity</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/style.css">
+        <script src="/scripts_server/jquery/dist/jquery.min.js"></script>
+        <script src="/scripts/partials/navbar.js"></script>
+        <script src="/scripts/search.js"></script>
+    </head>
+    <body>
+        <% include ../partials/navbar.ejs %>
+        <div class="container">
+            <div class="header">
+                <h1>Movies similar to <%=doc.title%> (<%=doc.year%>)</h1>
+            </div>
+            <div id="results" class="media-grid-container">
+                <% for(var i = 0; i < similar.length; i++) { %>
+                    <div class="media-box">
+                        <a href="/library/movies/movie?id=<%=similar[i]._id%>">
+                            <div class="poster-wrapper">
+                                <img src="<%=similar[i].images.posterWeb%>">
+                                <div class="poster-overlay">
+                                    <a class="media-play" href="/watch?id=<%=similar[i]._id%>"><i class="fas fa-play"></i></a>
+                                </div>
+                            </div>
+                        </a>
+                        <p class="media-title"><%=similar[i].title%></p>
+                        <p class="media-year">(<%=similar[i].year%>)</p>
+                    </div>
+                <%}%>
+            </div>
+        </div>
+    </body>
+</html>

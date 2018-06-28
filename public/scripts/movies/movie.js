@@ -3,6 +3,7 @@ $(document).ready(function() {
     let btnEdit = $('#btnEdit')
     let btnFixMetadata = $('#btnFixMetadata')
     let btnShowMore = $('#btnShowMore')
+    let btnSeeMore = $('#btnSeeMore')
     let actors = $('#actors')
 
     btnPlay.click(function() {
@@ -20,6 +21,10 @@ $(document).ready(function() {
     btnShowMore.click(function() {
         getActors()
         btnShowMore.hide()
+    })
+
+    btnSeeMore.click(function() {
+        window.location.href = '/library/movies/similar?id=' + id 
     })
 
     // by default load 8 actors
