@@ -9,6 +9,14 @@ module.exports = function(app) {
         res.render('library')
     })
 
+    app.get('/library/shows', function(req, res) {
+        db.find({}, function(err, docs) {
+            res.render('movies/shows', {
+                size: docs.length
+            })
+        })
+    })
+
     app.get('/library/movies', function(req, res) {
         db.find({}, function(err, docs) {
             res.render('movies/movies', {
