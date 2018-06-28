@@ -31,7 +31,7 @@ module.exports = function(app) {
         db.find({ genres: { $in: doc.genres }}, function(err, docs) {
             res.render('movies/movie',  {
                 doc: doc,
-                similar: docs
+                similar: docs.slice(0, 8) // only send 8 similar movies
             })
         })
     })
