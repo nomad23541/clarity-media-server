@@ -32,7 +32,6 @@ $(document).ready(function() {
                             '<div class="poster-wrapper">' +
                                 '<img src="' + obj.images.posterWeb + '">' +
                                 '<div class="poster-overlay">' +
-                                    '<a class="media-edit" href="/edit?id=' + obj._id + '"><i class="fas fa-edit"></i></a>' +
                                     '<a class="media-play" href="/watch?id=' + obj._id + '"><i class="fas fa-play"></i></a>' +
                                 '</div>' +
                             '</div>' +
