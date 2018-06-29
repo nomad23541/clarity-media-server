@@ -41,7 +41,7 @@ $(document).ready(function() {
     })
 
     function sort(query) {
-        $.getJSON('/api/media?sort=' + query + '&skip=' + skip + '&limit=' + limit, function(data) {
+        $.getJSON('/api/media?sort=' + query + '&skip=' + skip + '&limit=' + limit + '&type=movie', function(data) {
             data.forEach(obj => {
                 let content = 
                     '<div class="media-box">' +
