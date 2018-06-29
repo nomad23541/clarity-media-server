@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <title><%=doc.name%> - <%=season.name%> - Clarity</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/style.css">
+        <script src="/scripts_server/jquery/dist/jquery.min.js"></script>
+        <script src="/scripts/partials/navbar.js"></script>
+    </head>
+    <body>
+        <% include ../partials/navbar.ejs %>
+        <div class="container">
+            <div class="header">
+                <h1><%=doc.name%> - <%=season.name%></h1>
+            </div>
+            <!-- Media is presented here -->
+            <div id="media" class="media-grid-container">
+                <% for(let episode in episodes) { %>
+                    <div class="media-box">
+                        <!--<a href="/library/shows/show/<%=doc._id%>/season/<%=season.seasonNumber%>/episode/<%=episodes[episode].episodeNumber%>">-->
+                        <a href="/watch?id=<%=episodes[episode]._id%>">
+                            <div class="poster-wrapper">
+                                <img src="<%=episodes[episode].images.stillWeb%>">
+                                <div class="poster-overlay">
+                                </div>
+                            </div>
+                        </a>
+                        <p class="media-title"><%=episodes[episode].name%></p>
+                        <p class="media-year">Episode <%=episodes[episode].episodeNumber%></p>
+                    </div>
+                <%}%>
+            </div>
+        </div>
+    </body>
+</html>
