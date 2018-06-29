@@ -24,8 +24,12 @@
                     <label>Server Port:</label>
                 </div>
                 <div class="input-wrapper">
+                    <input id="showsDirectory" class="setting" type="text">
+                    <label>Shows Directory: </label>
+                </div>
+                <div class="input-wrapper">
                     <input id="moviesDirectory" class="setting" type="text">
-                    <label>Media Directory: </label>
+                    <label>Movies Directory: </label>
                 </div>
                 <div class="input-wrapper">
                     <input id="posterDirectory" class="setting" type="text">
@@ -66,15 +70,16 @@
                 </div>
             </div>
             <div class="row row-add-spacing">
-                <button id="btnScanNewFiles" class="btn">Scan New Files</button>
-                <button id="btnScanEntireLibrary" class="btn">Scan Entire Library</button>
+                <button id="btnScanShows" class="btn">Scan Shows</button>
+                <!--<button id="btnScanNewFiles" class="btn">Scan New Files</button>-->
+                <button id="btnScanMovies" class="btn">Scan Movies</button>
                 <button id="btnSave" class="btn btn-primary">Save Settings <i class="fas fa-save"></i></button>
             </div>
 
-            <div id="scanLibraryDialog" class="dialog-container">
+            <div id="scanMoviesDialog" class="dialog-container">
                 <div class="dialog">
                     <div class="lds-dual-ring"></div>
-                    <p id="scanLibraryTxt">Scanning Library... <span id="scanProgressLibrary">0%</span></p>
+                    <p id="scanLibraryTxt">Scanning Movies... <span id="scanProgressLibrary">0%</span></p>
                 </div>
             </div>
 

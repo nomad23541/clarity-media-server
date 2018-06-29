@@ -1,14 +1,14 @@
 $(document).ready(function() {
     let btnSave = $('#btnSave')
     let btnScanNewFiles = $('#btnScanNewFiles')
-    let btnScanEntireLibrary = $('#btnScanEntireLibrary')
-    let scanLibraryDialog = $('#scanLibraryDialog')
+    let btnScanMovies = $('#btnScanMovies')
+    let btnScanShows = $('#btnScanShows')
+    let scanMoviesDialog = $('#scanMoviesDialog')
     let scanNewFilesDialog = $('#scanNewFilesDialog')
 
     // hide on load
-    scanLibraryDialog.hide()
+    scanMoviesDialog.hide()
     scanNewFilesDialog.hide()
-
 
     // load settings from config
     $.getJSON('/api/settings', function(obj) {
@@ -74,10 +74,19 @@ $(document).ready(function() {
     })
 
     // scan entire library on btn click
-    btnScanEntireLibrary.click(function() {
+    btnScanMovies.click(function() {
+        scanMoviesDialog.show()
+        $.ajax({
+            url: '/media/scanmovies',
+            method: 'GET'
+        })
+    })
+
+    // scan shows debug test
+    btnScanShows.click(function() {
         scanLibraryDialog.show()
         $.ajax({
-            url: '/media/scanlibrary',
+            url: '/media/scanshows',
             method: 'GET'
         })
     })
