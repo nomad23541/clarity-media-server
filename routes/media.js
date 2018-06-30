@@ -8,32 +8,17 @@ const ffmpeg = require('fluent-ffmpeg')
 const transcode = require('../lib/transcoding/transcode')
 
 module.exports = function(app) {
-
-    // FOR DEBUGGING NEW SHOW FUNCTION
     app.get('/media/scanshows', function(req, res) {
-        if(!fs.existsSync(config.showsDirectory)) {
-            fs.mkdirSync(config.showsDirectory)
-        }
-
         db.remove({}, { multi: true })
         metadata.fetchShowsMetadata()
     })
 
     app.get('/media/scanmovies', function(req, res) { 
-        if(!fs.existsSync(config.moviesDirectory)) {
-            fs.mkdirSync(config.moviesDirectory)
-        }
-
         db.remove({}, { multi: true })
         metadata.fetchMoviesMetadata()
     })
 
     app.get('/media/scannewfiles', function(req, res) {
-        // create media directory if it doesn't exist
-        if(!fs.existsSync(config.moviesDirectory)) {
-            fs.mkdirSync(config.moviesDirectory)
-        }
-
         // compare files in media directory with files in database
         let files = fs.readdirSync(config.moviesDirectory)
         db.find({}, function(err, docs) {
