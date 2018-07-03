@@ -41,19 +41,19 @@ $(document).ready(function() {
     })
 
     function sort(query) {
-        $.getJSON('/api/media?sort=' + query + '&skip=' + skip + '&limit=' + limit + '&type=show', function(data) {
+        $.getJSON('/api/media/shows?sort=' + query + '&skip=' + skip + '&limit=' + limit, function(data) {
             data.forEach(obj => {
                 let content = 
                     '<div class="media-box">' +
                         '<a href="/library/shows/show?id=' + obj._id + '">' +
                             '<div class="poster-wrapper">' +
-                                '<img src="' + obj.images.posterWeb + '">' +
+                                '<img src="/images/' + obj.poster + '">' +
                                 '<div class="poster-overlay">' +
                                 '</div>' +
                             '</div>' +
                         '</a>' +
                         '<p class="media-title">' + obj.name + '</p>' +
-                        '<p class="media-year">' + obj.numberOfSeasons + ' Seasons</p>' +
+                        '<p class="media-year">' + obj.seasons.length + ' Seasons</p>' +
                     '</div>'
                 tempMedia.append(content)
             })

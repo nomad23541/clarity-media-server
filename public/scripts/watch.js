@@ -49,8 +49,9 @@ $(document).ready(function() {
             return this
         }
 
-        $.getJSON('/api/media/' + id, function(data) {
-            video.theDuration = data.videoInfo.duration
+        let apiToGet = $('#movie').length > 0 ? 'movies' : 'episodes'
+        $.getJSON('/api/media/' + apiToGet + '/' + id, function(data) {
+            if(data) video.theDuration = data.videoInfo.duration
         })
     }
 })

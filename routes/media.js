@@ -2,20 +2,24 @@ const metadata = require('../lib/handlers/metadata-handler')
 const config = require('../config')
 const fs = require('fs')
 const db = require('../lib/setup/setup-db').db()
-const path = require('path')
-const process = require('child_process')
-const ffmpeg = require('fluent-ffmpeg')
 const transcode = require('../lib/transcoding/transcode')
+
+const Movie = require('../models/movie')
+const Show = require('../models/show')
+const Episode = require('../models/episode')
 
 module.exports = function(app) {
     app.get('/media/scanshows', function(req, res) {
-        db.remove({}, { multi: true })
-        metadata.fetchShowsMetadata()
+        Episode.remove({})
+        Show.remove({})
+        metadata.processShows()
     })
 
     app.get('/media/scanmovies', function(req, res) { 
-        db.remove({}, { multi: true })
-        metadata.fetchMoviesMetadata()
+        //db.remove({}, { multi: true })
+        Movie.remove({})
+
+        metadata.processMovies()
     })
 
     app.get('/media/scannewfiles', function(req, res) {
@@ -35,10 +39,18 @@ module.exports = function(app) {
     })
 
     app.use('/media', function(req, res, next) {
-        db.findOne({ _id: req.query.id }, function(err, doc) {
-            req.body.path = doc.location
-            req.body.needsTranscoding = doc.needsTranscoding
-            next()
+        Movie.findOne({ _id: req.query.id }, function(err, movie) {
+            if(movie) {
+                req.body.path = movie.location
+                req.body.needsTranscoding = movie.needsTranscoding
+                next()
+            } else {
+                Episode.findOne({ _id: req.query.id }, function(err, episode) {
+                    req.body.path = episode.location
+                    req.body.needsTranscoding = episode.needsTranscoding
+                    next()
+                })
+            }
         })
     })
 

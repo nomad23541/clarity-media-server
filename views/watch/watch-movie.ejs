@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title><%=doc.title%> - Clarity</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/scripts_server/video.js/dist/video-js.min.css">
+        <link rel="stylesheet" href="/css/videojs-skin.css">
+        <script src="/scripts_server/video.js/dist/video.min.js"></script>
+        <script src="/scripts_server/jquery/dist/jquery.min.js"></script>
+        <script src="/scripts/partials/navbar.js"></script>
+        <script>
+            // make id usable in watch.js
+            const id = '<%=doc._id%>'
+            const needsTranscoding = '<%=doc.needsTranscoding%>'
+        </script>
+        <script src="/scripts/watch.js"></script>
+    </head>
+    <body>
+        <div class="container-fullscreen">
+            <video id="player" class="video-js vjs-default-skin" playsinline autoplay controls preload="auto">
+            </video>
+            <div class="player-overlay" id="movie">
+                <a id="backArrow" href="#"><i class="fas fa-arrow-left"></i></a>
+                <p class="player-title"><%=doc.title%></p>
+                <p class="player-year">(<%=doc.year%>)</p>
+                <img src="/images/<%=doc.poster%>">
+            </div>
+        </div>
+    </body>
+</html>

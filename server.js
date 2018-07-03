@@ -15,7 +15,7 @@ setupDirectories.init()
 // setup socket io
 socketIO.init(http)
 // intialize database
-db.init(path.join(__dirname, '/db/media.db'))
+db.init()
 
 app.set('view engine', 'ejs')
 app.use(bodyParser.json())

@@ -1,4 +1,6 @@
-const db = require('../lib/setup/setup-db').db()
+const Movie = require('../models/movie')
+const Show = require('../models/show')
+const Episode = require('../models/episode')
 
 module.exports = function(app) {
     app.get('/', function(req, res) {
@@ -10,7 +12,7 @@ module.exports = function(app) {
     })
 
     app.get('/library/shows', function(req, res) {
-        db.find({ type: 'show' }, function(err, docs) {
+        Show.find({}, function(err, docs) {
             res.render('shows/shows', {
                 size: docs.length
             })
@@ -18,11 +20,11 @@ module.exports = function(app) {
     })
 
     app.get('/library/shows/show/:id/season/:season', function(req, res) {
-        db.findOne({ _id: req.params.id }, function(err, doc) {
+        Show.findOne({ _id: req.params.id }, function(err, doc) {
             if(err || !doc) return res.status(404).send('Not Found ')
             // find season to use
             let season = doc.seasons.find(season => season.seasonNumber == req.params.season)
-            db.find({ showName: doc.name, seasonNumber: parseInt(req.params.season), type: 'episode' }).sort({ episodeNumber: 1 }).exec(function(err, episodes) {
+            Episode.find({ showName: doc.name, 'seasonNumber': parseInt(req.params.season) }).sort({ 'episodeNumber': 1 }).exec(function(err, episodes) {
                 res.render('shows/season', {
                     doc: doc,
                     season: season,
@@ -33,7 +35,7 @@ module.exports = function(app) {
     })
 
     app.get('/library/shows/show', function(req, res) {
-        db.findOne({ _id: req.query.id }, function(err, doc) {
+        Show.findOne({ _id: req.query.id }, function(err, doc) {
             res.render('shows/show', {
                 doc: doc
             })
@@ -41,7 +43,7 @@ module.exports = function(app) {
     })
 
     app.get('/library/movies', function(req, res) {
-        db.find({ type: 'movie' }, function(err, docs) {
+        Movie.find({}, function(err, docs) {
             res.render('movies/movies', {
                 size: docs.length
             })
@@ -49,7 +51,7 @@ module.exports = function(app) {
     })
 
     app.use('/library/movies/movie', function(req, res, next) {
-        db.findOne({ _id: req.query.id }, function(err, doc) {
+        Movie.findOne({ _id: req.query.id }, function(err, doc) {
             if(!doc) return res.status(404).send('Not Found')
             req.body.doc = doc
             next()
@@ -59,7 +61,8 @@ module.exports = function(app) {
     app.get('/library/movies/movie', function(req, res) {
         let doc = req.body.doc
         // find movies that have the same genres
-        db.find({ type: 'movie', genres: { $in: doc.genres }}, function(err, docs) {
+        Movie.find({ 'metadata.genres': { $in: doc.metadata.genres }}, function(err, docs) {
+            console.log(docs.length)
             res.render('movies/movie',  {
                 doc: doc,
                 similar: docs.slice(0, 8) // only send 8 similar movies
@@ -68,7 +71,7 @@ module.exports = function(app) {
     })
 
     app.get('/library/movies/similar', function(req, res, next) {
-        db.findOne({ _id: req.query.id }, function(err, doc) {
+        Movie.findOne({ _id: req.query.id }, function(err, doc) {
             if(!doc) return res.status(404).send('Not Found')
             req.body.doc = doc
             next()
@@ -78,7 +81,7 @@ module.exports = function(app) {
     app.get('/library/movies/similar', function(req, res) {
         let doc = req.body.doc
         // find movies that have the same genres
-        db.find({ type: 'movie', genres: { $in: doc.genres }}, function(err, docs) {
+        Movie.find({ 'metadata.genres': { $in: doc.metadata.genres }}, function(err, docs) {
             res.render('movies/similar',  {
                 doc: doc,
                 similar: docs

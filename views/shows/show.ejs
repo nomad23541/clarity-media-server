@@ -15,17 +15,17 @@
             </div>
             <!-- Media is presented here -->
             <div id="media" class="media-grid-container">
-                <% for(let season in doc.seasons) { %>
+                <% for(let season of doc.seasons) { %>
                     <div class="media-box">
-                        <a href="/library/shows/show/<%=doc._id%>/season/<%=doc.seasons[season].seasonNumber%>">
+                        <a href="/library/shows/show/<%=doc._id%>/season/<%=season.seasonNumber%>">
                             <div class="poster-wrapper">
-                                <img src="<%=doc.seasons[season].images.posterWeb%>">
+                                <img src="/images/<%=season.poster%>">
                                 <div class="poster-overlay">
                                 </div>
                             </div>
                         </a>
-                        <p class="media-title"><%=doc.seasons[season].name%></p>
-                        <p class="media-year"><%=doc.seasons[season].numberOfEpisodes%> Episodes</p>
+                        <p class="media-title"><%=season.name%></p>
+                        <p class="media-year"><%=season.episodeCount%> Episodes</p>
                     </div>
                 <%}%>
             </div>

@@ -3,10 +3,12 @@ $(document).ready(function() {
     let btnScanNewFiles = $('#btnScanNewFiles')
     let btnScanMovies = $('#btnScanMovies')
     let btnScanShows = $('#btnScanShows')
+    let scanShowsDialog = $('#scanShowsDialog') 
     let scanMoviesDialog = $('#scanMoviesDialog')
     let scanNewFilesDialog = $('#scanNewFilesDialog')
 
     // hide on load
+    scanShowsDialog.hide()
     scanMoviesDialog.hide()
     scanNewFilesDialog.hide()
 
@@ -84,7 +86,7 @@ $(document).ready(function() {
 
     // scan shows debug test
     btnScanShows.click(function() {
-        scanLibraryDialog.show()
+        scanShowsDialog.show()
         $.ajax({
             url: '/media/scanshows',
             method: 'GET'
@@ -94,8 +96,9 @@ $(document).ready(function() {
     // listen for library scan progress and update the client
     const socket = io()
     socket.on('scanProgress', function(data) {
+        $('#scanProgressShows').text(data.msg + '%')
         $('#scanProgressNewFiles').text(data.msg + '%')
-        $('#scanProgressLibrary').text(data.msg + '%')
+        $('#scanProgressMovies').text(data.msg + '%')
         if(data.msg == 100) {
             location.reload()
         }

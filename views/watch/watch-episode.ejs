@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title><%=doc.title%> - Clarity</title>
+        <title><%=doc.name%> - Clarity</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/css/style.css">
         <link rel="stylesheet" href="/scripts_server/video.js/dist/video-js.min.css">
@@ -16,15 +16,13 @@
         <script src="/scripts/watch.js"></script>
     </head>
     <body>
-        <!-- <% include partials/navbar.ejs %> -->
         <div class="container-fullscreen">
-            <video id="player" class="video-js vjs-default-skin" poster="<%=doc.poster%>" playsinline autoplay controls preload="auto">
+            <video id="player" class="video-js vjs-default-skin" playsinline autoplay controls preload="auto">
             </video>
-            <div class="player-overlay">
+            <div class="player-overlay" id="episode">
                 <a id="backArrow" href="#"><i class="fas fa-arrow-left"></i></a>
-                <p class="player-title"><%=doc.title%></p>
-                <p class="player-year">(<%=doc.year%>)</p>
-                <img src="<%=doc.images.posterWeb%>">
+                <p class="player-title"><%=doc.showName%>: <%=doc.name%></p>
+                <p class="player-year">Season <%=doc.seasonNumber%></p>
             </div>
         </div>
     </body>

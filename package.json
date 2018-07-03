@@ -4,7 +4,9 @@
   "description": "Simple Media Server",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "prestart": "mongod --dbpath data --fork --logpath /dev/null",
+    "start": "nodemon server.js",
+    "poststop": "mongod --dbpath data --shutdown"
   },
   "author": "nomad23541",
   "license": "ISC",
@@ -20,7 +22,7 @@
     "get-video-info": "^1.0.0",
     "is-video": "^1.0.1",
     "jquery": "^3.3.1",
-    "nedb": "^1.8.0",
+    "mongoose": "^5.1.7",
     "promise": "^8.0.1",
     "request": "^2.85.0",
     "simple-rate-limiter": "^0.2.3",

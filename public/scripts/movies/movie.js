@@ -32,19 +32,19 @@ $(document).ready(function() {
 
     function getActors(amount) {
         actors.empty()
-        $.getJSON('/api/media/' + id, function(data) {
+        $.getJSON('/api/media/movies/' + id, function(data) {
             // if amount isn't specified, get entire cast
             if(!amount) {
-                amount = data.cast.length
+                amount = data.metadata.cast.length
             }
 
             for(let i = 0; i < amount; i++) {
                 let content = 
                     '<div class="profile-box">' +
                         '<a href="#">' +
-                            '<img src="' + data.cast[i].profileWeb + '" onerror="this.onerror=null;this.src=\'/img/poster-unknown.png\';">' +
-                            '<p class="profile-name">' + data.cast[i].name + '</p>' +
-                            '<p class="profile-role">as ' + data.cast[i].character + '</p>' +
+                            '<img src="/profiles/' + data.metadata.cast[i].profile + '" onerror="this.onerror=null;this.src=\'/img/poster-unknown.png\';">' +
+                            '<p class="profile-name">' + data.metadata.cast[i].name + '</p>' +
+                            '<p class="profile-role">as ' + data.metadata.cast[i].character + '</p>' +
                         '</a>' +
                     '</div>'
                 actors.append(content)

@@ -23,21 +23,21 @@ $(document).ready(function() {
 
     function search() {
         if(searchField.val() != '') {
-            $.getJSON('/api/search?title=' + searchField.val(), function(data) {
+            $.getJSON('/api/search?query=' + searchField.val(), function(data) {
                 results.empty()
                 data.forEach(obj => {
                     var content = 
                     '<div class="media-box">' +
-                        '<a href="/library/movies/movie?id=' + obj._id + '">' +
+                        (obj.title ? '<a href="/library/movies/movie?id=' + obj._id + '">' : '<a href="/library/shows/show?id=' + obj._id + '">') +
                             '<div class="poster-wrapper">' +
-                                '<img src="' + obj.images.posterWeb + '">' +
+                                '<img src="/images/' + obj.poster + '">' +
                                 '<div class="poster-overlay">' +
                                     '<a class="media-play" href="/watch?id=' + obj._id + '"><i class="fas fa-play"></i></a>' +
                                 '</div>' +
                             '</div>' +
                         '</a>' +
-                        '<p class="media-title">' + obj.title + '</p>' +
-                        '<p class="media-year">(' + obj.year + ')</p>' +
+                        '<p class="media-title">' + (obj.title || obj.name) + '</p>' +
+                        '<p class="media-year">' + (obj.year || obj.seasons.length + ' Seasons') + '</p>' +
                     '</div>'
 
                     results.append(content)
