@@ -62,7 +62,6 @@ module.exports = function(app) {
         let doc = req.body.doc
         // find movies that have the same genres
         Movie.find({ 'metadata.genres': { $in: doc.metadata.genres }}, function(err, docs) {
-            console.log(docs.length)
             res.render('movies/movie',  {
                 doc: doc,
                 similar: docs.slice(0, 8) // only send 8 similar movies
