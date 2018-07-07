@@ -10,14 +10,25 @@ const Episode = require('../models/episode')
 
 module.exports = function(app) {
     app.get('/media/scanshows', function(req, res) {
-        Episode.remove({})
-        Show.remove({})
+        // remove whats in the collections before processing
+        Show.remove({}, function(err, removed) {
+            if(err) return console.log(err)
+            console.log('Removed ' + removed.n + ' shows')
+
+            Episode.remove({}, function(err, removed) {
+                if(err) return console.log(err)
+                console.log('Removed ' + removed.n + ' episodes')
+            })
+        })
+
         metadata.processShows()
     })
 
     app.get('/media/scanmovies', function(req, res) { 
-        //db.remove({}, { multi: true })
-        Movie.remove({})
+        Movie.remove({}, function(err, removed) {
+            if(err) return console.log(err)
+            console.log('Removed ' + removed.n + ' movies')
+        })
 
         metadata.processMovies()
     })
