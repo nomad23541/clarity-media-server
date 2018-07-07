@@ -14,6 +14,9 @@
                 <h1><%=doc.name%></h1>
                 <p><%=doc.metadata.overview%></p>
             </div>
+            <div class="details-background">
+                <img src="/images/<%=doc.backdrop%>">
+            </div>
             <!-- Media is presented here -->
             <div id="media" class="media-grid-container">
                 <% for(let season of doc.seasons) { %>
