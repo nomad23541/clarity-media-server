@@ -21,15 +21,15 @@ Example of what this would contain:
 ```json
     {
     	"port": "port you'd like to use",
-		"imagesDirectory": "where you'd like images to be stored",
-		"moviesDirectory": "where all your movies are",
-		"showsDirectory": "where your shows are",
-		"tmdbApiKey": "your tmdb api key",
-		"transcoding": {
-			"crf": "20 (crf is quality, 0 best, 50 worst)",
-			"preset": "veryfast (check ffmpeg docs for preset values)",
-			"normalizeAudio": "true (takes boolean value, does what it implies)"
-		}
+	"imagesDirectory": "where you'd like images to be stored",
+	"moviesDirectory": "where all your movies are",
+	"showsDirectory": "where your shows are",
+	"tmdbApiKey": "your tmdb api key",
+	"transcoding": {
+		"crf": "20 (crf is quality, 0 best, 50 worst)",
+		"preset": "veryfast (check ffmpeg docs for preset values)",
+		"normalizeAudio": "true (takes boolean value, does what it implies)"
+	}
     }
 ```
 This project uses MongoDB as it's database, that will need to be setup on localhost (I will later on include an install script that will do this automatically).
