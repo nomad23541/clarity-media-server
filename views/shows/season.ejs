@@ -11,6 +11,11 @@
         <div class="container">
             <div class="header">
                 <h1><%=doc.name%> - <%=season.name%></h1>
+                <p>First Aired: <%=season.airDate%></p>
+                <details>
+                    <summary>Season Overview</summary>
+                    <p><%=season.overview%></p>
+                </details>
             </div>
             <!-- Media is presented here -->
             <div id="media" class="media-grid-container">

@@ -193,8 +193,29 @@
 }
 
 .header {
-    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    width: 80%;
+    text-align: center;
+    margin: 15px;
 }
+
+    .header p {
+        text-align: left;
+        font-weight: 300;
+        opacity: 0.6;
+    }
+
+    .header summary:hover {
+        cursor: pointer;
+    }
+
+    .header summary {
+        margin-top: 10px;
+        color: var(--primary);
+    }
 
 .center-text {
     text-align: center;
