@@ -32,12 +32,14 @@ Example of what this would contain:
 	}
     }
 ```
-This project uses MongoDB as it's database, that will need to be setup on localhost (I will later on include an install script that will do this automatically).
+This project uses MongoDB as it's database, that will need to be setup on localhost.
+You can install MongoDB using my script `install.sh' (I don't recommend, you should probably install it via your package manager)
 
 Next you'll need to install the dependencies (In the root directory):
     `npm install`
 
-Then to start the server: `node ./server.js`
+Then to start the server: `npm start`
+Or you can run it using: `start.sh`, this helps with mongod already running if you're restarting the app.
 
 
 ## Images
