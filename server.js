@@ -35,7 +35,7 @@ app.use('/favicon.ico', express.static(path.join(__dirname, 'public', 'img', 'fa
 app.all('*', function(req, res, next) {
     // if first time setup hasn't been configured, reroute here.
     // make sure this doesn't catch /setup or it'll cause an infinite redirect
-    if(req.url === '/setup') next()
+    if(req.url === '/setup') return next()
     User.count(function(err, count) {
         if(err) return console.log(err)
         if(count == 0) {
