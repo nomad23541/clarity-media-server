@@ -22,6 +22,14 @@ a {
     color: var(--primary);
 }
 
+.bold {
+    font-weight: 600;
+}
+
+.light {
+    font-weight: 300;
+}
+
 /* Saves space for the navbar when at top */
 .navbar-space-holder {
     height: 40px;
@@ -447,6 +455,32 @@ select {
     transition: 0.2s;
 }
 
+/* Setup Page */
+
+#txtError {
+    color: var(--danger);
+    display: none;
+}
+
+.tab {
+    display: none;
+}
+
+.btn-bar {
+    width: 100%;
+    max-width: 600px;
+    margin: 5px auto;
+}
+    .btn-bar #btnNext {
+        float: right;
+    }
+
+    .btn-bar #btnPrev {
+        float: left;
+    }
+
+/* Setup Page End */
+
 select::-ms-expand {
     display: none;
 }
@@ -455,7 +489,12 @@ select:focus {
     border: 2px solid var(--primary);
 }
 
+.input-error {
+    border: 2px solid var(--danger);
+}
+
 .input-wrapper {
+    width: 100%;
     max-width: 600px;
     margin: 5px auto;
     /* To flip label and input to label can be colored when input focus */

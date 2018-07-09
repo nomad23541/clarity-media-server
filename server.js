@@ -9,6 +9,7 @@ const db = require('./lib/setup/setup-db')
 const socketIO = require('./lib/setup/setup-socket-io')
 const bodyParser = require('body-parser')
 const expressDevice = require('express-device')
+const User = require('./models/user')
 
 // create all directories needed in app
 setupDirectories.init()
@@ -27,6 +28,24 @@ app.use('/profiles', express.static(path.join(config.imagesDirectory, '/profiles
 app.use('/scripts_server', express.static(path.join(__dirname, 'node_modules')))
 // set favicon
 app.use('/favicon.ico', express.static(path.join(__dirname, 'public', 'img', 'favicon.ico')))
+
+/** If there aren't any users in the User collection,
+ * redirect to /setup
+**/
+app.all('*', function(req, res, next) {
+    // if first time setup hasn't been configured, reroute here.
+    // make sure this doesn't catch /setup or it'll cause an infinite redirect
+    if(req.url === '/setup') next()
+    User.count(function(err, count) {
+        if(err) return console.log(err)
+        if(count == 0) {
+            res.redirect('setup')
+            return false
+        }
+
+        next()
+    })
+})
 
 // dynamically load routes
 const routes = path.join(__dirname, 'routes')

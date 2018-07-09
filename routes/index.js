@@ -1,7 +1,26 @@
 const Movie = require('../models/movie')
 const Episode = require('../models/episode')
+const User = require('../models/user')
 
 module.exports = function(app) {
+    app.get('/setup', function(req, res) {
+        res.render('setup')
+    })
+
+    app.post('/setup', function(req, res) {
+        console.log('post')
+        let newUser = User({
+            username: req.body.username,
+            password: req.body.password,
+            admin: true
+        })
+
+        newUser.save(function(err) {
+            if(err) return console.log(err)
+            res.send('success')
+        })
+    })
+
     app.get('/watch', function(req, res) {
         Movie.findOne({ _id: req.query.id }, function(err, movie) {
             Episode.findOne({ _id: req.query.id }, function(err1, episode) {

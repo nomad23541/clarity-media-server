@@ -1,4 +1,3 @@
-const db = require('../lib/setup/setup-db').db()
 const fs = require('fs')
 
 module.exports = function(app) {
