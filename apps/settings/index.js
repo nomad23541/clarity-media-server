@@ -5,13 +5,12 @@ module.exports = function(app) {
         res.render('settings')
     })
 
-    app.post('/settings', function(req, res) {
-        try {
+    app.post('/settings', function(req, res, next) {
+        if(req.body) {
             fs.writeFileSync('./config.json', JSON.stringify(req.body))
-            res.send(JSON.stringify({ message: 'success'}))
-        } catch(err) {
-            res.status(500)
-            res.send(JSON.stringify({ message: err }))
+            res.json({ message: 'Saved settings successfully'})
+        } else {
+            return next(new Error('Failed to save settings'))
         }
     })
 }

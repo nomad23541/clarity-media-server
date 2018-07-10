@@ -15,7 +15,7 @@ $(document).ready(function() {
     })
 
     btnFixMetadata.click(function() {
-        window.location.href = '/fix?id=' + id
+        window.location.href = '/library/movies/fix?id=' + id
     })
 
     btnShowMore.click(function() {
