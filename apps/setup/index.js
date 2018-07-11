@@ -12,7 +12,7 @@ module.exports = function(app) {
         if(username && password) {
             let newUser = User({
                 username: req.body.username,
-                password: req.bdoy.password,
+                password: req.body.password,
                 admin: true
             })
     
