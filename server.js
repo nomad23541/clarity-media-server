@@ -36,7 +36,7 @@ app.use('/scripts_server', express.static(path.join(__dirname, 'node_modules')))
 app.use('/favicon.ico', express.static(path.join(__dirname, 'public', 'img', 'favicon.ico')))
 
 isAuthenticated = function(req, res, next) {
-    return req.session.userID
+    return req.session.user
 }
 
 /**
@@ -61,6 +61,11 @@ app.all('*', function(req, res, next) {
 
         next()
     })
+})
+
+app.use(function(req, res, next) {
+    res.locals.user = req.session.user
+    next()
 })
 
 // dynamically load routes
