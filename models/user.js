@@ -12,7 +12,8 @@ let userSchema = new Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    admin: Boolean
 })
 
 // hash the password
