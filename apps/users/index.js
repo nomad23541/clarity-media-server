@@ -14,7 +14,7 @@ module.exports = function(app) {
                 if(err) return next(err)
                 if(!user) return res.status(500).send('Invalid login credentials')
 
-                req.session.userID = user._id
+                req.session.user = user
                 res.send('ok')
             })
         } else {
