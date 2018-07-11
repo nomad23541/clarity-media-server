@@ -47,13 +47,17 @@ module.exports = function(app) {
     })
 
     app.get('/library/movies/fix', function(req, res, next) {
-        Movie.findOne({ _id: req.query.id }, function(err, doc) {
-            if(err) return next(err)
-            if(!doc) return next(new Error('Could not find this movie'))
-
-            res.render('fix', {
-                doc: doc
+        if(req.session.user.admin) {
+            Movie.findOne({ _id: req.query.id }, function(err, doc) {
+                if(err) return next(err)
+                if(!doc) return next(new Error('Could not find this movie'))
+    
+                res.render('fix', {
+                    doc: doc
+                })
             })
-        })
+        } else {
+            next(new Error('User is not admin'))
+        }
     })
 }
