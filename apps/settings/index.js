@@ -1,8 +1,14 @@
 const fs = require('fs')
 
 module.exports = function(app) {
-    app.get('/settings', function(req, res) {
-        res.render('settings')
+    app.get('/settings', function(req, res, next) {
+        if(req.session.user.admin) {
+            res.render('settings')
+        } else {
+            let err = new Error('You need to be admin to use this page')
+            err.statusCode = 403
+            next(err)
+        }
     })
 
     app.post('/settings', function(req, res, next) {

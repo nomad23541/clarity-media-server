@@ -95,6 +95,12 @@ app.set('views', viewDirs)
 // error middleware
 app.use(function(err, req, res, next) {
     console.log(err)
+    res.render('error', {
+        statusCode: err.statusCode,
+        error: err
+    })
+
+    console.log(err.statusCode)
     res.status(500).send('Oh no')
 })
 
