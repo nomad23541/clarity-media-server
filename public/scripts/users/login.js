@@ -1,5 +1,12 @@
 $(document).ready(function() {
-    $('#btnLogin').click(function() {
+    let btnLogin = $('#btnLogin')
+
+    // press enter to log in
+    $('#password').keypress(function(event) {
+        if(event.keyCode == 13) btnLogin.click()
+    })
+
+    btnLogin.click(function() {
         $.ajax({
             url: '/login',
             method: 'POST',
