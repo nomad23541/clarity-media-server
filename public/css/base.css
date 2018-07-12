@@ -467,6 +467,7 @@ select {
 /* Setup Page */
 
 #txtError {
+    padding: 10px;
     color: var(--danger);
     display: none;
 }
