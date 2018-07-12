@@ -11,8 +11,7 @@ module.exports = function(app) {
 
         if(username && password) {
             User.login(username, password, function(err, user) {
-                if(err) return next(err)
-                if(!user) return res.status(500).send('Invalid login credentials')
+                if(err || !user) return res.status(500).send('Invalid login credentials')
 
                 req.session.user = user
                 res.send('ok')

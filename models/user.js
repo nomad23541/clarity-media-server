@@ -31,9 +31,7 @@ userSchema.statics.login = function(username, password, callback) {
         if(err) {
             return callback(err)
         } else if(!user) {
-            let err = new Error('User not found')
-            err.status = 401
-            return callback(err)
+            return callback(new Error('No user found'))
         }
 
         bcrypt.compare(password, user.password, function(err, result) {

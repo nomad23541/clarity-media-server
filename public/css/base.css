@@ -228,7 +228,7 @@ a {
         font-size: 2em;
     }
 
-.btn {
+.btn, input[type=submit] {
     text-transform: uppercase;
     font-weight: 600;
     border: none;
@@ -246,11 +246,11 @@ a {
         background: var(--button-hover);
     }
 
-    .btn-primary {
+    .btn-primary, input[type=submit] {
         background: var(--primary);
     }
 
-    .btn-primary:hover {
+    .btn-primary:hover, input[type=submit]:hover {
         background: var(--primary-dark);
     }
 
@@ -467,7 +467,6 @@ select {
 /* Setup Page */
 
 #txtError {
-    padding: 10px;
     color: var(--danger);
     display: none;
 }

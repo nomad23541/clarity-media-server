@@ -109,6 +109,27 @@
     margin: 10px;
 }
 
+.form-wrapper {
+    text-align: center;
+}
+
+    form * {
+        margin: 5px;
+    }
+
+.container-generic {
+    
+}
+
+.container-generic-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    height: 100%;
+}
+
 .container {
     display: flex;
     flex-direction: column;

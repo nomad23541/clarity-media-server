@@ -7,24 +7,35 @@
         <script src="/scripts/users/login.js"></script>
     </head>
     <body>
-        <div class="container container-fullscreen container-center">
+        <div class="container-generic-center">
             <div class="logo">
                 <p><i class="fas fa-film"></i> Clarity</p>
             </div>
             <div class="header">
                 <h1>Log in</h1>
             </div>
-            <div class="settings-content">
-                    <div class="input-wrapper">
-                        <input id="username" class="setting" type="text" placeholder="username">
-                    </div>
-                    <div class="input-wrapper">
-                        <input id="password" class="setting" type="password" placeholder="password">
-                    </div>
+
+            <div class="form-wrapper">
+                <form>
+                    <input type="text" id="username" name="username" placeholder="username">
+                    <input type="password" id="password" name="password" placeholder="password">
+                    <input type="submit" value="Continue">
                     <p id="txtError"></p>
-                    <button id="btnLogin" class="btn btn-primary">Continue</button>
-                </div>
+                </form>
             </div>
+
+            <!--
+            <div class="settings-content">
+                <div class="input-wrapper">
+                    <input id="username" class="setting" type="text" placeholder="username">
+                </div>
+                <div class="input-wrapper">
+                    <input id="password" class="setting" type="password" placeholder="password">
+                </div>
+
+                <button id="btnLogin" class="btn btn-primary">Continue</button>
+            </div>
+          -->
         </div>
     </body>
 </html>
