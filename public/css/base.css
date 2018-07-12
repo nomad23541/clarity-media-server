@@ -30,6 +30,15 @@ a {
     font-weight: 300;
 }
 
+.logo {
+    font-size: 3.2rem;
+    margin-bottom: 25px;
+}
+
+    .logo i {
+        color: var(--primary);
+    }
+
 /* Saves space for the navbar when at top */
 .navbar-space-holder {
     height: 40px;
@@ -531,6 +540,10 @@ select:focus {
     .input-wrapper input:focus + label {
         color: var(--primary);
     }
+
+input::placeholder {
+    font-weight: 600;
+}
 
 /* tile on /library */
 .library-tile-wrapper {

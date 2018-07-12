@@ -236,3 +236,8 @@
 .font-light {
     font-weight: 300;
 }
+
+.panel {
+    background: var(--background-alt);
+    width: 60%;
+}
