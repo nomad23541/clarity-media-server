@@ -117,10 +117,6 @@
         margin: 5px;
     }
 
-.container-generic {
-    
-}
-
 .container-generic-center {
     display: flex;
     flex-direction: column;
