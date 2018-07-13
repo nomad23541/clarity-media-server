@@ -1,4 +1,19 @@
 $(document).ready(function() {
+
+    $('.tabs .tab-link').click(function() {
+        let tabID = $(this).attr('tab')
+
+        $('.tabs .tab-link').removeClass('active')
+        $('.tab-content').removeClass('active')
+
+        $(this).addClass('active')
+        $('#' + tabID).addClass('active')
+    })
+
+})
+
+/*
+$(document).ready(function() {
     let btnSave = $('#btnSave')
     let btnScanNewFiles = $('#btnScanNewFiles')
     let btnScanMovies = $('#btnScanMovies')
@@ -135,3 +150,4 @@ function keyify(obj, prefix = '') {
         }
     }, []);
 }
+*/

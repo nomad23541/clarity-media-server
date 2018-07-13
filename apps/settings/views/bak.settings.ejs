@@ -1,0 +1,101 @@
+<html>
+    <head>
+        <title>Settings - Clarity</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/style.css">
+        <script src="/scripts_server/jquery/dist/jquery.min.js"></script>
+        <script src="/scripts/partials/navbar.js"></script>
+        <script src="/scripts_server/socket.io-client/dist/socket.io.js"></script>
+        <script src="/scripts/settings.js"></script>
+    </head>
+    <body>
+        <% include partials/navbar.ejs %>
+        <div class="settings-container">
+            <div class="settings-content">
+                <div class="header">
+                    <h1>Settings</h1>
+                </div>
+                <div class="header">
+                    <h3>General:</h3>
+                </div>
+                <!-- General Settings -->
+                <div class="input-wrapper">
+                    <input id="port" class="setting" type="text">
+                    <label>Server Port:</label>
+                </div>
+                <div class="input-wrapper">
+                    <input id="showsDirectory" class="setting" type="text">
+                    <label>Shows Directory: </label>
+                </div>
+                <div class="input-wrapper">
+                    <input id="moviesDirectory" class="setting" type="text">
+                    <label>Movies Directory: </label>
+                </div>
+                <div class="input-wrapper">
+                    <input id="imagesDirectory" class="setting" type="text">
+                    <label>Images Directory: </label>
+                </div>
+                <div class="input-wrapper">
+                    <input id="tmdbApiKey" class="setting" type="text">
+                    <label>TMDb Api Key: </label>
+                </div>
+                <div class="header">
+                    <h3>Transcoding:</h3>
+                </div>
+                <!-- Transcoding Settings -->
+                <div class="input-wrapper">
+                    <select id="transcoding.preset" class="setting" >
+                        <option value="ultrafast">ultrafast</option>
+                        <option value="superfast">superfast</option>
+                        <option value="veryfast">veryfast</option>
+                        <option value="faster">faster</option>
+                        <option value="fast">fast</option>
+                        <option value="medium">medium</option>
+                        <option value="slow">slow</option>
+                        <option value="slower">slower</option>
+                        <option value="veryslow">veryslow</option>
+                    </select>
+                    <label>Preset</label>
+                </div>
+                <div class="input-wrapper">
+                    <input id="transcoding.crf" class="setting" type="number" step="1" min="0" max="50">
+                    <label>CRF</label>
+                </div>
+                <div class="input-wrapper">
+                    <select id="transcoding.normalizeAudio" class="setting" >
+                        <option value="true">On</option>
+                        <option value="false">Off</option>
+                    </select>
+                    <label>Normalize Audio</label>
+                </div>
+            </div>
+            <div class="row row-add-spacing">
+                <button id="btnScanShows" class="btn">Scan Shows</button>
+                <!--<button id="btnScanNewFiles" class="btn">Scan New Files</button>-->
+                <button id="btnScanMovies" class="btn">Scan Movies</button>
+                <button id="btnSave" class="btn btn-primary">Save Settings <i class="fas fa-save"></i></button>
+            </div>
+
+            <div id="scanMoviesDialog" class="dialog-container">
+                <div class="dialog">
+                    <div class="lds-dual-ring"></div>
+                    <p id="scanLibraryTxt">Scanning Movies... <span id="scanProgressMovies">0%</span></p>
+                </div>
+            </div>
+
+            <div id="scanShowsDialog" class="dialog-container">
+                <div class="dialog">
+                    <div class="lds-dual-ring"></div>
+                    <p id="scanLibraryTxt">Scanning Shows... <span id="scanProgressShows">0%</span></p>
+                </div>
+            </div>
+
+            <div id="scanNewFilesDialog" class="dialog-container">
+                <div class="dialog">
+                    <div class="lds-dual-ring"></div>
+                    <p>Scanning new files... <span id="scanProgressNewFiles">0%</span></p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

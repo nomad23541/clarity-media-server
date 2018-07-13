@@ -471,10 +471,6 @@ select {
     display: none;
 }
 
-.tab {
-    display: none;
-}
-
 .btn-bar {
     width: 100%;
     max-width: 600px;
@@ -503,9 +499,6 @@ select:focus {
 }
 
 .input-wrapper {
-    width: 100%;
-    max-width: 600px;
-    margin: 5px auto;
     /* To flip label and input to label can be colored when input focus */
     display: flex;
     flex-direction: column-reverse;
@@ -522,19 +515,21 @@ select:focus {
 
     .input-wrapper input {
         width: 100%;
+        display: block;
+    }
+
+    .input-wrapper .small {
+        width: 30%;
+        min-width: 100px;
     }
 
     .input-wrapper select {
-        width: 50%;
+        width: 100%;
+        display: block;
     }
 
     .input-wrapper select:focus + label {
         color: var(--primary);
-    }
-
-    .input-wrapper input, select {
-        margin: 5px 0;
-        display: block;
     }
 
     .input-wrapper input:focus + label {

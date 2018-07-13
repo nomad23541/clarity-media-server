@@ -109,13 +109,48 @@
     margin: 10px;
 }
 
+.tabs {
+    list-style: none;
+}
+
+    .tabs .tab-link {
+        background: none;
+        display: inline-block;
+        padding: 10px 15px;
+        cursor: pointer;
+    }
+
+    .tabs .tab-link.active {
+        background: var(--background-alt);
+    }
+
+    .tab-content {
+        width: 90%;
+        display: none;
+        padding: 15px;
+    }
+
+    .tab-content.active {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
 .form-wrapper {
     text-align: center;
+    width: 100%;
+    max-width: 600px;
 }
 
     form * {
         margin: 5px;
     }
+
+.container-generic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .container-generic-center {
     display: flex;
