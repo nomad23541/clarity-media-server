@@ -1,9 +1,17 @@
 const fs = require('fs')
+const User = require('../../models/user')
 
 module.exports = function(app) {
     app.get('/settings', function(req, res, next) {
         if(req.session.user.admin) {
-            res.render('settings')
+            User.find({}, function(err, users) {
+                if(err) return next(err)
+                if(!users) return next(new Error('No users in collection'))
+
+                res.render('settings', {
+                    users: users
+                })
+            })
         } else {
             let err = new Error('You need to be admin to use this page')
             err.statusCode = 403

@@ -466,7 +466,7 @@ select {
 
 /* Setup Page */
 
-#txtError {
+.text-error {
     color: var(--danger);
     display: none;
 }
@@ -503,6 +503,10 @@ select:focus {
     display: flex;
     flex-direction: column-reverse;
 }
+
+    .input-wrapper.same-line {
+        flex-direction: row-reverse;
+    }
 
     .input-wrapper label, input {
         transition: 0.2s;
@@ -562,3 +566,19 @@ input::placeholder {
     .library-tile:hover {
         background-color: var(--primary-dark);
     }
+
+.user-tile {
+    padding: 15px;
+    background: var(--background-dark);
+    border-radius: 5px;
+    margin: 5px;
+}
+
+    .user-tile * {
+        margin: 5px;
+    }
+
+    #tileEditUser, #tileNewUser {
+        display: none;
+    }
+    

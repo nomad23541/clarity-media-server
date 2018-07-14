@@ -84,7 +84,65 @@
                 </div>
             </div>
             <div id="users" class="tab-content">
-                
+                <% for(let user of users) { %>
+                    <div class="user-tile" user-id="<%=user._id%>">
+                        <p>Username: <span class="username"><%=user.username%></span></p>
+                        <p>Admin: <span class="admin"><%=user.admin%></span></p>
+                        <div class="row row-add-spacing">
+                            <button class="btn btnEdit">Edit</button>
+                            <button class="btn btn-danger btnDelete">Delete</button>
+                        </div>
+                    </div>
+                <%}%>
+                <div id="tileEditUser" class="user-tile">
+                    <div class="input-wrapper">
+                        <input id="editUsername" type="text">
+                        <label>Username:</label>
+                    </div>
+                    <div class="input-wrapper">
+                        <input id="editPassword" type="text">
+                        <label>Password:</label>
+                    </div>
+                    <div class="input-wrapper">
+                        <input id="editPasswordConfirm" type="text">
+                        <label>Confirm Password:</label>
+                    </div>
+                    <div class="input-wrapper same-line">
+                        <input id="editAdmin" type="checkbox" value="true">
+                        <label>Admin:</label>
+                    </div>
+
+                    <p id="txtEditUserError" class="text-error"></p>
+
+                    <button id="btnSaveEdit" class="btn btn-primary">Save</button>
+                    <button id="btnCancelEdit" class="btn">Cancel</button>
+                </div>
+                <div id="tileNewUser" class="user-tile">
+                        <div class="input-wrapper">
+                            <input id="newUsername" type="text">
+                            <label>Username:</label>
+                        </div>
+                        <div class="input-wrapper">
+                            <input id="newPassword" type="text">
+                            <label>Password:</label>
+                        </div>
+                        <div class="input-wrapper">
+                            <input id="newPasswordConfirm" type="text">
+                            <label>Confirm Password:</label>
+                        </div>
+                        <div class="input-wrapper same-line">
+                            <input id="newAdmin" type="checkbox" value="true">
+                            <label>Admin:</label>
+                        </div>
+    
+                        <p id="txtNewUserError" class="text-error"></p>
+    
+                        <button id="btnSaveNew" class="btn btn-primary">Create</button>
+                        <button id="btnCancelNew" class="btn">Cancel</button>
+                    </div>
+                <button id="btnCreateUser" class="btn btn-primary user-tile">
+                    <h1><i class="fas fa-user-plus"></i></h1>
+                </button>
             </div>
         </div>
     </body>

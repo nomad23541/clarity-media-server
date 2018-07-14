@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     $('.tabs .tab-link').click(function() {
         let tabID = $(this).attr('tab')
 
@@ -8,6 +7,49 @@ $(document).ready(function() {
 
         $(this).addClass('active')
         $('#' + tabID).addClass('active')
+    })
+
+    $('.btnEdit').click(function() {
+        let parent = $(this).parent().parent()
+        let userID = $(this).parent().parent().attr('user-id')
+        let editUserTile = $('#tileEditUser')
+        let username = parent.find('.username').text()
+        let admin = parent.find('.admin').text()
+
+        // set input values of newUserTile from the selected user-tile
+        $('#editUsername').val(username)
+        if(admin == 'true') $('#editAdmin').prop('checked', true)
+
+        editUserTile.show()
+        parent.hide()
+
+        $('#btnSaveEdit').click(function() {
+
+        })
+    
+        $('#btnCancelEdit').click(function() {
+            editUserTile.find('input').val('')
+            editUserTile.hide()
+            parent.show()
+        })
+    })
+
+    let btnCreateUser = $('#btnCreateUser')
+    btnCreateUser.click(function() {
+        let newUserTile = $('#tileNewUser')
+        
+        btnCreateUser.hide()
+        newUserTile.show()
+
+        $('#btnSaveNew').click(function() {
+
+        })
+
+        $('#btnCancelNew').click(function() {
+            newUserTile.find('input').val('')
+            newUserTile.hide()
+            btnCreateUser.show()
+        })
     })
 
 })
