@@ -28,26 +28,23 @@
                             <input class="small" type="text" id="port" placeholder="server port" size="5" maxsize="5">
                             <label>Server Port:</label>
                         </div>
-
                         <div class="input-wrapper">
                             <input type="text" id="imagesDirectory" placeholder="images directory">
                             <label>Images Directory:</label>
                         </div>
-                        
                         <div class="input-wrapper">
                             <input type="text" id="moviesDirectory" placeholder="movies directory">
                             <label>Movies Directory:</label>
                         </div>
-                        
                         <div class="input-wrapper">
                             <input type="text" id="showsDirectory" placeholder="shows directory">
                             <label>Shows Directory:</label>
                         </div>
-
                         <input id="submitServer" type="submit" value="Save">
                     </form>
                 </div>
             </div>
+
             <div id="playback" class="tab-content">
                 <div class="form-wrapper">
                     <form>
@@ -65,12 +62,10 @@
                             </select>
                             <label>Preset:</label>
                         </div>
-
                         <div class="input-wrapper">
                             <input id="transcoding.crf" class="small" type="number" step="1" min="0" max="50">
                             <label>CRF</label>
                         </div>
-
                         <div class="input-wrapper">
                             <select id="transcoding.normalizeAudio" class="small">
                                 <option value="true">On</option>
@@ -78,12 +73,12 @@
                             </select>
                             <label>Normalize Audio</label>
                         </div>
-
                         <input id="submitPlayback" type="submit" value="Save">
                     </form>
                 </div>
             </div>
-            <div id="users" class="tab-content">
+
+            <div id="users" class="tab-content content-row">
                 <% for(let user of users) { %>
                     <div class="user-tile" user-id="<%=user._id%>">
                         <p>Username: <span class="username"><%=user.username%></span></p>
@@ -94,11 +89,9 @@
                         </div>
                     </div>
                 <%}%>
+                
                 <div id="tileEditUser" class="user-tile">
-                    <div class="input-wrapper">
-                        <input id="editUsername" type="text">
-                        <label>Username:</label>
-                    </div>
+                    <h3 id="editUsername"></h3>
                     <div class="input-wrapper">
                         <input id="editPassword" type="text">
                         <label>Password:</label>
@@ -117,29 +110,32 @@
                     <button id="btnSaveEdit" class="btn btn-primary">Save</button>
                     <button id="btnCancelEdit" class="btn">Cancel</button>
                 </div>
+
                 <div id="tileNewUser" class="user-tile">
-                        <div class="input-wrapper">
-                            <input id="newUsername" type="text">
-                            <label>Username:</label>
-                        </div>
-                        <div class="input-wrapper">
-                            <input id="newPassword" type="text">
-                            <label>Password:</label>
-                        </div>
-                        <div class="input-wrapper">
-                            <input id="newPasswordConfirm" type="text">
-                            <label>Confirm Password:</label>
-                        </div>
-                        <div class="input-wrapper same-line">
-                            <input id="newAdmin" type="checkbox" value="true">
-                            <label>Admin:</label>
-                        </div>
-    
-                        <p id="txtNewUserError" class="text-error"></p>
-    
-                        <button id="btnSaveNew" class="btn btn-primary">Create</button>
-                        <button id="btnCancelNew" class="btn">Cancel</button>
+                    <h3>New User</h3>
+                    <div class="input-wrapper">
+                        <input id="newUsername" type="text">
+                        <label>Username:</label>
                     </div>
+                    <div class="input-wrapper">
+                        <input id="newPassword" type="text">
+                        <label>Password:</label>
+                    </div>
+                    <div class="input-wrapper">
+                        <input id="newPasswordConfirm" type="text">
+                        <label>Confirm Password:</label>
+                    </div>
+                    <div class="input-wrapper same-line">
+                        <input id="newAdmin" type="checkbox" value="true">
+                        <label>Admin:</label>
+                    </div>
+
+                    <p id="txtNewUserError" class="text-error"></p>
+
+                    <button id="btnSaveNew" class="btn btn-primary">Create</button>
+                    <button id="btnCancelNew" class="btn">Cancel</button>
+                </div>
+                
                 <button id="btnCreateUser" class="btn btn-primary user-tile">
                     <h1><i class="fas fa-user-plus"></i></h1>
                 </button>

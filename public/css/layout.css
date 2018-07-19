@@ -109,6 +109,10 @@
     margin: 10px;
 }
 
+.tab {
+    display: none;
+}
+
 .tabs {
     list-style: none;
 }
@@ -136,7 +140,7 @@
         align-items: center;
     }
 
-    .tab-content.active.row {
+    .tab-content.content-row.active {
         flex-direction: row;
         justify-content: center;
     }
@@ -301,4 +305,14 @@
 .panel {
     background: var(--background-alt);
     width: 60%;
+}
+
+.dialog {
+    display: none;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    background-color: var(--background-dark);
+    border: 1px solid var(--background-alt);
 }

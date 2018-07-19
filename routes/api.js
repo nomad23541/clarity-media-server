@@ -4,6 +4,7 @@ const metadata = require('../lib/handlers/metadata-handler')
 const Movie = require('../models/movie')
 const Show = require('../models/show')
 const Episode = require('../models/episode')
+const User = require('../models/user')
 
 module.exports = function(app) {
     app.get('/api/media/movies', function(req, res) {
@@ -103,6 +104,67 @@ module.exports = function(app) {
         // time to update with new tmdbid
         metadata.fixMovie(req.body.tmdbid, req.body.docid, function(newDoc) {
             res.send(JSON.stringify({ id: newDoc._id }))
+        })
+    })
+
+    app.get('/api/users/:id', function(req, res, next) {
+        User.findOne({ _id: req.params.id }, function(err, user) {
+            if(err) return next(err)
+            if(!user) return next(new Error('User does not exist'))
+
+            res.json(user)
+        })
+    })
+
+    app.post('/api/users/:id', function(req, res) {
+        let password = req.body.password
+        let passwordConfirm = req.body.passwordConfirm
+        let admin = req.body.admin
+
+        if(password || passwordConfirm) {
+            if(password && passwordConfirm) {
+                if(password != passwordConfirm) {
+                    return res.status(500).send('Passwords do not match')
+                }
+            } else {
+                return res.status(500).send('Both fields are required to change the password')
+            }
+        }
+
+        // determine values that will be updated
+        let updatedValues = {}
+        if(password) updatedValues.password = password
+        updatedValues.admin = admin
+
+        User.edit(req.params.id, updatedValues, function(err, user) {
+            if(err) return res.status(500).send(err.message)
+            // if this user is editing their own self, destroy their session
+            if(user._id == req.session.user._id) req.session.destroy()
+            res.json({ status: 'success' })
+        })
+    })
+
+    app.put('/api/users/', function(req, res) {
+        let username = req.body.username
+        let password = req.body.password
+        let passwordConfirm = req.body.passwordConfirm
+        let admin = req.body.admin
+
+        if(username && password && passwordConfirm) {
+            if(password != passwordConfirm) return res.status(500).send('Passwords do not match')
+            User.new(username, password, admin, function(err) {   
+                if(err) return res.status(500).send(err.message)
+                res.json({ status: 'success' })
+            })
+        } else {
+            return res.status(500).send('All fields are required')
+        }
+    })
+
+    app.delete('/api/users/:id', function(req, res, next) {
+        User.findByIdAndRemove({ _id: req.params.id }, function(err) {
+            if(err) next(new Error('Error removing ' + req.params.id + ' from db'))
+            res.json({ status: 'success' })
         })
     })
 }

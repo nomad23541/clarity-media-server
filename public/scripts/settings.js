@@ -4,9 +4,23 @@ $(document).ready(function() {
 
         $('.tabs .tab-link').removeClass('active')
         $('.tab-content').removeClass('active')
-
+        
         $(this).addClass('active')
         $('#' + tabID).addClass('active')
+    })
+
+    $('.btnDelete').click(function() {
+        let userID = $(this).parent().parent().attr('user-id')
+        if(confirm('Are you sure you want to delete this user?')) {
+            $.ajax({
+                url: '/api/users/' + userID,
+                method: 'DELETE',
+                contentType: 'application/json',
+                success: function() {
+                    location.reload()
+                }
+            })
+        }
     })
 
     $('.btnEdit').click(function() {
@@ -17,14 +31,37 @@ $(document).ready(function() {
         let admin = parent.find('.admin').text()
 
         // set input values of newUserTile from the selected user-tile
-        $('#editUsername').val(username)
+        $('#editUsername').text(username)
         if(admin == 'true') $('#editAdmin').prop('checked', true)
 
-        editUserTile.show()
         parent.hide()
+        // so the edit tile shows in place of the parent's
+        parent.after(editUserTile.detach())
+        editUserTile.show()
 
         $('#btnSaveEdit').click(function() {
+            let password = $('#editPassword').val()
+            let passwordConfirm = $('#editPasswordConfirm').val()
+            let admin = $('#editAdmin').is(':checked')
 
+            let data = {
+                password,
+                passwordConfirm,
+                admin
+            }
+
+            $.ajax({
+                url: '/api/users/' + userID,
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                error: function(err) {
+                    $('#txtEditUserError').text(err.responseText).slideDown()
+                },
+                success: function() {
+                    location.reload()
+                }
+            })
         })
     
         $('#btnCancelEdit').click(function() {
@@ -42,7 +79,30 @@ $(document).ready(function() {
         newUserTile.show()
 
         $('#btnSaveNew').click(function() {
+            let username = $('#newUsername').val()
+            let password = $('#newPassword').val()
+            let passwordConfirm = $('#newPasswordConfirm').val()
+            let admin = $('#newAdmin').is(':checked')
 
+            let data = {
+                username,
+                password,
+                passwordConfirm,
+                admin
+            }
+
+            $.ajax({
+                url: '/api/users/',
+                method: 'PUT',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                error: function(err) {
+                    $('#txtNewUserError').text(err.responseText).slideDown()
+                },
+                success: function() {
+                    location.reload()
+                }
+            })
         })
 
         $('#btnCancelNew').click(function() {
