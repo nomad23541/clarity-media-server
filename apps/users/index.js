@@ -19,4 +19,10 @@ module.exports = function(app) {
             res.status(500).send('All fields are required')
         }
     })
+
+    app.get('/logout', function(req, res) {
+        // very simple
+        req.session.destroy()
+        res.redirect('/')
+    })
 }
