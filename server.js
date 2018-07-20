@@ -94,8 +94,9 @@ app.set('views', viewDirs)
 
 // error middleware
 app.use(function(err, req, res, next) {
+    let status = 500 || err.statusCode
     res.render('error', {
-        statusCode: err.statusCode,
+        statusCode: status,
         error: err.message
     })
 })
