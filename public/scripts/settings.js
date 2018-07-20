@@ -1,13 +1,27 @@
 $(document).ready(function() {
+    let searchParams = new URLSearchParams(window.location.search)
+
+    // show tab based on query when loading page
+    if(window.location.search.indexOf('?tab=') > -1) {
+        let tabQuery = searchParams.get('tab')
+        showTab($('[tab="' + tabQuery + '"]'), tabQuery)
+    }
+
     $('.tabs .tab-link').click(function() {
         let tabID = $(this).attr('tab')
+        searchParams.set('tab', tabID)
+        // actually change the url to show this update to the query
+        window.history.replaceState({}, '', window.location.pathname + '?' + searchParams)
+        showTab($(this), tabID)
+    })
 
+    function showTab(tabLink, tabID) {
         $('.tabs .tab-link').removeClass('active')
         $('.tab-content').removeClass('active')
         
-        $(this).addClass('active')
+        $(tabLink).addClass('active')
         $('#' + tabID).addClass('active')
-    })
+    }
 
     $('.btnDelete').click(function() {
         let userID = $(this).parent().parent().attr('user-id')
@@ -111,7 +125,6 @@ $(document).ready(function() {
             btnCreateUser.show()
         })
     })
-
 })
 
 /*
