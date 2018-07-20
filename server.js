@@ -92,12 +92,20 @@ fs.readdirSync(appRoutes).forEach(function(appDir) {
 
 app.set('views', viewDirs)
 
+let mongoose = require('mongoose')
 // error middleware
 app.use(function(err, req, res, next) {
     let status = 500 || err.statusCode
+    let message = err.message
+
+    if(err instanceof mongoose.CastError) {
+        status = 404    
+        message = 'This path couldn\'t be found'
+    }
+
     res.render('error', {
         statusCode: status,
-        error: err.message
+        error: message
     })
 })
 
