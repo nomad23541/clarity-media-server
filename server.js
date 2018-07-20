@@ -11,6 +11,7 @@ const bodyParser = require('body-parser')
 const expressDevice = require('express-device')
 const expressSession = require('express-session')
 const User = require('./models/user')
+const mongoose = require('mongoose')
 
 // create all directories needed in app
 setupDirectories.init()
@@ -92,14 +93,13 @@ fs.readdirSync(appRoutes).forEach(function(appDir) {
 
 app.set('views', viewDirs)
 
-let mongoose = require('mongoose')
 // error middleware
 app.use(function(err, req, res, next) {
     let status = 500 || err.statusCode
     let message = err.message
 
     if(err instanceof mongoose.CastError) {
-        status = 404    
+        status = 404
         message = 'This path couldn\'t be found'
     }
 
