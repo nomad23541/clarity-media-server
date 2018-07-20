@@ -28,14 +28,14 @@ module.exports = function(app) {
         }
     })
 
-    app.get('/api/media/movies/:id', function(req, res) {
+    app.get('/api/media/movie/:id', function(req, res) {
         Movie.findOne({ _id: req.params.id }, function(err, doc) {
             if(err) res.send(err)
             res.json(doc)
         })
     })
 
-    app.get('/api/media/episodes/:id', function(req, res) {
+    app.get('/api/media/episode/:id', function(req, res) {
         Episode.findOne({ _id: req.params.id }, function(err, doc) {
             if(err) res.send(err)
             console.log(doc)
@@ -43,7 +43,7 @@ module.exports = function(app) {
         })
     })
 
-    app.get('/api/media/shows/:id', function(req, res) {
+    app.get('/api/media/show/:id', function(req, res) {
         Show.findOne({ _id: req.params.id }, function(err, doc) {
             if(err) res.send(err)
             res.json(doc)
@@ -100,14 +100,21 @@ module.exports = function(app) {
         })
     })
 
-    app.post('/api/fix', function(req, res) {
+    app.put('/api/fix', function(req, res) {
         // time to update with new tmdbid
         metadata.fixMovie(req.body.tmdbid, req.body.docid, function(newDoc) {
             res.send(JSON.stringify({ id: newDoc._id }))
         })
     })
 
-    app.get('/api/users/:id', function(req, res, next) {
+    app.get('/api/users', function(req, res, next) {
+        User.find({}, function(err, users) {
+            if(err) return next(err)
+            res.json(users)
+        })
+    })
+
+    app.get('/api/user/:id', function(req, res, next) {
         User.findOne({ _id: req.params.id }, function(err, user) {
             if(err) return next(err)
             if(!user) return next(new Error('User does not exist'))
@@ -116,7 +123,7 @@ module.exports = function(app) {
         })
     })
 
-    app.post('/api/users/:id', function(req, res) {
+    app.put('/api/user/:id', function(req, res) {
         let password = req.body.password
         let passwordConfirm = req.body.passwordConfirm
         let admin = req.body.admin
@@ -144,7 +151,7 @@ module.exports = function(app) {
         })
     })
 
-    app.put('/api/users/', function(req, res) {
+    app.post('/api/user/', function(req, res) {
         let username = req.body.username
         let password = req.body.password
         let passwordConfirm = req.body.passwordConfirm
@@ -161,7 +168,7 @@ module.exports = function(app) {
         }
     })
 
-    app.delete('/api/users/:id', function(req, res, next) {
+    app.delete('/api/user/:id', function(req, res, next) {
         User.findByIdAndRemove({ _id: req.params.id }, function(err) {
             if(err) next(new Error('Error removing ' + req.params.id + ' from db'))
             res.json({ status: 'success' })

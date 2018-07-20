@@ -41,7 +41,6 @@ $(document).ready(function() {
             if(time === undefined) {
                 return video.oldCurrentTime() + video.start
             }
-            console.log(time)
             video.start = time
             video.oldCurrentTime(0)
             video.src({ type: 'video/mp4', src: '/media?id=' + id + '&ss=' + time })
@@ -49,7 +48,7 @@ $(document).ready(function() {
             return this
         }
 
-        let apiToGet = $('#movie').length > 0 ? 'movies' : 'episodes'
+        let apiToGet = $('#movie').length > 0 ? 'movie' : 'episode'
         $.getJSON('/api/media/' + apiToGet + '/' + id, function(data) {
             if(data) video.theDuration = data.videoInfo.duration
         })

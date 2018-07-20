@@ -44,7 +44,7 @@ $(document).ready(function() {
                     let docid = $.urlParam('id')
                     $.ajax({
                         url: '/api/fix',
-                        method: 'POST',
+                        method: 'PUT',
                         contentType: 'application/json',
                         data: JSON.stringify({ tmdbid, docid }),
                         success: function(newID) {

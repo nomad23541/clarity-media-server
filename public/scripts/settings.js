@@ -27,7 +27,7 @@ $(document).ready(function() {
         let userID = $(this).parent().parent().attr('user-id')
         if(confirm('Are you sure you want to delete this user?')) {
             $.ajax({
-                url: '/api/users/' + userID,
+                url: '/api/user/' + userID,
                 method: 'DELETE',
                 contentType: 'application/json',
                 success: function() {
@@ -65,8 +65,8 @@ $(document).ready(function() {
             }
 
             $.ajax({
-                url: '/api/users/' + userID,
-                method: 'POST',
+                url: '/api/user/' + userID,
+                method: 'PUT',
                 contentType: 'application/json',
                 data: JSON.stringify(data),
                 error: function(err) {
@@ -106,8 +106,8 @@ $(document).ready(function() {
             }
 
             $.ajax({
-                url: '/api/users/',
-                method: 'PUT',
+                url: '/api/user/',
+                method: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(data),
                 error: function(err) {

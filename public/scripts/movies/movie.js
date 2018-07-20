@@ -32,7 +32,7 @@ $(document).ready(function() {
 
     function getActors(amount) {
         actors.empty()
-        $.getJSON('/api/media/movies/' + id, function(data) {
+        $.getJSON('/api/media/movie/' + id, function(data) {
             // if amount isn't specified, get entire cast
             if(!amount) {
                 amount = data.metadata.cast.length
