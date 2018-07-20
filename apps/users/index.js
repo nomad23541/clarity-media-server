@@ -11,18 +11,18 @@ module.exports = function(app) {
 
         if(username && password) {
             User.login(username, password, function(err, user) {
-                if(err || !user) return res.status(500).send('Invalid login credentials')
+                if(err || !user) return res.status(401).send('Invalid login credentials')
                 req.session.user = user
-                res.json({ status: 'success' })
+                res.sendStatus(200)
             })
         } else {
-            res.status(500).send('All fields are required')
+            res.status(400).send('All fields are required')
         }
     })
 
     app.post('/logout', function(req, res) {
         // very simple
         req.session.destroy()
-        res.json({ status: 'success' })
+        res.sendStatus(200)
     })
 }
