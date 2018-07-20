@@ -7,7 +7,7 @@ const Episode = require('../models/episode')
 const User = require('../models/user')
 
 module.exports = function(app) {
-    app.get('/api/media/movies', function(req, res) {
+    app.get('/api/media/movies', function(req, res, next) {
         let skip = req.query.skip ? req.query.skip : 0
         let limit = req.query.limit ? req.query.limit : 0
 
@@ -17,40 +17,39 @@ module.exports = function(app) {
             let value = query[1]
 
             Movie.find({}).sort({ [key]: value }).skip(parseInt(skip)).limit(parseInt(limit)).exec(function(err, docs) {
-                if(err) res.send(err)
+                if(err) return next(err)
                 res.json(docs)
             })
         } else {
             Movie.find({}, function(err, docs) {
-                if(err) res.send(err)
+                if(err) return next(err)
                 res.json(docs)
             })
         }
     })
 
-    app.get('/api/media/movie/:id', function(req, res) {
+    app.get('/api/media/movie/:id', function(req, res, next) {
         Movie.findOne({ _id: req.params.id }, function(err, doc) {
-            if(err) res.send(err)
+            if(err) return next(err)
             res.json(doc)
         })
     })
 
-    app.get('/api/media/episode/:id', function(req, res) {
+    app.get('/api/media/episode/:id', function(req, res, next) {
         Episode.findOne({ _id: req.params.id }, function(err, doc) {
-            if(err) res.send(err)
-            console.log(doc)
+            if(err) return next(err)
             res.json(doc)
         })
     })
 
-    app.get('/api/media/show/:id', function(req, res) {
+    app.get('/api/media/show/:id', function(req, res, next) {
         Show.findOne({ _id: req.params.id }, function(err, doc) {
-            if(err) res.send(err)
+            if(err) return next(err)
             res.json(doc)
         })
     })
 
-    app.get('/api/media/shows', function(req, res) {
+    app.get('/api/media/shows', function(req, res, next) {
         let skip = req.query.skip ? req.query.skip : 0
         let limit = req.query.limit ? req.query.limit : 0
 
@@ -60,23 +59,23 @@ module.exports = function(app) {
             let value = query[1]
 
             Show.find({}).sort({ [key]: value }).skip(parseInt(skip)).limit(parseInt(limit)).exec(function(err, docs) {
-                if(err) res.send(err)
+                if(err) return next(err)
                 res.json(docs)
             })
         } else {
             Show.find({}, function(err, docs) {
-                if(err) res.send(err)
+                if(err) return next(err)
                 res.json(docs)
             })
         }
     })
 
-    app.get('/api/search', function(req, res) {
+    app.get('/api/search', function(req, res, next) {
         let query = req.query.query
         Movie.find({ title: new RegExp(query, 'i') }, function(err, movies) {
             Show.find({ name: new RegExp(query, 'i') }, function(err1, shows) {
                 let results = movies.concat(shows)
-                if(err || err1) res.send(err || err1)
+                if(err || err1) return next(err || err1)
                 res.json(results)
             })
         })
@@ -86,7 +85,7 @@ module.exports = function(app) {
         res.json(config)
     })
 
-    app.get('/api/fix', function(req, res) {
+    app.get('/api/fix', function(req, res, next) {
         // search tmdb api and send results back to client
         tmdb.searchMovies({
             title: req.query.query,
@@ -95,8 +94,7 @@ module.exports = function(app) {
         }).then(function(results) {
             res.json(results)
         }).catch(function(err) {
-            console.log(err)
-            res.err(err)
+            next(new Error('Failed searching for movies /fix'))
         })
     })
 
