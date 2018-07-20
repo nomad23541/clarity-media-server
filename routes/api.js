@@ -131,10 +131,10 @@ module.exports = function(app) {
         if(password || passwordConfirm) {
             if(password && passwordConfirm) {
                 if(password != passwordConfirm) {
-                    return res.status(500).send('Passwords do not match')
+                    return res.status(400).send('Passwords do not match')
                 }
             } else {
-                return res.status(500).send('Both fields are required to change the password')
+                return res.status(400).send('Both fields are required to change the password')
             }
         }
 
@@ -147,7 +147,7 @@ module.exports = function(app) {
             if(err) return res.status(500).send(err.message)
             // if this user is editing their own self, destroy their session
             if(user._id == req.session.user._id) req.session.destroy()
-            res.json({ status: 'success' })
+            res.sendStatus(200)
         })
     })
 
@@ -158,20 +158,20 @@ module.exports = function(app) {
         let admin = req.body.admin
 
         if(username && password && passwordConfirm) {
-            if(password != passwordConfirm) return res.status(500).send('Passwords do not match')
+            if(password != passwordConfirm) return res.status(400).send('Passwords do not match')
             User.new(username, password, admin, function(err) {   
                 if(err) return res.status(500).send(err.message)
-                res.json({ status: 'success' })
+                res.sendStatus(200)
             })
         } else {
-            return res.status(500).send('All fields are required')
+            return res.status(400).send('All fields are required')
         }
     })
 
     app.delete('/api/user/:id', function(req, res, next) {
         User.findByIdAndRemove({ _id: req.params.id }, function(err) {
             if(err) next(new Error('Error removing ' + req.params.id + ' from db'))
-            res.json({ status: 'success' })
+            res.sendStatus(200)
         })
     })
 }
