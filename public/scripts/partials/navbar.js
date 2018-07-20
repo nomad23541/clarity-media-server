@@ -1,4 +1,17 @@
 $(document).ready(function() {
+    // handle logging out, use POST so this isn't recorded in browser history
+    let logout = $('#logout')
+    logout.click(function() {
+        $.ajax({
+            url: '/logout',
+            method: 'POST',
+            success: function() {
+                window.location = '/'
+            }
+        })
+        return false
+    })
+
     let back = $('#back')
     back.click(function() {
         window.history.back()

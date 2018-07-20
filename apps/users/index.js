@@ -13,16 +13,16 @@ module.exports = function(app) {
             User.login(username, password, function(err, user) {
                 if(err || !user) return res.status(500).send('Invalid login credentials')
                 req.session.user = user
-                res.send('success')
+                res.json({ status: 'success' })
             })
         } else {
             res.status(500).send('All fields are required')
         }
     })
 
-    app.get('/logout', function(req, res) {
+    app.post('/logout', function(req, res) {
         // very simple
         req.session.destroy()
-        res.redirect('/')
+        res.json({ status: 'success' })
     })
 }
