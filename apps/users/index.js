@@ -11,12 +11,13 @@ module.exports = function(app) {
 
         if(username && password) {
             User.login(username, password, function(err, user) {
-                if(err || !user) return res.status(401).send('Invalid login credentials')
+                if(err || !user) return next(new AppError('Invalid login credentials', 400))
                 req.session.user = user
                 res.sendStatus(200)
             })
         } else {
-            res.status(400).send('All fields are required')
+            let err = new AppError('All fields are required', 400)
+            next(err)
         }
     })
 

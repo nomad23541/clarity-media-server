@@ -93,6 +93,46 @@ fs.readdirSync(appRoutes).forEach(function(appDir) {
 
 app.set('views', viewDirs)
 
+// this will be moved, so I can specify the http status code in a one liner
+class AppError extends Error {
+    constructor(message, status) {
+        super(message)
+        this.name = this.constructor.name
+        Error.captureStackTrace(this, this.constructor)
+        this.status = status || 500
+    }
+}
+global.AppError = AppError
+
+logErrors = function(err, req, res, next) {
+    if(typeof err === 'string') err = new Error(err)
+    console.error('logErrors', err.message)
+    next(err)
+}
+
+clientErrorHandler = function(err, req, res, next) {
+    if(req.xhr) {
+        console.error('clientErrorHandler')
+        res.status(500 || err.statusCode).send(err.message)
+    } else {
+        next(err)
+    }
+}
+
+errorHandler = function(err, req, res, next) {
+    console.error('errorHandler')
+    res.render('error', {
+        statusCode: 500 || err.statusCode,
+        error: err.message
+    })
+}
+
+// use error handlers
+app.use(logErrors)
+app.use(clientErrorHandler)
+app.use(errorHandler)
+
+/*
 // error middleware
 app.use(function(err, req, res, next) {
     let status = 500 || err.statusCode
@@ -108,6 +148,7 @@ app.use(function(err, req, res, next) {
         error: message
     })
 })
+*/
 
 // start server
 http.listen(config.port, function() {

@@ -121,7 +121,7 @@ module.exports = function(app) {
         })
     })
 
-    app.put('/api/user/:id', function(req, res) {
+    app.put('/api/user/:id', function(req, res, next) {
         let password = req.body.password
         let passwordConfirm = req.body.passwordConfirm
         let admin = req.body.admin
@@ -129,10 +129,10 @@ module.exports = function(app) {
         if(password || passwordConfirm) {
             if(password && passwordConfirm) {
                 if(password != passwordConfirm) {
-                    return res.status(400).send('Passwords do not match')
+                    return next(new AppError('Passwords do not match', 400))
                 }
             } else {
-                return res.status(400).send('Both fields are required to change the password')
+                return next(new AppError('Both fields are required to change the password', 400))
             }
         }
 
@@ -142,27 +142,27 @@ module.exports = function(app) {
         updatedValues.admin = admin
 
         User.edit(req.params.id, updatedValues, function(err, user) {
-            if(err) return res.status(500).send(err.message)
+            if(err) return next(err)
             // if this user is editing their own self, destroy their session
             if(user._id == req.session.user._id) req.session.destroy()
             res.sendStatus(200)
         })
     })
 
-    app.post('/api/user/', function(req, res) {
+    app.post('/api/user/', function(req, res, next) {
         let username = req.body.username
         let password = req.body.password
         let passwordConfirm = req.body.passwordConfirm
         let admin = req.body.admin
 
         if(username && password && passwordConfirm) {
-            if(password != passwordConfirm) return res.status(400).send('Passwords do not match')
+            if(password != passwordConfirm) return next(new AppError('Passwords do not match', 400))
             User.new(username, password, admin, function(err) {   
-                if(err) return res.status(500).send(err.message)
+                if(err) return next(err)
                 res.sendStatus(200)
             })
         } else {
-            return res.status(400).send('All fields are required')
+            return next(new AppError('All fields are required', 400))
         }
     })
 
