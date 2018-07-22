@@ -7,63 +7,73 @@
         <script src="/scripts/setup.js"></script>
     </head>
     <body>
-        <div class="container container-fullscreen container-center">
+        <div class="container-generic-center">
             <div class="header">
-                <h1 class="bold">Clarity Media Server</h1>
-                <h3 class="light">First-Time Setup</h3>
+                <h1>Clarity Media Server</h1>
+                <h3>First-Time Setup</h3>
             </div>
-            <div class="settings-content">
-                <div class="tab">
-                    <h2>Create Admin User</h2>
-                    <div class="input-wrapper">
-                        <input id="username" class="setting" type="text">
-                        <label>Username:</label>
-                    </div>
-                    <div class="input-wrapper">
-                        <input id="password" class="setting" type="password">
-                        <label>Password:</label>
-                    </div>
-                    <div class="input-wrapper">
-                        <input id="confirmPassword" class="setting" type="password">
-                        <label>Confirm Password:</label>
-                    </div>
+            <div class="tab">
+                <div class="form-wrapper">
+                    <form>
+                        <h2>Create Admin User</h2>
+                        <div class="input-wrapper">
+                            <input id="username" class="setting" type="text">
+                            <label>Username:</label>
+                        </div>
+                        <div class="input-wrapper">
+                            <input id="password" class="setting" type="password">
+                            <label>Password:</label>
+                        </div>
+                        <div class="input-wrapper">
+                            <input id="confirmPassword" class="setting" type="password">
+                            <label>Confirm Password:</label>
+                        </div>
+                    </form>
                 </div>
-                <div class="tab">
-                    <h2>Directories to use</h2>
-                    <div class="input-wrapper">
-                        <input id="showsDirectory" class="setting" type="text" placeholder="Where your tv shows are stored">
-                        <label>Shows Directory: </label>
-                    </div>
-                    <div class="input-wrapper">
-                        <input id="moviesDirectory" class="setting" type="text" placeholder="Where your movies are stored">
-                        <label>Movies Directory: </label>
-                    </div>
-                    <div class="input-wrapper">
-                        <input id="imagesDirectory" class="setting" type="text" placeholder="Where you want all images saved">
-                        <label>Images Directory: </label>
-                    </div>
+            </div>
+            <div class="tab">
+                <div class="form-wrapper">
+                    <form>
+                        <h2>Directories to use</h2>
+                        <div class="input-wrapper">
+                            <input id="showsDirectory" class="setting" type="text" placeholder="Where your tv shows are stored">
+                            <label>Shows Directory: </label>
+                        </div>
+                        <div class="input-wrapper">
+                            <input id="moviesDirectory" class="setting" type="text" placeholder="Where your movies are stored">
+                            <label>Movies Directory: </label>
+                        </div>
+                        <div class="input-wrapper">
+                            <input id="imagesDirectory" class="setting" type="text" placeholder="Where you want all images saved">
+                            <label>Images Directory: </label>
+                        </div>
+                    </form>
                 </div>
-                <div class="tab">
-                    <h2>Server Configuration</h2>
-                    <div class="input-wrapper">
-                        <input id="port" class="setting" type="text" value="3000">
-                        <label>Port: </label>
-                    </div>
-                    <div class="input-wrapper">
-                        <input id="tmdbApiKey" class="setting" type="text" placeholder="This is needed if you want metadata for your library">
-                        <label>TMDb Api Key: </label>
-                    </div>
+            </div>
+            <div class="tab">
+                <div class="form-wrapper">
+                    <form>
+                        <h2>Server Configuration</h2>
+                        <div class="input-wrapper">
+                            <input id="port" class="setting" type="text" value="3000">
+                            <label>Port: </label>
+                        </div>
+                        <div class="input-wrapper">
+                            <input id="tmdbApiKey" class="setting" type="text" placeholder="This is needed if you want metadata for your library">
+                            <label>TMDb Api Key: </label>
+                        </div>
+                    </form>
                 </div>
-                <tab class="tab">
-                    <div class="lds-dual-ring"></div>
-                </tab>
-                <div class="center">
-                    <p id="txtError"></p>
-                </div>
-                <div class="btn-bar">
-                    <button id="btnPrev" class="btn btn">Previous</button>
-                    <button id="btnNext" class="btn btn-primary">Next</button>
-                </div>
+            </div>
+            <tab class="tab">
+                <div class="lds-dual-ring"></div>
+            </tab>
+            <div class="center">
+                <p class="text-error" id="txtError"></p>
+            </div>
+            <div class="btn-bar">
+                <button id="btnPrev" class="btn btn">Previous</button>
+                <button id="btnNext" class="btn btn-primary">Next</button>
             </div>
         </div>
     </body>
