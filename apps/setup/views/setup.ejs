@@ -36,15 +36,15 @@
                     <form>
                         <h2>Directories to use</h2>
                         <div class="input-wrapper">
-                            <input id="showsDirectory" class="setting" type="text" placeholder="Where your tv shows are stored">
+                            <input id="showsDirectory" class="setting" type="text" placeholder="Where your tv shows are stored" value="<%=config.showsDirectory%>">
                             <label>Shows Directory: </label>
                         </div>
                         <div class="input-wrapper">
-                            <input id="moviesDirectory" class="setting" type="text" placeholder="Where your movies are stored">
+                            <input id="moviesDirectory" class="setting" type="text" placeholder="Where your movies are stored" value="<%=config.moviesDirectory%>">
                             <label>Movies Directory: </label>
                         </div>
                         <div class="input-wrapper">
-                            <input id="imagesDirectory" class="setting" type="text" placeholder="Where you want all images saved">
+                            <input id="imagesDirectory" class="setting" type="text" placeholder="Where you want all images saved" value="<%=config.imagesDirectory%>">
                             <label>Images Directory: </label>
                         </div>
                     </form>
@@ -55,11 +55,11 @@
                     <form>
                         <h2>Server Configuration</h2>
                         <div class="input-wrapper">
-                            <input id="port" class="setting" type="text" value="3000">
+                            <input id="port" class="setting" type="text" value="<%=config.port%>">
                             <label>Port: </label>
                         </div>
                         <div class="input-wrapper">
-                            <input id="tmdbApiKey" class="setting" type="text" placeholder="This is needed if you want metadata for your library">
+                            <input id="apiKey" class="setting" type="text" placeholder="This is needed if you want metadata for your library" value="<%=config.tmdbApiKey%>">
                             <label>TMDb Api Key: </label>
                         </div>
                     </form>
