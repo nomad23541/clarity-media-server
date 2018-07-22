@@ -57,8 +57,6 @@ $(document).ready(function() {
     }
     
     function isValid(currentTab) {
-        // remove any previous error messages
-        txtError.text('')
         // remove all input-error classes
         $(tabs[currentTab]).find('input').removeClass('input-error')
 
@@ -67,7 +65,7 @@ $(document).ready(function() {
         }).addClass('input-error')
     
         if(emptyInputs.length > 0) {
-            txtError.append('All fields must be filled out').slideDown('fast')
+            txtError.text('All fields must be filled out').slideDown()
             return false
         } else {
             // if on first page, check if both passwords match
@@ -75,7 +73,7 @@ $(document).ready(function() {
                 if($('#password').val() != $('#confirmPassword').val()) {
                     $('#password').addClass('input-error')
                     $('#confirmPassword').addClass('input-error')
-                    txtError.append('Passwords must match!').slideDown('fast');
+                    txtError.text('Passwords must match').slideDown();
                     return false
                 }
             }
@@ -85,20 +83,27 @@ $(document).ready(function() {
     }
     
     function submit() {
-        console.log('submit')
-        let user = {
+        let data = {
             username: $('#username').val(),
             password: $('#password').val(),
-            admin: true,
+            confirmPassword: $('#confirmPassword').val(),
+            moviesDirectory: $('#moviesDirectory').val(),
+            showsDirectory: $('#showsDirectory').val(),
+            imagesDirectory: $('#imagesDirectory').val(),
+            port: $('#port').val(),
+            apiKey: $('#apiKey').val()
         }
 
         $.ajax({
             url: '/setup',
             method: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify(user),
-            success: function(data) {
+            data: JSON.stringify(data),
+            success: function() {
                 window.location.href = '/'
+            },
+            err: function(err) {
+                txtError.text(err.responseText).slideDown() 
             }
         })
     }
