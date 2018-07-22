@@ -111,7 +111,13 @@
 
 .tab {
     display: none;
+    width: 90%;
 }
+
+    .tab.active {
+        display: flex;
+        justify-content: center;
+    }
 
 .tabs {
     list-style: none;

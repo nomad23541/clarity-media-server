@@ -18,9 +18,9 @@ $(document).ready(function() {
 
     function nextPrev(n) {
         // don't continue if anything is invalid in the form
-        if(!isValid(currentTab)) return false
+        if(n > 0 && !isValid(currentTab)) return false
     
-        $(tabs[currentTab]).css('display', 'none')
+        $(tabs[currentTab]).removeClass('active')
         currentTab = currentTab + n
     
         // if at end of form, submit
@@ -35,7 +35,7 @@ $(document).ready(function() {
     }
     
     function showTab(n) {
-        $(tabs[n]).css('display', 'block')
+        $(tabs[n]).addClass('active')
     
         if(n == 0) {
             btnPrev.css('display', 'none')
