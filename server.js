@@ -1,20 +1,19 @@
 const express = require('express')
 const app = express()
 const http = require('http').Server(app)
-const config = require('./config')
 const fs = require('fs')
 const path = require('path')
-const setupDirectories = require('./lib/setup/setup-directories')
 const db = require('./lib/setup/setup-db')
 const socketIO = require('./lib/setup/setup-socket-io')
 const bodyParser = require('body-parser')
 const expressDevice = require('express-device')
 const expressSession = require('express-session')
 const User = require('./models/user')
-const mongoose = require('mongoose')
+const setupConfig = require('./lib/setup/setup-config')
+// create a default config just in case the config doesn't exist
+setupConfig.setup()
+const config = require('./config')
 
-// create all directories needed in app
-setupDirectories.init()
 // setup socket io
 socketIO.init(http)
 // intialize database
