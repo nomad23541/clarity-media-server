@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "prestart": "mongod --dbpath data --fork --logpath /dev/null",
-    "start": "nodemon --ignore 'public/*' server.js",
+    "start": "nodemon --ignore 'public/*' --ignore 'config.json' server.js",
     "poststop": "mongod --dbpath data --shutdown"
   },
   "author": "nomad23541",
