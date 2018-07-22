@@ -9,14 +9,14 @@ const Show = require('../models/show')
 const Episode = require('../models/episode')
 
 module.exports = function(app) {
-    app.get('/media/scanshows', function(req, res) {
+    app.get('/media/scanshows', function(req, res, err) {
         // remove whats in the collections before processing
         Show.remove({}, function(err, removed) {
-            if(err) return console.log(err)
+            if(err) return next(err)
             console.log('Removed ' + removed.n + ' shows')
 
             Episode.remove({}, function(err, removed) {
-                if(err) return console.log(err)
+                if(err) return next(err)
                 console.log('Removed ' + removed.n + ' episodes')
             })
         })
@@ -24,19 +24,20 @@ module.exports = function(app) {
         metadata.processShows()
     })
 
-    app.get('/media/scanmovies', function(req, res) { 
+    app.get('/media/scanmovies', function(req, res, next) { 
         Movie.remove({}, function(err, removed) {
-            if(err) return console.log(err)
+            if(err) return next(err)
             console.log('Removed ' + removed.n + ' movies')
         })
 
         metadata.processMovies()
     })
 
-    app.get('/media/scannewfiles', function(req, res) {
+    app.get('/media/scannewfiles', function(req, res, next) {
         // compare files in media directory with files in database
         let files = fs.readdirSync(config.moviesDirectory)
         db.find({}, function(err, docs) {
+            if(err) return next(err)
             let filesInDB = []
             for(let doc in docs) {
                 filesInDB.push(docs[doc].file)
@@ -51,12 +52,14 @@ module.exports = function(app) {
 
     app.use('/media', function(req, res, next) {
         Movie.findOne({ _id: req.query.id }, function(err, movie) {
+            if(err) return next(err)
             if(movie) {
                 req.body.path = movie.location
                 req.body.needsTranscoding = movie.needsTranscoding
                 next()
             } else {
                 Episode.findOne({ _id: req.query.id }, function(err, episode) {
+                    if(err) return next(err)
                     req.body.path = episode.location
                     req.body.needsTranscoding = episode.needsTranscoding
                     next()
