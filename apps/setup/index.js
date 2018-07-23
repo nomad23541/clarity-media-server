@@ -40,8 +40,7 @@ module.exports = function(app) {
             config.moviesDirectory = moviesDirectory
             config.imagesDirectory = imagesDirectory
             config.tmdbApiKey = apiKey
-            // make sure port is an actual number and no bigger than 49151
-            if(!isNaN(port)) return next(new AppError('The port entered is not a number'))
+            // make sure port no bigger than 49151
             if(port > 49151) return next(new AppError('The port entered is invalid'))
             config.port = port
 
