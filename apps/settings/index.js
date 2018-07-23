@@ -6,10 +6,11 @@ module.exports = function(app) {
         if(req.session.user.admin) {
             User.find({}, function(err, users) {
                 if(err) return next(err)
-                if(!users) return next(new Error('No users in collection'))
-
+                // now read config file
+                let config = JSON.parse(fs.readFileSync('config.json', 'utf8'))
                 res.render('settings', {
-                    users: users
+                    users: users,
+                    config: config
                 })
             })
         } else {

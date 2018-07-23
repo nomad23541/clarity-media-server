@@ -25,19 +25,19 @@
                 <div class="form-wrapper">
                     <form>
                         <div class="input-wrapper">
-                            <input class="small" type="text" id="port" placeholder="server port" size="5" maxsize="5">
+                            <input class="small" type="text" id="port" placeholder="server port" value="<%=config.port%>">
                             <label>Server Port:</label>
                         </div>
                         <div class="input-wrapper">
-                            <input type="text" id="imagesDirectory" placeholder="images directory">
+                            <input type="text" id="imagesDirectory" placeholder="images directory" value="<%=config.imagesDirectory%>">
                             <label>Images Directory:</label>
                         </div>
                         <div class="input-wrapper">
-                            <input type="text" id="moviesDirectory" placeholder="movies directory">
+                            <input type="text" id="moviesDirectory" placeholder="movies directory" value="<%=config.moviesDirectory%>">
                             <label>Movies Directory:</label>
                         </div>
                         <div class="input-wrapper">
-                            <input type="text" id="showsDirectory" placeholder="shows directory">
+                            <input type="text" id="showsDirectory" placeholder="shows directory" value="<%=config.showsDirectory%>">
                             <label>Shows Directory:</label>
                         </div>
                         <input id="submitServer" type="submit" value="Save">
@@ -50,26 +50,24 @@
                     <form>
                         <div class="input-wrapper">
                             <select id="transcoding.preset" class="small">
-                                <option value="ultrafast">ultrafast</option>
-                                <option value="superfast">superfast</option>
-                                <option value="veryfast">veryfast</option>
-                                <option value="faster">faster</option>
-                                <option value="fast">fast</option>
-                                <option value="medium">medium</option>
-                                <option value="slow">slow</option>
-                                <option value="slower">slower</option>
-                                <option value="veryslow">veryslow</option>
+                                <%
+                                    let options = ['ultrafast', 'superfast', 'veryfast', 'faster', 'fast', 'medium', 'slow', 'slower', 'veryslow']
+                                    for(let i = 0; i < options.length; i++) {
+                                        let selected = (config.transcoding.preset == options[i]) ? 'selected' : ''
+                                        %><option value="<%=options[i]%>" <%=selected%>><%=options[i]%></option><%
+                                    }
+                                %>
                             </select>
                             <label>Preset:</label>
                         </div>
                         <div class="input-wrapper">
-                            <input id="transcoding.crf" class="small" type="number" step="1" min="0" max="50">
+                            <input id="transcoding.crf" class="small" type="number" step="1" min="0" max="50" value="<%=config.transcoding.crf%>">
                             <label>CRF</label>
                         </div>
                         <div class="input-wrapper">
                             <select id="transcoding.normalizeAudio" class="small">
-                                <option value="true">On</option>
-                                <option value="false">Off</option>
+                                <option value="true" <% if(config.transcoding.normalizeAudio) { %>selected<%}%>>On</option>
+                                <option value="false" <% if(!config.transcoding.normalizeAudio) { %>selected<%}%>>Off</option>
                             </select>
                             <label>Normalize Audio</label>
                         </div>
