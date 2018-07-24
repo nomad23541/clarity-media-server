@@ -14,24 +14,7 @@ To Work On:
  - Optimal transcoding on desktop devices
 
 # Getting Started
-The config file that contains TMDb api key, and required folders is not included (currently).
-In the meantime, you'll need to create a file named "config.json" in the project's root directory. This will change once I have implemented a "first-time setup" process. 
 
-Example of what this would contain:
-```json
-    {
-    	"port": "port you'd like to use",
-	"imagesDirectory": "where you'd like images to be stored",
-	"moviesDirectory": "where all your movies are",
-	"showsDirectory": "where your shows are",
-	"tmdbApiKey": "your tmdb api key",
-	"transcoding": {
-		"crf": "20 (crf is quality, 0 best, 50 worst)",
-		"preset": "veryfast (check ffmpeg docs for preset values)",
-		"normalizeAudio": "true (takes boolean value, does what it implies)"
-	}
-    }
-```
 This project uses MongoDB as it's database, that will need to be setup on localhost.
 You can install MongoDB using my script `install.sh' (I don't recommend, you should probably install it via your package manager)
 
@@ -40,6 +23,9 @@ Next you'll need to install the dependencies (In the root directory):
 
 Then to start the server: `npm start`
 Or you can run it using: `start.sh`, this helps with mongod already running if you're restarting the app.
+
+NOTE: Until further notice, you'll need your own TMDb API Key (https://developers.themoviedb.org/3/getting-started/introduction)
+This is planned to become optional
 
 
 ## Images
