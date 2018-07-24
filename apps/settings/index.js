@@ -20,12 +20,20 @@ module.exports = function(app) {
         }
     })
 
-    app.post('/settings', function(req, res, next) {
-        if(req.body) {
-            fs.writeFileSync('./config.json', JSON.stringify(req.body))
-            res.json({ message: 'Saved settings successfully'})
-        } else {
-            return next(new Error('Failed to save settings'))
+    app.put('/settings', function(req, res, next) {
+        let config = JSON.parse(fs.readFileSync('config.json', 'utf8'))
+        // get all recieved keys from body and compare to config's keys
+        // if they match, set config's to req.body's
+        for(let key in req.body) {
+            for(let configKey in config) {
+                if(key == configKey) {
+                    config[configKey] = req.body[key].trim()
+                }
+            }
         }
+
+        // now write the file
+        fs.writeFileSync('config.json', JSON.stringify(config), 'utf-8')
+        res.sendStatus(200) 
     })
 }
