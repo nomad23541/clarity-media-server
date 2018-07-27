@@ -21,7 +21,6 @@ module.exports = function(app) {
     })
 
     app.put('/settings', function(req, res, next) {
-        console.log('hello')
         let config = JSON.parse(fs.readFileSync('config.json', 'utf8'))
         // update em'
         updateConfigKeys(req.body, config)
