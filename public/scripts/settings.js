@@ -23,13 +23,63 @@ $(document).ready(function() {
         $('#' + tabID).addClass('active')
     }
 
+    $('#submitServer').click(function(e) {
+        e.preventDefault()
+        // gather data from inputs
+        let data = {
+            moviesDirectory: $('#moviesDirectory').val(),
+            imagesDirectory: $('#imagesDirectory').val(),
+            showsDirectory: $('#showsDirectory').val(),
+            port: $('#port').val()
+        }
+
+        $.ajax({
+            url: '/settings',
+            method: 'PUT',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            success: function() {
+                location.reload()
+            },
+            error: function(err) {
+                $('#serverError').text(err.responseText).slideDown()
+            }
+        })
+    })
+
+    $('#submitPlayback').click(function(e) {
+        e.preventDefault()
+        console.log('test')
+        console.log('test')
+        let data = {
+            preset: $('#preset option:selected').val(),
+            crf: $('#crf').val(),
+            normalizeAudio: $('#normalizeAudio option:selected').val()
+        }
+
+        console.log('test')
+        console.log(data)
+
+        $.ajax({
+            url: '/settings',
+            method: 'PUT',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            success: function() {
+                location.reload()
+            },
+            error: function(err) {
+                $('#playbackError').text(err.responseText).slideDown()
+            }
+        })
+    })
+
     $('.btnDelete').click(function() {
         let userID = $(this).parent().parent().attr('user-id')
         if(confirm('Are you sure you want to delete this user?')) {
             $.ajax({
                 url: '/api/users/' + userID,
                 method: 'DELETE',
-                contentType: 'application/json',
                 success: function() {
                     location.reload()
                 }

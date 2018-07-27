@@ -21,19 +21,37 @@ module.exports = function(app) {
     })
 
     app.put('/settings', function(req, res, next) {
+        console.log('hello')
         let config = JSON.parse(fs.readFileSync('config.json', 'utf8'))
-        // get all recieved keys from body and compare to config's keys
-        // if they match, set config's to req.body's
-        for(let key in req.body) {
-            for(let configKey in config) {
-                if(key == configKey) {
-                    config[configKey] = req.body[key].trim()
-                }
-            }
-        }
-
+        // update em'
+        updateConfigKeys(req.body, config)
         // now write the file
         fs.writeFileSync('config.json', JSON.stringify(config), 'utf-8')
         res.sendStatus(200) 
     })
+
+    /**
+     * Compares keys from body and config, if they equal, set config's key value to
+     * body's.
+     * 
+     * If there aren't any equal keys found, try seeing if there are any inner objects
+     * in config, if there are, then do some recursive action
+     */
+    updateConfigKeys = function(body, config) {
+        for(let key in body) {
+            for(let configKey in config) {
+                if(key == configKey) {
+                    config[configKey] = body[key].trim()
+                } else {
+                    if(typeof config[configKey] === 'object') {
+                        for(let innerKey in config[configKey]) {
+                            if(key == innerKey) {
+                                updateConfigKeys(body, config[configKey])
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
