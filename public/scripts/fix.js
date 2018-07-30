@@ -6,13 +6,14 @@ $(document).ready(function() {
 
     // focus this on page load
     fieldTitle.focus()
-    btnSearch.click(function() {
+    btnSearch.click(function(e) {
+        e.preventDefault()
         search()
     })
 
     function search(query) {
         if(fieldTitle.val() != '') {
-            $.getJSON('/api/fix?query=' + fieldTitle.val() + '&year=' + fieldYear.val(), function(data) {
+            $.getJSON('/api/fix?title=' + fieldTitle.val() + '&year=' + fieldYear.val(), function(data) {
                 results.empty()
                 console.log(data)
                 data.results.forEach(obj => {
