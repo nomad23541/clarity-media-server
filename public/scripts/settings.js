@@ -47,18 +47,61 @@ $(document).ready(function() {
         })
     })
 
+    const socket = io()
+
+    socket.on('scanProgress', function(data) {
+        $('#scanProgress').text('Scan Progress: ' + data.msg + '%')
+
+        if(data.msg == 100) {
+            location.reload()  
+        }
+
+        if(data.msg == 'NOMEDIA') {
+            $('#scanProgress').text('There is no media to scan')
+        }
+    })
+
+    $('#btnScanMovies').click(function() {
+        $.ajax({
+            url: '/media/scanmovies',
+            method: 'GET'
+        })
+    })
+
+    $('#btnScanShows').click(function() {
+        $.ajax({
+            url: '/media/scanshows',
+            method: 'GET'
+        })
+    })
+
+    $('#submitMetadata').click(function(e) {
+        e.preventDefault()
+        let data = {
+            tmdbApiKey: $('#tmdbApiKey').val()
+        }
+
+        $.ajax({
+            url: '/settings',
+            method: 'PUT',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            success: function() {
+                location.reload()
+            },
+            error: function(err) {
+                $('#metadataError').text(err.responseText).slideDown()
+            }
+        })
+    })
+
     $('#submitPlayback').click(function(e) {
         e.preventDefault()
-        console.log('test')
-        console.log('test')
         let data = {
             preset: $('#preset option:selected').val(),
             crf: $('#crf').val(),
             normalizeAudio: $('#normalizeAudio option:selected').val()
         }
-
-        console.log('test')
-        console.log(data)
 
         $.ajax({
             url: '/settings',
