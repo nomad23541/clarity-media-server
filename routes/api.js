@@ -88,7 +88,7 @@ module.exports = function(app) {
     app.get('/api/fix', function(req, res, next) {
         // search tmdb api and send results back to client
         tmdb.searchMovies({
-            title: req.query.query,
+            title: req.query.title,
             year: req.query.year,
             apiKey: config.tmdbApiKey
         }).then(function(results) {
