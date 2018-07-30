@@ -15,19 +15,18 @@
                 <p>File: <%=doc.location%></p>
             </div>
             <p>Wrong metadata for the file? Query in the search boxes and choose the correct one.</p>
-            <div class="row row-container row-center row-add-spacing">
-                <div class="settings-content">
-                    <div class="input-wrapper">
-                        <input id="fieldQuery" type="text" placeholder="Title">
-                        <label>Title</label>
-                    </div>
-                    <div class="input-wrapper">
-                        <input id="fieldYear" type="text" placeholder="Year">
-                        <label>Year</label>
-                    </div>
-                    <button id="btnSearch" class="btn"<i class="fas fa-search"></i> Search</button>
-                </div>
-            </div>
+                <div class="form-wrapper">
+                    <form>
+                        <div class="input-wrapper">
+                            <input id="fieldTitle" type="text" placeholder="Title">
+                            <label>Title:</label>
+                        </div>
+                        <div class="input-wrapper">
+                            <input id="fieldYear" type="text" placeholder="Year">
+                            <label>Year:</label>
+                        </div>
+                        <button id="btnSearch" class="btn"<i class="fas fa-search"></i> Search</button>
+                    </form>
             <div id="results" class="media-grid-container"></div>
         </div>
     </body>

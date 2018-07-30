@@ -1,18 +1,18 @@
 $(document).ready(function() {
-    let fieldQuery = $('#fieldQuery')
+    let fieldTitle = $('#fieldTitle')
     let fieldYear = $('#fieldYear')
     let btnSearch = $('#btnSearch')
     let results = $('#results')
 
     // focus this on page load
-    fieldQuery.focus()
+    fieldTitle.focus()
     btnSearch.click(function() {
         search()
     })
 
     function search(query) {
-        if(fieldQuery.val() != '') {
-            $.getJSON('/api/fix?query=' + fieldQuery.val() + '&year=' + fieldYear.val(), function(data) {
+        if(fieldTitle.val() != '') {
+            $.getJSON('/api/fix?query=' + fieldTitle.val() + '&year=' + fieldYear.val(), function(data) {
                 results.empty()
                 console.log(data)
                 data.results.forEach(obj => {
