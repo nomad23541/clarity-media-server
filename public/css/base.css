@@ -471,6 +471,11 @@ select {
     display: none;
 }
 
+.text-progress {
+    display: none;
+    padding: 5px;
+}
+
 .btn-bar {
     width: 100%;
     max-width: 600px;

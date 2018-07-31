@@ -48,27 +48,34 @@ $(document).ready(function() {
     })
 
     const socket = io()
+    let btnScanMovies = $('#btnScanMovies')
+    let btnScanShows = $('#btnScanShows')
+    let scanProgress = $('#scanProgress')
 
     socket.on('scanProgress', function(data) {
-        $('#scanProgress').text('Scan Progress: ' + data.msg + '%')
+        btnScanMovies.prop('disabled', true)
+        btnScanShows.prop('disabled', true)
+        scanProgress.text('Scan Progress: ' + data.msg + '%')
 
         if(data.msg == 100) {
             location.reload()  
         }
 
         if(data.msg == 'NOMEDIA') {
-            $('#scanProgress').text('There is no media to scan')
+            scanProgress.text('There is no media to scan')
         }
     })
 
-    $('#btnScanMovies').click(function() {
+    btnScanMovies.click(function() {
+        scanProgress.text('Starting movie scan...').slideDown()
         $.ajax({
             url: '/media/scanmovies',
             method: 'GET'
         })
     })
 
-    $('#btnScanShows').click(function() {
+    btnScanShows.click(function() {
+        scanProgress.text('Starting shows scan...').slideDown()
         $.ajax({
             url: '/media/scanshows',
             method: 'GET'
